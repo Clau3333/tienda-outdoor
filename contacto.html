@@ -2,45 +2,70 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>ALBEDO Outdoor | Contacto</title>
 
+
     <!-- Bootstrap -->
+
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
 
-    <!-- Estilos propios -->
-    <link rel="stylesheet" href="estilos.css">
+
+    <!-- Estilos ALBEDO -->
+
+    <link
+        rel="stylesheet"
+        href="estilos.css"
+    >
+
 </head>
+
 
 <body>
 
-    <!-- CABECERA -->
+
+    <!-- =========================================
+         CABECERA
+         ========================================= -->
+
     <header class="cabecera-tienda">
+
 
         <div class="cabecera-superior">
 
+
             <div class="espacio-cabecera"></div>
+
 
             <a
                 class="marca"
                 href="index.html"
                 aria-label="ALBEDO Outdoor, inicio"
             >
+
                 <img
                     src="img/logo-albedo.png"
                     alt="ALBEDO Outdoor"
                 >
+
             </a>
+
 
             <nav
                 class="enlaces-principales"
                 aria-label="Navegación principal"
             >
+
                 <a href="index.html">
                     Inicio
                 </a>
@@ -55,33 +80,47 @@
                 >
                     Contacto
                 </a>
+
             </nav>
 
+
         </div>
+
 
     </header>
 
 
-    <!-- CONTENIDO -->
+
+    <!-- =========================================
+         CONTENIDO
+         ========================================= -->
+
     <main>
+
 
         <section class="container py-5">
 
+
             <div class="row justify-content-center">
+
 
                 <div class="col-12 col-lg-8 col-xl-7">
 
-                    <!-- Encabezado -->
+
+                    <!-- ENCABEZADO -->
 
                     <div class="mb-5">
+
 
                         <p class="etiqueta mb-2">
                             ALBEDO OUTDOOR
                         </p>
 
+
                         <h1 class="fs-1">
                             Contáctanos
                         </h1>
+
 
                         <p class="text-secondary mt-3">
                             ¿Necesitas ayuda con un producto?
@@ -89,16 +128,25 @@
                             en contacto contigo.
                         </p>
 
+
                     </div>
 
 
-                    <!-- FORMULARIO -->
 
-                    <form id="formularioContacto">
+                    <!-- =================================
+                         FORMULARIO
+                         ================================= -->
 
-                        <!-- Nombre -->
+                    <form
+                        id="formularioContacto"
+                        novalidate
+                    >
+
+
+                        <!-- NOMBRE -->
 
                         <div class="mb-4">
+
 
                             <label
                                 for="nombre"
@@ -107,21 +155,28 @@
                                 Nombre
                             </label>
 
+
                             <input
                                 type="text"
                                 class="form-control"
                                 id="nombre"
                                 name="nombre"
+                                maxlength="100"
                                 placeholder="Ingresa tu nombre"
-                                required
                             >
+
+
+                            <div id="feedbackNombre"></div>
+
 
                         </div>
 
 
-                        <!-- Correo -->
+
+                        <!-- CORREO -->
 
                         <div class="mb-4">
+
 
                             <label
                                 for="correo"
@@ -130,21 +185,38 @@
                                 Correo electrónico
                             </label>
 
+
                             <input
                                 type="email"
                                 class="form-control"
                                 id="correo"
                                 name="correo"
-                                placeholder="nombre@correo.cl"
-                                required
+                                maxlength="100"
+                                placeholder="nombre@gmail.com"
                             >
+
+
+                            <div id="feedbackCorreo"></div>
+
+
+                            <div class="form-text">
+
+                                Correos permitidos:
+                                @gmail.com,
+                                @duoc.cl y
+                                @profesor.duoc.cl
+
+                            </div>
+
 
                         </div>
 
 
-                        <!-- Teléfono -->
+
+                        <!-- TELÉFONO -->
 
                         <div class="mb-4">
+
 
                             <label
                                 for="telefono"
@@ -153,21 +225,27 @@
                                 Teléfono
                             </label>
 
+
                             <input
                                 type="tel"
                                 class="form-control"
                                 id="telefono"
                                 name="telefono"
                                 placeholder="+56 9 1234 5678"
-                                required
                             >
+
+
+                            <div id="feedbackTelefono"></div>
+
 
                         </div>
 
 
-                        <!-- Motivo -->
+
+                        <!-- MOTIVO -->
 
                         <div class="mb-4">
+
 
                             <label
                                 for="motivo"
@@ -176,41 +254,57 @@
                                 Motivo de contacto
                             </label>
 
+
                             <select
                                 class="form-select"
                                 id="motivo"
                                 name="motivo"
-                                required
                             >
 
-                                <option value="" selected disabled>
+
+                                <option
+                                    value=""
+                                    selected
+                                    disabled
+                                >
                                     Selecciona una opción
                                 </option>
+
 
                                 <option value="producto">
                                     Consulta por producto
                                 </option>
 
+
                                 <option value="talla">
                                     Consulta por talla
                                 </option>
+
 
                                 <option value="pedido">
                                     Consulta por pedido
                                 </option>
 
+
                                 <option value="otro">
                                     Otro
                                 </option>
 
+
                             </select>
+
+
+                            <div id="feedbackMotivo"></div>
+
 
                         </div>
 
 
-                        <!-- Mensaje -->
+
+                        <!-- MENSAJE -->
 
                         <div class="mb-4">
+
 
                             <label
                                 for="mensaje"
@@ -219,40 +313,64 @@
                                 Mensaje
                             </label>
 
+
                             <textarea
                                 class="form-control"
                                 id="mensaje"
                                 name="mensaje"
                                 rows="5"
+                                maxlength="500"
                                 placeholder="Escribe tu consulta..."
-                                required
                             ></textarea>
 
-                        </div>
+
+                            <div id="feedbackMensaje"></div>
 
 
-                        <!-- Aceptación -->
+                            <div class="form-text">
+                                Máximo 500 caracteres.
+                            </div>
 
-                        <div class="form-check mb-4">
-
-                            <input
-                                class="form-check-input"
-                                type="checkbox"
-                                id="terminos"
-                                required
-                            >
-
-                            <label
-                                class="form-check-label"
-                                for="terminos"
-                            >
-                                Confirmo que los datos ingresados son correctos.
-                            </label>
 
                         </div>
 
 
-                        <!-- Botón -->
+
+                        <!-- CHECKBOX -->
+
+                        <div class="mb-4">
+
+
+                            <div class="form-check">
+
+
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    id="terminos"
+                                >
+
+
+                                <label
+                                    class="form-check-label"
+                                    for="terminos"
+                                >
+                                    Confirmo que los datos ingresados
+                                    son correctos.
+                                </label>
+
+
+                            </div>
+
+
+                            <div id="feedbackTerminos"></div>
+
+
+                        </div>
+
+
+
+                        <!-- BOTÓN -->
 
                         <button
                             type="submit"
@@ -261,37 +379,64 @@
                             Enviar consulta
                         </button>
 
+
+
+                        <!-- RESULTADO DEL ENVÍO -->
+
+                        <div
+                            id="mensajeResultado"
+                            role="alert"
+                        ></div>
+
+
                     </form>
+
 
                 </div>
 
+
             </div>
 
+
         </section>
+
 
     </main>
 
 
-    <!-- FOOTER -->
+
+    <!-- =========================================
+         PIE DE PÁGINA
+         ========================================= -->
 
     <footer class="pie">
+
 
         <p class="pie-marca">
             ALBEDO OUTDOOR
         </p>
 
+
         <p>
             &copy; 2026 ALBEDO Outdoor.
         </p>
 
+
     </footer>
 
 
-    <!-- Bootstrap JS -->
+
+    <!-- BOOTSTRAP -->
 
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     ></script>
+
+
+    <!-- JAVASCRIPT ALBEDO -->
+
+    <script src="funciones.js"></script>
+
 
 </body>
 

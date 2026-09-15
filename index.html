@@ -2,217 +2,552 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>ALBEDO Outdoor | Inicio</title>
 
-    <link rel="stylesheet" href="estilos.css">
+
+    <!-- BOOTSTRAP -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- ESTILOS ALBEDO -->
+
+    <link
+        rel="stylesheet"
+        href="estilos.css"
+    >
+
 </head>
+
 
 <body>
 
+
+    <!-- ==================================================
+         CABECERA
+         ================================================== -->
+
     <header class="cabecera-tienda">
 
-        <!-- PARTE SUPERIOR -->
 
         <div class="cabecera-superior">
 
+
             <div class="espacio-cabecera"></div>
 
-            <a class="marca" href="index.html" aria-label="ALBEDO Outdoor, inicio">
-                <img src="img/logo-albedo.png" alt="ALBEDO Outdoor">
+
+            <!-- LOGO -->
+
+            <a
+                class="marca"
+                href="index.html"
+                aria-label="ALBEDO Outdoor, inicio"
+            >
+
+                <img
+                    src="img/logo-albedo.png"
+                    alt="ALBEDO Outdoor"
+                >
+
             </a>
 
-            <nav class="enlaces-principales" aria-label="Navegación principal">
-                <a href="index.html" aria-current="page">Inicio</a>
-                <a href="productos.html">Productos</a>
+
+            <!-- MENÚ PRINCIPAL -->
+
+            <nav
+                class="enlaces-principales"
+                aria-label="Navegación principal"
+            >
+
+                <a
+                    href="index.html"
+                    aria-current="page"
+                >
+                    Inicio
+                </a>
+
+
+                <a href="productos.html">
+                    Productos
+                </a>
+
+
+                <a href="contacto.html">
+                    Contacto
+                </a>
+
             </nav>
+
 
         </div>
 
 
-        <!-- MENÚ PRINCIPAL DE CATEGORÍAS -->
 
-        <nav class="menu-categorias" aria-label="Categorías de productos">
+        <!-- ==================================================
+             MENÚ DE CATEGORÍAS
+             ================================================== -->
+
+        <nav
+            class="menu-categorias"
+            aria-label="Categorías de productos"
+        >
+
 
             <!-- CHAQUETAS -->
 
             <div class="mega-item">
 
-                <a class="mega-enlace" href="productos.html#chaquetas">
+
+                <a
+                    class="mega-enlace"
+                    href="productos.html#chaquetas"
+                >
                     CHAQUETAS
                 </a>
 
+
                 <div class="mega-panel">
 
-                    <div class="mega-contenido">
 
-                        <div class="mega-columna">
+                    <div class="mega-menu-grid">
 
-                            <h3>CHAQUETAS</h3>
+
+                        <!-- COLUMNA 1 -->
+
+                        <div class="mega-menu-columna">
+
+                            <h3>
+                                CHAQUETAS
+                            </h3>
 
                             <a href="productos.html#chaquetas">
-                                Chaqueta impermeable Cordillera
+                                Chaqueta Cordillera
                             </a>
 
-                            <a
-                                class="mega-ver-todo"
-                                href="productos.html#chaquetas"
-                            >
-                                Ver todas las chaquetas
+                            <a href="productos.html#chaquetas">
+                                Chaqueta Andes
+                            </a>
+
+                            <a href="productos.html#chaquetas">
+                                Chaqueta Patagonia
+                            </a>
+
+                            <a href="productos.html#chaquetas">
+                                Chaqueta Aconcagua
+                            </a>
+
+                            <a href="productos.html#chaquetas">
+                                Chaqueta Atacama
                             </a>
 
                         </div>
 
 
-                        <div class="mega-destacado">
 
-                            <img
-                                src="img/chaqueta-cordillera.png"
-                                alt="Chaqueta impermeable Cordillera"
-                            >
+                        <!-- COLUMNA 2 -->
 
-                            <div>
-                                <span>DESTACADO</span>
+                        <div class="mega-menu-columna">
 
-                                <strong>
-                                    Chaqueta Cordillera
-                                </strong>
-
-                                <p>$59.990</p>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- POLERONES -->
-
-            <div class="mega-item">
-
-                <a class="mega-enlace" href="productos.html#polar">
-                    POLERONES Y POLAR
-                </a>
-
-                <div class="mega-panel">
-
-                    <div class="mega-contenido">
-
-                        <div class="mega-columna">
-
-                            <h3>POLERONES Y POLAR</h3>
+                            <h3>
+                                POLERONES Y POLAR
+                            </h3>
 
                             <a href="productos.html#polar">
                                 Polar Sendero
                             </a>
 
-                            <a
-                                class="mega-ver-todo"
-                                href="productos.html#polar"
-                            >
-                                Ver todos los polares
+                            <a href="productos.html#polar">
+                                Polar Andes
+                            </a>
+
+                            <a href="productos.html#polar">
+                                Polar Patagonia
+                            </a>
+
+                            <a href="productos.html#polar">
+                                Polar Atacama
+                            </a>
+
+                            <a href="productos.html#polar">
+                                Polar Volcán
                             </a>
 
                         </div>
 
 
-                        <div class="mega-destacado">
 
-                            <img
-                                src="img/polar-sendero.png"
-                                alt="Polar Sendero"
-                            >
+                        <!-- COLUMNA 3 -->
 
-                            <div>
-                                <span>DESTACADO</span>
+                        <div class="mega-menu-columna">
 
-                                <strong>
-                                    Polar Sendero
-                                </strong>
+                            <h3>
+                                PANTALONES
+                            </h3>
 
-                                <p>$29.990</p>
-                            </div>
+                            <a href="productos.html#pantalones">
+                                Pantalón Cumbre
+                            </a>
+
+                            <a href="productos.html#pantalones">
+                                Pantalón Andes
+                            </a>
+
+                            <a href="productos.html#pantalones">
+                                Pantalón Patagonia
+                            </a>
+
+                            <a href="productos.html#pantalones">
+                                Pantalón Fiordo
+                            </a>
+
+                            <a href="productos.html#pantalones">
+                                Pantalón Atacama
+                            </a>
 
                         </div>
 
+
+
+                        <!-- COLUMNA 4 -->
+
+                        <div class="mega-menu-columna">
+
+                            <h3>
+                                ALBEDO
+                            </h3>
+
+                            <a href="productos.html">
+                                Todos los productos
+                            </a>
+
+                            <a href="productos.html#chaquetas">
+                                Protección
+                            </a>
+
+                            <a href="productos.html#polar">
+                                Abrigo
+                            </a>
+
+                            <a href="productos.html#pantalones">
+                                Trekking
+                            </a>
+
+                            <a href="contacto.html">
+                                Contacto
+                            </a>
+
+                        </div>
+
+
                     </div>
+
 
                 </div>
 
+
             </div>
+
+
+
+            <!-- POLERONES Y POLAR -->
+
+            <div class="mega-item">
+
+
+                <a
+                    class="mega-enlace"
+                    href="productos.html#polar"
+                >
+                    POLERONES Y POLAR
+                </a>
+
+
+                <div class="mega-panel">
+
+
+                    <div class="mega-menu-grid">
+
+
+                        <div class="mega-menu-columna">
+
+                            <h3>
+                                CHAQUETAS
+                            </h3>
+
+                            <a href="productos.html#chaquetas">
+                                Chaqueta Cordillera
+                            </a>
+
+                            <a href="productos.html#chaquetas">
+                                Chaqueta Andes
+                            </a>
+
+                            <a href="productos.html#chaquetas">
+                                Chaqueta Patagonia
+                            </a>
+
+                            <a href="productos.html#chaquetas">
+                                Chaqueta Aconcagua
+                            </a>
+
+                            <a href="productos.html#chaquetas">
+                                Chaqueta Atacama
+                            </a>
+
+                        </div>
+
+
+                        <div class="mega-menu-columna">
+
+                            <h3>
+                                POLERONES Y POLAR
+                            </h3>
+
+                            <a href="productos.html#polar">
+                                Polar Sendero
+                            </a>
+
+                            <a href="productos.html#polar">
+                                Polar Andes
+                            </a>
+
+                            <a href="productos.html#polar">
+                                Polar Patagonia
+                            </a>
+
+                            <a href="productos.html#polar">
+                                Polar Atacama
+                            </a>
+
+                            <a href="productos.html#polar">
+                                Polar Volcán
+                            </a>
+
+                        </div>
+
+
+                        <div class="mega-menu-columna">
+
+                            <h3>
+                                PANTALONES
+                            </h3>
+
+                            <a href="productos.html#pantalones">
+                                Pantalón Cumbre
+                            </a>
+
+                            <a href="productos.html#pantalones">
+                                Pantalón Andes
+                            </a>
+
+                            <a href="productos.html#pantalones">
+                                Pantalón Patagonia
+                            </a>
+
+                            <a href="productos.html#pantalones">
+                                Pantalón Fiordo
+                            </a>
+
+                            <a href="productos.html#pantalones">
+                                Pantalón Atacama
+                            </a>
+
+                        </div>
+
+
+                        <div class="mega-menu-columna">
+
+                            <h3>
+                                ALBEDO
+                            </h3>
+
+                            <a href="productos.html">
+                                Todos los productos
+                            </a>
+
+                            <a href="contacto.html">
+                                Consultas
+                            </a>
+
+                            <a href="contacto.html">
+                                Tallas y productos
+                            </a>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
 
 
             <!-- PANTALONES -->
 
             <div class="mega-item">
 
-                <a class="mega-enlace" href="productos.html#pantalones">
+
+                <a
+                    class="mega-enlace"
+                    href="productos.html#pantalones"
+                >
                     PANTALONES
                 </a>
 
+
                 <div class="mega-panel">
 
-                    <div class="mega-contenido">
 
-                        <div class="mega-columna">
+                    <div class="mega-menu-grid">
 
-                            <h3>PANTALONES</h3>
+
+                        <div class="mega-menu-columna">
+
+                            <h3>
+                                CHAQUETAS
+                            </h3>
+
+                            <a href="productos.html#chaquetas">
+                                Chaqueta Cordillera
+                            </a>
+
+                            <a href="productos.html#chaquetas">
+                                Chaqueta Andes
+                            </a>
+
+                            <a href="productos.html#chaquetas">
+                                Chaqueta Patagonia
+                            </a>
+
+                            <a href="productos.html#chaquetas">
+                                Chaqueta Aconcagua
+                            </a>
+
+                            <a href="productos.html#chaquetas">
+                                Chaqueta Atacama
+                            </a>
+
+                        </div>
+
+
+                        <div class="mega-menu-columna">
+
+                            <h3>
+                                POLERONES Y POLAR
+                            </h3>
+
+                            <a href="productos.html#polar">
+                                Polar Sendero
+                            </a>
+
+                            <a href="productos.html#polar">
+                                Polar Andes
+                            </a>
+
+                            <a href="productos.html#polar">
+                                Polar Patagonia
+                            </a>
+
+                            <a href="productos.html#polar">
+                                Polar Atacama
+                            </a>
+
+                            <a href="productos.html#polar">
+                                Polar Volcán
+                            </a>
+
+                        </div>
+
+
+                        <div class="mega-menu-columna">
+
+                            <h3>
+                                PANTALONES
+                            </h3>
 
                             <a href="productos.html#pantalones">
-                                Pantalón de trekking Cumbre
+                                Pantalón Cumbre
                             </a>
 
-                            <a
-                                class="mega-ver-todo"
-                                href="productos.html#pantalones"
-                            >
-                                Ver todos los pantalones
+                            <a href="productos.html#pantalones">
+                                Pantalón Andes
+                            </a>
+
+                            <a href="productos.html#pantalones">
+                                Pantalón Patagonia
+                            </a>
+
+                            <a href="productos.html#pantalones">
+                                Pantalón Fiordo
+                            </a>
+
+                            <a href="productos.html#pantalones">
+                                Pantalón Atacama
                             </a>
 
                         </div>
 
 
-                        <div class="mega-destacado">
+                        <div class="mega-menu-columna">
 
-                            <img
-                                src="img/pantalon-cumbre.png"
-                                alt="Pantalón de trekking Cumbre"
-                            >
+                            <h3>
+                                ALBEDO
+                            </h3>
 
-                            <div>
-                                <span>DESTACADO</span>
+                            <a href="productos.html">
+                                Todos los productos
+                            </a>
 
-                                <strong>
-                                    Pantalón Cumbre
-                                </strong>
-
-                                <p>$39.990</p>
-                            </div>
+                            <a href="contacto.html">
+                                Contacto
+                            </a>
 
                         </div>
+
 
                     </div>
 
+
                 </div>
+
 
             </div>
 
+
         </nav>
+
 
     </header>
 
 
+
+    <!-- ==================================================
+         PORTADA
+         ================================================== -->
+
     <main>
 
-        <!-- PORTADA -->
 
-        <section class="portada" aria-labelledby="bienvenida">
+        <section
+            class="portada"
+            aria-labelledby="bienvenida"
+        >
+
 
             <img
                 class="portada-imagen"
@@ -220,179 +555,282 @@
                 alt="Excursionista frente a una cordillera nevada"
             >
 
+
             <div class="portada-contenido">
+
 
                 <p class="etiqueta portada-etiqueta">
                     ALBEDO OUTDOOR
                 </p>
 
+
                 <h1 id="bienvenida">
-                    Comienza hoy<br>
+
+                    Comienza hoy
+
+                    <br>
+
                     tu aventura
+
                 </h1>
 
+
                 <p class="descripcion">
+
                     Tenidas para acompañarte desde el primer sendero
-                    hasta tu próxima incursión
+                    hasta tu próxima incursión.
+
                 </p>
 
-                <a class="boton" href="productos.html">
+
+                <a
+                    class="boton-albedo"
+                    href="productos.html"
+                >
                     Explorar productos
                 </a>
 
+
             </div>
+
 
         </section>
 
 
-        <!-- PRODUCTOS DESTACADOS -->
+
+        <!-- ==================================================
+             PRODUCTOS DESTACADOS
+             ================================================== -->
 
         <section
-            class="productos"
+            class="productos-inicio"
             aria-labelledby="productos-destacados"
         >
 
-            <p class="etiqueta">
-                PREPARA TU PRÓXIMA SALIDA
-            </p>
 
-            <h2 id="productos-destacados">
-                Productos destacados
-            </h2>
-
-            <p class="subtitulo-productos">
-                Equipamiento pensado para acompañarte en cada ruta.
-            </p>
+            <div class="productos-introduccion">
 
 
-            <div class="destacados-grid">
+                <p class="etiqueta">
+                    PREPARA TU PRÓXIMA SALIDA
+                </p>
+
+
+                <h2 id="productos-destacados">
+                    Productos destacados
+                </h2>
+
+
+                <p>
+                    Encuentra la equipación para tu próxima aventura.
+                </p>
+
+
+            </div>
+
+
+
+            <div class="productos-grid">
 
 
                 <!-- CHAQUETA -->
 
-                <article class="producto-card">
+                <a
+                    class="producto-destacado"
+                    href="productos.html#chaquetas"
+                >
 
-                    <a
-                        class="producto-imagen"
-                        href="productos.html#chaquetas"
-                    >
+
+                    <div class="producto-destacado-imagen">
+
                         <img
                             src="img/chaqueta-cordillera.png"
-                            alt="Chaqueta impermeable Cordillera"
+                            alt="Chaqueta Cordillera"
                         >
-                    </a>
 
-                    <p class="producto-categoria">
-                        CHAQUETAS
-                    </p>
+                    </div>
 
-                    <h3>
-                        Chaqueta impermeable Cordillera
-                    </h3>
 
-                    <p class="producto-precio">
-                        $59.990
-                    </p>
+                    <div class="producto-destacado-info">
 
-                    <a
-                        class="producto-enlace"
-                        href="productos.html#chaquetas"
-                    >
-                        Ver chaquetas
-                    </a>
+                        <p class="producto-tipo">
+                            CHAQUETAS
+                        </p>
 
-                </article>
+                        <h3>
+                            Chaqueta Cordillera
+                        </h3>
+
+                        <p>
+                            Protección impermeable para condiciones
+                            cambiantes.
+                        </p>
+
+                        <span>
+                            Ver colección →
+                        </span>
+
+                    </div>
+
+
+                </a>
+
 
 
                 <!-- POLAR -->
 
-                <article class="producto-card">
+                <a
+                    class="producto-destacado"
+                    href="productos.html#polar"
+                >
 
-                    <a
-                        class="producto-imagen"
-                        href="productos.html#polar"
-                    >
+
+                    <div class="producto-destacado-imagen">
+
                         <img
                             src="img/polar-sendero.png"
                             alt="Polar Sendero"
                         >
-                    </a>
 
-                    <p class="producto-categoria">
-                        POLERONES Y POLAR
-                    </p>
+                    </div>
 
-                    <h3>
-                        Polar Sendero
-                    </h3>
 
-                    <p class="producto-precio">
-                        $29.990
-                    </p>
+                    <div class="producto-destacado-info">
 
-                    <a
-                        class="producto-enlace"
-                        href="productos.html#polar"
-                    >
-                        Ver polares
-                    </a>
+                        <p class="producto-tipo">
+                            POLERONES Y POLAR
+                        </p>
 
-                </article>
+                        <h3>
+                            Polar Sendero
+                        </h3>
+
+                        <p>
+                            Abrigo ligero y cómodo para cada salida.
+                        </p>
+
+                        <span>
+                            Ver colección →
+                        </span>
+
+                    </div>
+
+
+                </a>
+
 
 
                 <!-- PANTALÓN -->
 
-                <article class="producto-card">
+                <a
+                    class="producto-destacado"
+                    href="productos.html#pantalones"
+                >
 
-                    <a
-                        class="producto-imagen"
-                        href="productos.html#pantalones"
-                    >
+
+                    <div class="producto-destacado-imagen">
+
                         <img
                             src="img/pantalon-cumbre.png"
-                            alt="Pantalón de trekking Cumbre"
+                            alt="Pantalón Cumbre"
                         >
-                    </a>
 
-                    <p class="producto-categoria">
-                        PANTALONES
-                    </p>
+                    </div>
 
-                    <h3>
-                        Pantalón de trekking Cumbre
-                    </h3>
 
-                    <p class="producto-precio">
-                        $39.990
-                    </p>
+                    <div class="producto-destacado-info">
 
-                    <a
-                        class="producto-enlace"
-                        href="productos.html#pantalones"
-                    >
-                        Ver pantalones
-                    </a>
+                        <p class="producto-tipo">
+                            PANTALONES
+                        </p>
 
-                </article>
+                        <h3>
+                            Pantalón Cumbre
+                        </h3>
+
+                        <p>
+                            Comodidad y libertad de movimiento en
+                            cualquier terreno.
+                        </p>
+
+                        <span>
+                            Ver colección →
+                        </span>
+
+                    </div>
+
+
+                </a>
+
 
             </div>
 
+
         </section>
+
+
+
+        <!-- ==================================================
+             CONTACTO
+             ================================================== -->
+
+        <section class="inicio-contacto">
+
+
+            <div class="inicio-contacto-contenido">
+
+
+                <p class="etiqueta">
+                    ¿NECESITAS AYUDA?
+                </p>
+
+
+                <h2>
+                    Estamos para ayudarte
+                </h2>
+
+
+                <p>
+                    Consulta por productos, tallas o pedidos desde
+                    nuestro formulario de contacto.
+                </p>
+
+
+                <a
+                    class="boton-albedo"
+                    href="contacto.html"
+                >
+                    Contáctanos
+                </a>
+
+
+            </div>
+
+
+        </section>
+
 
     </main>
 
 
+
+    <!-- FOOTER -->
+
     <footer class="pie">
+
 
         <p class="pie-marca">
             ALBEDO OUTDOOR
         </p>
 
+
         <p>
             &copy; 2026 ALBEDO Outdoor.
         </p>
 
+
     </footer>
+
 
 </body>
 

@@ -1,95 +1,387 @@
+// =============================================
 // FORMULARIO DE CONTACTO ALBEDO
+// =============================================
 
-function validarFormulario() {
+document.addEventListener("DOMContentLoaded", function () {
 
-    // Obtener los datos ingresados por el usuario
+    const formulario = document.getElementById("formularioContacto");
 
-    let nombre = document.getElementById("nombre").value;
-    let correo = document.getElementById("correo").value;
-    let telefono = document.getElementById("telefono").value;
-    let motivo = document.getElementById("motivo").value;
-    let mensaje = document.getElementById("mensaje").value;
-    let terminos = document.getElementById("terminos").checked;
+    const nombre = document.getElementById("nombre");
+    const correo = document.getElementById("correo");
+    const telefono = document.getElementById("telefono");
+    const motivo = document.getElementById("motivo");
+    const mensaje = document.getElementById("mensaje");
+    const terminos = document.getElementById("terminos");
 
 
-    // Expresión regular para validar correo
+    // =========================================
+    // VALIDACIÓN DE CORREO
+    // =========================================
 
     const regExCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+    const dominiosPermitidos = [
+        "gmail.com",
+        "duoc.cl",
+        "profesor.duoc.cl"
+    ];
 
-    // Validar nombre
 
-    if (nombre == "") {
+    // =========================================
+    // VALIDACIÓN EN TIEMPO REAL
+    // =========================================
 
-        alert("Debe ingresar su nombre");
+    nombre.addEventListener("input", validarNombre);
 
-        return false;
+    correo.addEventListener("input", validarCorreo);
+
+    telefono.addEventListener("input", validarTelefono);
+
+    motivo.addEventListener("change", validarMotivo);
+
+    mensaje.addEventListener("input", validarMensaje);
+
+    terminos.addEventListener("change", validarTerminos);
+
+
+    // =========================================
+    // NOMBRE
+    // Requerido - máximo 100 caracteres
+    // =========================================
+
+    function validarNombre() {
+
+        let valor = nombre.value.trim();
+
+        if (valor == "") {
+
+            mostrarError(
+                nombre,
+                "feedbackNombre",
+                "Debe ingresar su nombre"
+            );
+
+            return false;
+        }
+
+
+        if (valor.length > 100) {
+
+            mostrarError(
+                nombre,
+                "feedbackNombre",
+                "El nombre no puede superar los 100 caracteres"
+            );
+
+            return false;
+        }
+
+
+        mostrarCorrecto(
+            nombre,
+            "feedbackNombre",
+            "Nombre válido"
+        );
+
+        return true;
     }
 
 
-    // Validar correo vacío
+    // =========================================
+    // CORREO
+    // Requerido
+    // Máximo 100 caracteres
+    // Formato válido
+    // Dominios permitidos
+    // =========================================
 
-    if (correo == "") {
+    function validarCorreo() {
 
-        alert("Debe ingresar su correo electrónico");
+        let valor = correo.value.trim();
 
-        return false;
+
+        if (valor == "") {
+
+            mostrarError(
+                correo,
+                "feedbackCorreo",
+                "Debe ingresar su correo electrónico"
+            );
+
+            return false;
+        }
+
+
+        if (valor.length > 100) {
+
+            mostrarError(
+                correo,
+                "feedbackCorreo",
+                "El correo no puede superar los 100 caracteres"
+            );
+
+            return false;
+        }
+
+
+        if (regExCorreo.test(valor) == false) {
+
+            mostrarError(
+                correo,
+                "feedbackCorreo",
+                "El formato del correo no es válido"
+            );
+
+            return false;
+        }
+
+
+        let partesCorreo = valor.split("@");
+
+        let dominio = partesCorreo[1].toLowerCase();
+
+
+        if (dominiosPermitidos.includes(dominio) == false) {
+
+            mostrarError(
+                correo,
+                "feedbackCorreo",
+                "Correo no permitido. Solo se acepta @gmail.com, @duoc.cl o @profesor.duoc.cl"
+            );
+
+            return false;
+        }
+
+
+        mostrarCorrecto(
+            correo,
+            "feedbackCorreo",
+            "Correo válido: @" + dominio
+        );
+
+        return true;
     }
 
 
-    // Validar formato del correo
+    // =========================================
+    // TELÉFONO
+    // Requerido
+    // =========================================
 
-    if (regExCorreo.test(correo) == false) {
+    function validarTelefono() {
 
-        alert("Debe ingresar un correo electrónico válido");
+        let valor = telefono.value.trim();
 
-        return false;
+
+        if (valor == "") {
+
+            mostrarError(
+                telefono,
+                "feedbackTelefono",
+                "Debe ingresar su teléfono"
+            );
+
+            return false;
+        }
+
+
+        mostrarCorrecto(
+            telefono,
+            "feedbackTelefono",
+            "Teléfono ingresado correctamente"
+        );
+
+        return true;
     }
 
 
-    // Validar teléfono
+    // =========================================
+    // MOTIVO
+    // Requerido
+    // =========================================
 
-    if (telefono == "") {
+    function validarMotivo() {
 
-        alert("Debe ingresar su teléfono");
+        if (motivo.value == "") {
 
-        return false;
+            mostrarError(
+                motivo,
+                "feedbackMotivo",
+                "Debe seleccionar un motivo de contacto"
+            );
+
+            return false;
+        }
+
+
+        mostrarCorrecto(
+            motivo,
+            "feedbackMotivo",
+            "Motivo seleccionado correctamente"
+        );
+
+        return true;
     }
 
 
-    // Validar motivo
+    // =========================================
+    // MENSAJE
+    // Requerido - máximo 500 caracteres
+    // =========================================
 
-    if (motivo == "") {
+    function validarMensaje() {
 
-        alert("Debe seleccionar un motivo de contacto");
+        let valor = mensaje.value.trim();
 
-        return false;
+
+        if (valor == "") {
+
+            mostrarError(
+                mensaje,
+                "feedbackMensaje",
+                "Debe ingresar un mensaje"
+            );
+
+            return false;
+        }
+
+
+        if (valor.length > 500) {
+
+            mostrarError(
+                mensaje,
+                "feedbackMensaje",
+                "El mensaje no puede superar los 500 caracteres. Lleva "
+                + valor.length
+                + " caracteres"
+            );
+
+            return false;
+        }
+
+
+        mostrarCorrecto(
+            mensaje,
+            "feedbackMensaje",
+            "Mensaje válido: "
+            + valor.length
+            + " de 500 caracteres"
+        );
+
+        return true;
     }
 
 
-    // Validar mensaje
+    // =========================================
+    // CHECKBOX
+    // =========================================
 
-    if (mensaje == "") {
+    function validarTerminos() {
 
-        alert("Debe ingresar un mensaje");
+        if (terminos.checked == false) {
 
-        return false;
+            mostrarError(
+                terminos,
+                "feedbackTerminos",
+                "Debe confirmar que los datos ingresados son correctos"
+            );
+
+            return false;
+        }
+
+
+        mostrarCorrecto(
+            terminos,
+            "feedbackTerminos",
+            "Datos confirmados"
+        );
+
+        return true;
     }
 
 
-    // Validar checkbox
+    // =========================================
+    // MOSTRAR ERROR
+    // =========================================
 
-    if (terminos == false) {
+    function mostrarError(campo, idFeedback, texto) {
 
-        alert("Debe confirmar que los datos son correctos");
+        const feedback = document.getElementById(idFeedback);
 
-        return false;
+        campo.classList.remove("is-valid");
+        campo.classList.add("is-invalid");
+
+        feedback.className = "small text-danger mt-1";
+        feedback.textContent = texto;
     }
 
 
-    // Si todo está correcto
+    // =========================================
+    // MOSTRAR CORRECTO
+    // =========================================
 
-    alert("Consulta enviada correctamente");
+    function mostrarCorrecto(campo, idFeedback, texto) {
 
-    return true;
-}
+        const feedback = document.getElementById(idFeedback);
+
+        campo.classList.remove("is-invalid");
+        campo.classList.add("is-valid");
+
+        feedback.className = "small text-success mt-1";
+        feedback.textContent = texto;
+    }
+
+
+    // =========================================
+    // ENVIAR FORMULARIO
+    // =========================================
+
+    formulario.addEventListener("submit", function (evento) {
+
+        evento.preventDefault();
+
+
+        let nombreValido = validarNombre();
+
+        let correoValido = validarCorreo();
+
+        let telefonoValido = validarTelefono();
+
+        let motivoValido = validarMotivo();
+
+        let mensajeValido = validarMensaje();
+
+        let terminosValidos = validarTerminos();
+
+
+        const resultado =
+            document.getElementById("mensajeResultado");
+
+
+        if (
+            nombreValido == true &&
+            correoValido == true &&
+            telefonoValido == true &&
+            motivoValido == true &&
+            mensajeValido == true &&
+            terminosValidos == true
+        ) {
+
+            resultado.className =
+                "alert alert-success mt-4";
+
+            resultado.textContent =
+                "Consulta enviada correctamente. Gracias por contactar a ALBEDO Outdoor.";
+
+        } else {
+
+            resultado.className =
+                "alert alert-danger mt-4";
+
+            resultado.textContent =
+                "No se pudo enviar la consulta. Revise los campos marcados en rojo.";
+        }
+
+    });
+
+});
