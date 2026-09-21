@@ -56,16 +56,18 @@ function crearTarjeta(producto) {
     return `
         <article class="producto-catalogo">
 
-            <div class="catalogo-imagen">
+            <a class="catalogo-imagen" href="producto-detalle.html?id=${producto.id}">
 
                 <img
                     src="${producto.imagen}"
                     alt="${producto.nombre}"
                 >
 
-            </div>
+            </a>
 
-            <h3>${producto.nombre}</h3>
+            <a class="catalogo-titulo-enlace" href="producto-detalle.html?id=${producto.id}">
+                <h3>${producto.nombre}</h3>
+            </a>
 
             <p class="catalogo-descripcion-producto">
                 ${producto.descripcion}
@@ -76,6 +78,10 @@ function crearTarjeta(producto) {
             </p>
 
             ${coloresHTML}
+
+            <a class="catalogo-ver-detalle" href="producto-detalle.html?id=${producto.id}">
+                Ver detalle →
+            </a>
 
         </article>
     `;
