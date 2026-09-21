@@ -81,6 +81,15 @@
                     Contacto
                 </a>
 
+                <a href="carrito.html">
+                    Carrito
+                    <span class="carrito-contador" id="contadorCarrito">0</span>
+                </a>
+
+                <a href="login.html">
+                    Iniciar sesión
+                </a>
+
             </nav>
 
 
@@ -162,6 +171,7 @@
                                 id="nombre"
                                 name="nombre"
                                 maxlength="100"
+                                autocomplete="name"
                                 placeholder="Ingresa tu nombre"
                             >
 
@@ -192,6 +202,7 @@
                                 id="correo"
                                 name="correo"
                                 maxlength="100"
+                                autocomplete="email"
                                 placeholder="nombre@gmail.com"
                             >
 
@@ -231,6 +242,7 @@
                                 class="form-control"
                                 id="telefono"
                                 name="telefono"
+                                autocomplete="tel"
                                 placeholder="+56 9 1234 5678"
                             >
 
@@ -436,6 +448,8 @@
     <!-- JAVASCRIPT ALBEDO -->
 
     <script src="funciones.js"></script>
+
+    <script src="carrito.js"></script>
 
 
 </body>
