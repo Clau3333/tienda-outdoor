@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ALBEDO Outdoor | Carrito de compras</title>
+
+
+    <!-- Bootstrap -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- Estilos ALBEDO -->
+
+    <link
+        rel="stylesheet"
+        href="estilos.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         CABECERA
+         ========================================= -->
+
+    <header class="cabecera-tienda">
+
+
+        <div class="cabecera-superior">
+
+
+            <div class="espacio-cabecera"></div>
+
+
+            <a
+                class="marca"
+                href="index.html"
+                aria-label="ALBEDO Outdoor, inicio"
+            >
+
+                <img
+                    src="img/logo-albedo.png"
+                    alt="ALBEDO Outdoor"
+                >
+
+            </a>
+
+
+            <nav
+                class="enlaces-principales"
+                aria-label="Navegación principal"
+            >
+
+                <a href="index.html">
+                    Inicio
+                </a>
+
+                <a href="productos.html">
+                    Productos
+                </a>
+
+                <a href="contacto.html">
+                    Contacto
+                </a>
+
+                <a
+                    href="carrito.html"
+                    aria-current="page"
+                >
+                    Carrito
+                    <span class="carrito-contador" id="contadorCarrito">0</span>
+                </a>
+
+                <a href="login.html">
+                    Iniciar sesión
+                </a>
+
+            </nav>
+
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- =========================================
+         CONTENIDO
+         ========================================= -->
+
+    <main>
+
+
+        <section class="container py-5 carrito-seccion">
+
+
+            <p class="etiqueta mb-2">
+                ALBEDO OUTDOOR
+            </p>
+
+            <h1 class="fs-1 mb-4">
+                Carrito de compras
+            </h1>
+
+
+            <!-- CARRITO VACÍO -->
+
+            <div
+                id="carritoVacio"
+                class="alert alert-secondary"
+                style="display: none;"
+            >
+                Tu carrito está vacío.
+                <a href="productos.html">Ver productos</a>
+            </div>
+
+
+            <!-- CONTENIDO DEL CARRITO -->
+
+            <div id="carritoContenido">
+
+
+                <div class="table-responsive">
+
+                    <table class="table align-middle carrito-tabla">
+
+                        <thead>
+
+                            <tr>
+                                <th>Producto</th>
+                                <th>Color</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Subtotal</th>
+                                <th></th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="carritoLista"></tbody>
+
+                    </table>
+
+                </div>
+
+
+                <div class="carrito-resumen">
+
+                    <button
+                        id="botonVaciarCarrito"
+                        class="btn btn-outline-dark"
+                        type="button"
+                    >
+                        Vaciar carrito
+                    </button>
+
+                    <p class="carrito-total">
+                        Total:
+                        <span id="carritoTotal">$0</span>
+                    </p>
+
+                    <button
+                        id="botonFinalizarCompra"
+                        class="boton-albedo"
+                        type="button"
+                    >
+                        Finalizar compra
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="mensajeCompra"
+                    role="alert"
+                ></div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================================
+         PIE DE PÁGINA
+         ========================================= -->
+
+    <footer class="pie">
+
+
+        <p class="pie-marca">
+            ALBEDO OUTDOOR
+        </p>
+
+
+        <p>
+            &copy; 2026 ALBEDO Outdoor.
+        </p>
+
+
+    </footer>
+
+
+
+    <!-- BOOTSTRAP -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    ></script>
+
+
+    <!-- JAVASCRIPT ALBEDO -->
+
+    <script src="carrito.js"></script>
+
+
+</body>
+
+</html>
