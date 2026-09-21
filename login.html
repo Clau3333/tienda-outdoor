@@ -3,6 +3,7 @@
 
 <head>
 
+    <!-- 1. Configuración básica -->
     <meta charset="UTF-8">
 
     <meta
@@ -13,16 +14,14 @@
     <title>ALBEDO Outdoor | Iniciar sesión</title>
 
 
-    <!-- Bootstrap -->
-
+    <!-- 2. Bootstrap -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
 
 
-    <!-- Estilos ALBEDO -->
-
+    <!-- 3. Estilos propios de ALBEDO -->
     <link
         rel="stylesheet"
         href="estilos.css"
@@ -35,7 +34,7 @@
 
 
     <!-- =========================================
-         CABECERA
+         4. CABECERA Y NAVEGACIÓN
          ========================================= -->
 
     <header class="cabecera-tienda">
@@ -47,6 +46,7 @@
             <div class="espacio-cabecera"></div>
 
 
+            <!-- Logo ALBEDO -->
             <a
                 class="marca"
                 href="index.html"
@@ -61,6 +61,7 @@
             </a>
 
 
+            <!-- Menú principal -->
             <nav
                 class="enlaces-principales"
                 aria-label="Navegación principal"
@@ -79,16 +80,33 @@
                 </a>
 
                 <a href="carrito.html">
+
                     Carrito
-                    <span class="carrito-contador" id="contadorCarrito">0</span>
+
+                    <span
+                        class="carrito-contador"
+                        id="contadorCarrito"
+                    >
+                        0
+                    </span>
+
                 </a>
 
+
+                <!-- Página actual -->
                 <a
                     href="login.html"
                     aria-current="page"
                 >
                     Iniciar sesión
                 </a>
+
+
+                <!-- Usuario que todavía no tiene cuenta -->
+                <a href="registro.html">
+                    Registrarse
+                </a>
+
 
             </nav>
 
@@ -101,7 +119,7 @@
 
 
     <!-- =========================================
-         CONTENIDO
+         5. CONTENIDO PRINCIPAL
          ========================================= -->
 
     <main>
@@ -116,7 +134,7 @@
                 <div class="col-12 col-lg-6 col-xl-5">
 
 
-                    <!-- ENCABEZADO -->
+                    <!-- 6. Encabezado -->
 
                     <div class="mb-5">
 
@@ -142,7 +160,8 @@
 
 
                     <!-- =================================
-                         FORMULARIO
+                         7. FORMULARIO DE LOGIN
+                         login.js controlará las validaciones.
                          ================================= -->
 
                     <form
@@ -151,7 +170,9 @@
                     >
 
 
-                        <!-- CORREO -->
+                        <!-- =================================
+                             8. CORREO ELECTRÓNICO
+                             ================================= -->
 
                         <div class="mb-4">
 
@@ -172,9 +193,12 @@
                                 maxlength="100"
                                 autocomplete="email"
                                 placeholder="nombre@gmail.com"
+                                required
                             >
 
 
+                            <!-- JavaScript mostrará aquí
+                                 error o confirmación -->
                             <div id="feedbackCorreoLogin"></div>
 
 
@@ -192,7 +216,17 @@
 
 
 
-                        <!-- CONTRASEÑA -->
+                        <!-- =================================
+                             9. CONTRASEÑA
+
+                             Reglas de ALBEDO:
+
+                             - Exactamente 10 caracteres.
+                             - Al menos una letra.
+                             - Al menos un número.
+                             - Al menos un símbolo permitido.
+                             - Sin espacios.
+                             ================================= -->
 
                         <div class="mb-4">
 
@@ -210,17 +244,24 @@
                                 class="form-control"
                                 id="contrasenaLogin"
                                 name="contrasenaLogin"
+                                minlength="10"
                                 maxlength="10"
                                 autocomplete="current-password"
                                 placeholder="Ingresa tu contraseña"
+                                required
                             >
 
 
+                            <!-- Mensaje generado por login.js -->
                             <div id="feedbackContrasenaLogin"></div>
 
 
                             <div class="form-text">
-                                Debe tener entre 4 y 10 caracteres.
+
+                                Debe tener exactamente 10 caracteres,
+                                al menos una letra, un número y un símbolo:
+                                % &amp; $ # / ( ) = &quot; !
+
                             </div>
 
 
@@ -228,7 +269,9 @@
 
 
 
-                        <!-- BOTÓN -->
+                        <!-- =================================
+                             10. BOTÓN DE INICIO DE SESIÓN
+                             ================================= -->
 
                         <button
                             type="submit"
@@ -239,7 +282,25 @@
 
 
 
-                        <!-- RESULTADO DEL ENVÍO -->
+                        <!-- =================================
+                             11. REGISTRO PARA USUARIOS NUEVOS
+                             ================================= -->
+
+                        <p class="mt-4 mb-0 small">
+
+                            ¿No tienes una cuenta?
+
+                            <a href="registro.html">
+                                Registrarse
+                            </a>
+
+                        </p>
+
+
+
+                        <!-- =================================
+                             12. RESULTADO GENERAL
+                             ================================= -->
 
                         <div
                             id="mensajeResultadoLogin"
@@ -264,7 +325,7 @@
 
 
     <!-- =========================================
-         PIE DE PÁGINA
+         13. PIE DE PÁGINA
          ========================================= -->
 
     <footer class="pie">
@@ -284,17 +345,17 @@
 
 
 
-    <!-- BOOTSTRAP -->
-
+    <!-- 14. JavaScript Bootstrap -->
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     ></script>
 
 
-    <!-- JAVASCRIPT ALBEDO -->
-
+    <!-- 15. Contador del carrito -->
     <script src="carrito.js"></script>
 
+
+    <!-- 16. Validaciones del login -->
     <script src="login.js"></script>
 
 
