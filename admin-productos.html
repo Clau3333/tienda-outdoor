@@ -12,21 +12,22 @@
 
     <title>ALBEDO Outdoor | Administración de productos</title>
 
-
-    <!-- BOOTSTRAP -->
-
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
 
-
-    <!-- ESTILOS ADMINISTRACIÓN -->
-
     <link
         rel="stylesheet"
         href="admin.css"
     >
+
+    <!--
+        SEGURIDAD:
+        Se carga antes del contenido funcional.
+        Solo permite Administrador.
+    -->
+    <script src="admin-seguridad.js"></script>
 
 </head>
 
@@ -62,17 +63,14 @@
             </div>
 
 
-
             <nav
                 class="admin-menu"
                 aria-label="Menú de administración"
             >
 
-
                 <a href="admin.html">
                     Inicio
                 </a>
-
 
                 <a
                     class="activo"
@@ -81,23 +79,18 @@
                     Productos
                 </a>
 
-
-                <span class="admin-menu-pendiente">
+                <a href="admin-usuarios.html">
                     Usuarios
-                </span>
-
+                </a>
 
             </nav>
 
 
-
             <div class="admin-sidebar-inferior">
-
 
                 <a href="index.html">
                     ← Volver a la tienda
                 </a>
-
 
             </div>
 
@@ -135,18 +128,21 @@
 
                 <div class="admin-usuario">
 
-                    <span class="admin-usuario-icono">
+                    <span
+                        class="admin-usuario-icono"
+                        id="adminInicial"
+                    >
                         A
                     </span>
 
                     <div>
 
-                        <strong>
+                        <strong id="adminNombre">
                             Administrador
                         </strong>
 
-                        <small>
-                            Gestión de productos
+                        <small id="adminPerfil">
+                            Administrador
                         </small>
 
                     </div>
@@ -188,11 +184,9 @@
 
 
                         <p>
-
                             Desde esta vista podrás listar,
                             crear y editar los productos
                             disponibles en ALBEDO Outdoor.
-
                         </p>
 
                     </div>
@@ -214,7 +208,6 @@
 
                     <div class="admin-seccion-encabezado">
 
-
                         <div>
 
                             <p class="admin-etiqueta">
@@ -228,7 +221,6 @@
 
                         </div>
 
-
                     </div>
 
 
@@ -241,8 +233,6 @@
                             novalidate
                         >
 
-
-                            <!-- CÓDIGO ORIGINAL EN EDICIÓN -->
 
                             <input
                                 type="hidden"
@@ -261,14 +251,12 @@
 
                                 <div class="col-12 col-md-6">
 
-
                                     <label
                                         for="codigoProducto"
                                         class="form-label fw-semibold"
                                     >
                                         Código producto
                                     </label>
-
 
                                     <input
                                         type="text"
@@ -280,14 +268,11 @@
                                         placeholder="Ej: CHA001"
                                     >
 
-
                                     <div id="feedbackCodigoProducto"></div>
-
 
                                     <div class="form-text">
                                         Requerido. Mínimo 3 caracteres.
                                     </div>
-
 
                                 </div>
 
@@ -299,14 +284,12 @@
 
                                 <div class="col-12 col-md-6">
 
-
                                     <label
                                         for="nombreProducto"
                                         class="form-label fw-semibold"
                                     >
                                         Nombre
                                     </label>
-
 
                                     <input
                                         type="text"
@@ -318,14 +301,11 @@
                                         placeholder="Ej: Chaqueta Cordillera"
                                     >
 
-
                                     <div id="feedbackNombreProducto"></div>
-
 
                                     <div class="form-text">
                                         Requerido. Máximo 100 caracteres.
                                     </div>
-
 
                                 </div>
 
@@ -337,14 +317,12 @@
 
                                 <div class="col-12">
 
-
                                     <label
                                         for="descripcionProducto"
                                         class="form-label fw-semibold"
                                     >
                                         Descripción
                                     </label>
-
 
                                     <textarea
                                         class="form-control"
@@ -355,14 +333,11 @@
                                         placeholder="Descripción del producto"
                                     ></textarea>
 
-
                                     <div id="feedbackDescripcionProducto"></div>
-
 
                                     <div class="form-text">
                                         Campo opcional. Máximo 500 caracteres.
                                     </div>
-
 
                                 </div>
 
@@ -374,14 +349,12 @@
 
                                 <div class="col-12 col-md-6">
 
-
                                     <label
                                         for="precioProducto"
                                         class="form-label fw-semibold"
                                     >
                                         Precio
                                     </label>
-
 
                                     <input
                                         type="text"
@@ -393,14 +366,11 @@
                                         placeholder="Ej: 59990 o 59990,50"
                                     >
 
-
                                     <div id="feedbackPrecioProducto"></div>
-
 
                                     <div class="form-text">
                                         Requerido. Solo números. Puede ser 0 y admite decimales.
                                     </div>
-
 
                                 </div>
 
@@ -412,14 +382,12 @@
 
                                 <div class="col-12 col-md-6">
 
-
                                     <label
                                         for="stockProducto"
                                         class="form-label fw-semibold"
                                     >
                                         Stock
                                     </label>
-
 
                                     <input
                                         type="text"
@@ -431,14 +399,11 @@
                                         placeholder="Ej: 20"
                                     >
 
-
                                     <div id="feedbackStockProducto"></div>
-
 
                                     <div class="form-text">
                                         Requerido. Solo números enteros desde 0.
                                     </div>
-
 
                                 </div>
 
@@ -450,14 +415,12 @@
 
                                 <div class="col-12 col-md-6">
 
-
                                     <label
                                         for="stockCriticoProducto"
                                         class="form-label fw-semibold"
                                     >
                                         Stock crítico
                                     </label>
-
 
                                     <input
                                         type="text"
@@ -469,14 +432,11 @@
                                         placeholder="Ej: 5"
                                     >
 
-
                                     <div id="feedbackStockCriticoProducto"></div>
-
 
                                     <div class="form-text">
                                         Opcional. Solo números enteros desde 0.
                                     </div>
-
 
                                 </div>
 
@@ -488,14 +448,12 @@
 
                                 <div class="col-12 col-md-6">
 
-
                                     <label
                                         for="categoriaProducto"
                                         class="form-label fw-semibold"
                                     >
                                         Categoría
                                     </label>
-
 
                                     <select
                                         class="form-select"
@@ -521,14 +479,11 @@
 
                                     </select>
 
-
                                     <div id="feedbackCategoriaProducto"></div>
-
 
                                     <div class="form-text">
                                         Campo requerido.
                                     </div>
-
 
                                 </div>
 
@@ -540,14 +495,12 @@
 
                                 <div class="col-12">
 
-
                                     <label
                                         for="imagenProducto"
                                         class="form-label fw-semibold"
                                     >
                                         Ruta de imagen
                                     </label>
-
 
                                     <input
                                         type="text"
@@ -559,18 +512,13 @@
                                         placeholder="Ej: img/chaqueta-cordillera.png"
                                     >
 
-
                                     <div id="feedbackImagenProducto"></div>
 
-
                                     <div class="form-text">
-
                                         Campo opcional. Puedes utilizar
                                         una imagen existente dentro de
                                         la carpeta img.
-
                                     </div>
-
 
                                 </div>
 
@@ -579,9 +527,9 @@
 
 
 
-                            <!-- =============================
+                            <!-- =================================
                                  MENSAJE GENERAL
-                                 ============================= -->
+                                 ================================= -->
 
                             <div
                                 id="mensajeProducto"
@@ -590,12 +538,11 @@
 
 
 
-                            <!-- =============================
+                            <!-- =================================
                                  BOTONES
-                                 ============================= -->
+                                 ================================= -->
 
                             <div class="d-flex flex-wrap gap-2 mt-4">
-
 
                                 <button
                                     type="submit"
@@ -605,7 +552,6 @@
                                     Guardar producto
                                 </button>
 
-
                                 <button
                                     type="button"
                                     class="btn btn-outline-secondary px-4"
@@ -614,7 +560,6 @@
                                 >
                                     Cancelar edición
                                 </button>
-
 
                             </div>
 
@@ -641,20 +586,17 @@
 
                     <div class="admin-seccion-encabezado">
 
-
                         <div>
 
                             <p class="admin-etiqueta">
                                 CATÁLOGO
                             </p>
 
-
                             <h2 id="titulo-listado-productos">
                                 Productos registrados
                             </h2>
 
                         </div>
-
 
                     </div>
 
@@ -673,7 +615,6 @@
 
 
                                 <thead>
-
 
                                     <tr>
 
@@ -707,13 +648,10 @@
 
                                     </tr>
 
-
                                 </thead>
 
 
-
                                 <tbody id="listaProductosAdmin">
-
 
                                     <tr>
 
@@ -725,7 +663,6 @@
                                         </td>
 
                                     </tr>
-
 
                                 </tbody>
 
@@ -759,7 +696,6 @@
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     ></script>
-
 
     <script src="productos.js"></script>
 
