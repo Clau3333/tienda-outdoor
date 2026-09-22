@@ -12,16 +12,10 @@
 
     <title>ALBEDO Outdoor | Contacto</title>
 
-
-    <!-- Bootstrap -->
-
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
-
-
-    <!-- Estilos ALBEDO -->
 
     <link
         rel="stylesheet"
@@ -70,11 +64,17 @@
                     Inicio
                 </a>
 
-
                 <a href="productos.html">
                     Productos
                 </a>
 
+                <a href="nosotros.html">
+                    Nosotros
+                </a>
+
+                <a href="blog.html">
+                    Blog
+                </a>
 
                 <a
                     href="contacto.html"
@@ -82,7 +82,6 @@
                 >
                     Contacto
                 </a>
-
 
                 <a href="carrito.html">
 
@@ -97,11 +96,9 @@
 
                 </a>
 
-
                 <a href="login.html">
                     Iniciar sesión
                 </a>
-
 
                 <a href="registro.html">
                     Registrarse
@@ -149,9 +146,11 @@
 
 
                         <p class="text-secondary mt-3">
+
                             ¿Necesitas ayuda con un producto?
                             Envíanos tu consulta y nos pondremos
                             en contacto contigo.
+
                         </p>
 
 
@@ -214,7 +213,7 @@
 
 
                             <input
-                                type="email"
+                                type="text"
                                 class="form-control"
                                 id="correo"
                                 name="correo"
@@ -254,17 +253,39 @@
                             </label>
 
 
-                            <input
-                                type="tel"
-                                class="form-control"
-                                id="telefono"
-                                name="telefono"
-                                autocomplete="tel"
-                                placeholder="+56 9 1234 5678"
-                            >
+                            <div class="input-group">
+
+
+                                <span
+                                    class="input-group-text fw-semibold"
+                                    id="prefijoTelefono"
+                                >
+                                    +569
+                                </span>
+
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="telefono"
+                                    name="telefono"
+                                    inputmode="numeric"
+                                    maxlength="8"
+                                    autocomplete="tel-national"
+                                    placeholder="12345678"
+                                    aria-describedby="prefijoTelefono"
+                                >
+
+
+                            </div>
 
 
                             <div id="feedbackTelefono"></div>
+
+
+                            <div class="form-text">
+                                Ingresa los 8 números restantes.
+                            </div>
 
 
                         </div>
@@ -365,7 +386,7 @@
 
 
 
-                        <!-- CHECKBOX -->
+                        <!-- CONFIRMACIÓN -->
 
                         <div class="mb-4">
 
@@ -384,8 +405,10 @@
                                     class="form-check-label"
                                     for="terminos"
                                 >
+
                                     Confirmo que los datos ingresados
                                     son correctos.
+
                                 </label>
 
 
@@ -410,7 +433,7 @@
 
 
 
-                        <!-- RESULTADO DEL ENVÍO -->
+                        <!-- RESULTADO -->
 
                         <div
                             id="mensajeResultado"
@@ -435,7 +458,7 @@
 
 
     <!-- =========================================
-         PIE DE PÁGINA
+         FOOTER
          ========================================= -->
 
     <footer class="pie">

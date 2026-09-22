@@ -1,24 +1,47 @@
-// =============================================
-// FORMULARIO DE CONTACTO ALBEDO
-// =============================================
+// =====================================================
+// FORMULARIO DE CONTACTO - ALBEDO OUTDOOR
+// =====================================================
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const formulario = document.getElementById("formularioContacto");
 
-    const nombre = document.getElementById("nombre");
-    const correo = document.getElementById("correo");
-    const telefono = document.getElementById("telefono");
-    const motivo = document.getElementById("motivo");
-    const mensaje = document.getElementById("mensaje");
-    const terminos = document.getElementById("terminos");
+    // =================================================
+    // 1. CAMPOS DEL FORMULARIO
+    // =================================================
+
+    const formulario =
+        document.getElementById("formularioContacto");
+
+    const nombre =
+        document.getElementById("nombre");
+
+    const correo =
+        document.getElementById("correo");
+
+    const telefono =
+        document.getElementById("telefono");
+
+    const motivo =
+        document.getElementById("motivo");
+
+    const mensaje =
+        document.getElementById("mensaje");
+
+    const terminos =
+        document.getElementById("terminos");
+
+    const resultado =
+        document.getElementById("mensajeResultado");
 
 
-    // =========================================
-    // VALIDACIÓN DE CORREO
-    // =========================================
 
-    const regExCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // =================================================
+    // 2. CONFIGURACIÓN DEL CORREO
+    // =================================================
+
+    const regExCorreo =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 
     const dominiosPermitidos = [
         "gmail.com",
@@ -27,33 +50,114 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
 
-    // =========================================
-    // VALIDACIÓN EN TIEMPO REAL
-    // =========================================
 
-    nombre.addEventListener("input", validarNombre);
+    // =================================================
+    // 3. VALIDACIÓN EN TIEMPO REAL
+    // =================================================
 
-    correo.addEventListener("input", validarCorreo);
+    nombre.addEventListener(
+        "input",
+        function () {
 
-    telefono.addEventListener("input", validarTelefono);
+            limpiarResultadoGeneral();
 
-    motivo.addEventListener("change", validarMotivo);
+            validarNombre();
 
-    mensaje.addEventListener("input", validarMensaje);
+        }
+    );
 
-    terminos.addEventListener("change", validarTerminos);
+
+    correo.addEventListener(
+        "input",
+        function () {
+
+            limpiarResultadoGeneral();
+
+            validarCorreo();
+
+        }
+    );
 
 
-    // =========================================
-    // NOMBRE
-    // Requerido - máximo 100 caracteres
-    // =========================================
+    telefono.addEventListener(
+        "input",
+        function () {
+
+            limpiarResultadoGeneral();
+
+
+            // Solo números.
+            telefono.value =
+                telefono.value.replace(
+                    /\D/g,
+                    ""
+                );
+
+
+            // Máximo 8 números.
+            telefono.value =
+                telefono.value.slice(
+                    0,
+                    8
+                );
+
+
+            validarTelefono();
+
+        }
+    );
+
+
+    motivo.addEventListener(
+        "change",
+        function () {
+
+            limpiarResultadoGeneral();
+
+            validarMotivo();
+
+        }
+    );
+
+
+    mensaje.addEventListener(
+        "input",
+        function () {
+
+            limpiarResultadoGeneral();
+
+            validarMensaje();
+
+        }
+    );
+
+
+    terminos.addEventListener(
+        "change",
+        function () {
+
+            limpiarResultadoGeneral();
+
+            validarTerminos();
+
+        }
+    );
+
+
+
+    // =================================================
+    // 4. VALIDAR NOMBRE
+    // =================================================
 
     function validarNombre() {
 
-        let valor = nombre.value.trim();
 
-        if (valor == "") {
+        const valor =
+            nombre.value.trim();
+
+
+        if (valor === "") {
+
 
             mostrarError(
                 nombre,
@@ -61,11 +165,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Debe ingresar su nombre"
             );
 
+
             return false;
+
         }
 
 
         if (valor.length > 100) {
+
 
             mostrarError(
                 nombre,
@@ -73,34 +180,41 @@ document.addEventListener("DOMContentLoaded", function () {
                 "El nombre no puede superar los 100 caracteres"
             );
 
+
             return false;
+
         }
 
 
         mostrarCorrecto(
             nombre,
-            "feedbackNombre",
-            "Nombre válido"
+            "feedbackNombre"
         );
 
+
         return true;
+
     }
 
 
-    // =========================================
-    // CORREO
-    // Requerido
-    // Máximo 100 caracteres
-    // Formato válido
-    // Dominios permitidos
-    // =========================================
+
+    // =================================================
+    // 5. VALIDAR CORREO
+    // =================================================
 
     function validarCorreo() {
 
-        let valor = correo.value.trim();
+
+        const valorOriginal =
+            correo.value;
 
 
-        if (valor == "") {
+        const valor =
+            valorOriginal.toLowerCase();
+
+
+        if (valor === "") {
+
 
             mostrarError(
                 correo,
@@ -108,11 +222,29 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Debe ingresar su correo electrónico"
             );
 
+
             return false;
+
+        }
+
+
+        if (/\s/.test(valorOriginal)) {
+
+
+            mostrarError(
+                correo,
+                "feedbackCorreo",
+                "El correo no puede contener espacios"
+            );
+
+
+            return false;
+
         }
 
 
         if (valor.length > 100) {
+
 
             mostrarError(
                 correo,
@@ -120,11 +252,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 "El correo no puede superar los 100 caracteres"
             );
 
+
             return false;
+
         }
 
 
-        if (regExCorreo.test(valor) == false) {
+        if (
+            regExCorreo.test(valor) === false
+        ) {
+
 
             mostrarError(
                 correo,
@@ -132,48 +269,62 @@ document.addEventListener("DOMContentLoaded", function () {
                 "El formato del correo no es válido"
             );
 
+
             return false;
+
         }
 
 
-        let partesCorreo = valor.split("@");
+        const dominio =
+            valor.split("@")[1];
 
-        let dominio = partesCorreo[1].toLowerCase();
 
+        if (
+            dominiosPermitidos.includes(
+                dominio
+            ) === false
+        ) {
 
-        if (dominiosPermitidos.includes(dominio) == false) {
 
             mostrarError(
                 correo,
                 "feedbackCorreo",
-                "Correo no permitido. Solo se acepta @gmail.com, @duoc.cl o @profesor.duoc.cl"
+                "Solo se acepta @gmail.com, @duoc.cl o @profesor.duoc.cl"
             );
 
+
             return false;
+
         }
 
 
         mostrarCorrecto(
             correo,
-            "feedbackCorreo",
-            "Correo válido: @" + dominio
+            "feedbackCorreo"
         );
 
+
         return true;
+
     }
 
 
-    // =========================================
-    // TELÉFONO
-    // Requerido
-    // =========================================
+
+    // =================================================
+    // 6. VALIDAR TELÉFONO
+    // Prefijo fijo +569
+    // Exactamente 8 números
+    // =================================================
 
     function validarTelefono() {
 
-        let valor = telefono.value.trim();
+
+        const valor =
+            telefono.value;
 
 
-        if (valor == "") {
+        if (valor === "") {
+
 
             mostrarError(
                 telefono,
@@ -181,28 +332,65 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Debe ingresar su teléfono"
             );
 
+
             return false;
+
+        }
+
+
+        if (
+            /^[0-9]+$/.test(valor) === false
+        ) {
+
+
+            mostrarError(
+                telefono,
+                "feedbackTelefono",
+                "El teléfono solo puede contener números"
+            );
+
+
+            return false;
+
+        }
+
+
+        if (valor.length !== 8) {
+
+
+            mostrarError(
+                telefono,
+                "feedbackTelefono",
+                "Debe ingresar exactamente 8 números"
+            );
+
+
+            return false;
+
         }
 
 
         mostrarCorrecto(
             telefono,
-            "feedbackTelefono",
-            "Teléfono ingresado correctamente"
+            "feedbackTelefono"
         );
 
+
         return true;
+
     }
 
 
-    // =========================================
-    // MOTIVO
-    // Requerido
-    // =========================================
+
+    // =================================================
+    // 7. VALIDAR MOTIVO
+    // =================================================
 
     function validarMotivo() {
 
-        if (motivo.value == "") {
+
+        if (motivo.value === "") {
+
 
             mostrarError(
                 motivo,
@@ -210,31 +398,37 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Debe seleccionar un motivo de contacto"
             );
 
+
             return false;
+
         }
 
 
         mostrarCorrecto(
             motivo,
-            "feedbackMotivo",
-            "Motivo seleccionado correctamente"
+            "feedbackMotivo"
         );
 
+
         return true;
+
     }
 
 
-    // =========================================
-    // MENSAJE
-    // Requerido - máximo 500 caracteres
-    // =========================================
+
+    // =================================================
+    // 8. VALIDAR MENSAJE
+    // =================================================
 
     function validarMensaje() {
 
-        let valor = mensaje.value.trim();
+
+        const valor =
+            mensaje.value.trim();
 
 
-        if (valor == "") {
+        if (valor === "") {
+
 
             mostrarError(
                 mensaje,
@@ -242,43 +436,48 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Debe ingresar un mensaje"
             );
 
+
             return false;
+
         }
 
 
         if (valor.length > 500) {
 
+
             mostrarError(
                 mensaje,
                 "feedbackMensaje",
-                "El mensaje no puede superar los 500 caracteres. Lleva "
-                + valor.length
-                + " caracteres"
+                "El mensaje no puede superar los 500 caracteres"
             );
 
+
             return false;
+
         }
 
 
         mostrarCorrecto(
             mensaje,
-            "feedbackMensaje",
-            "Mensaje válido: "
-            + valor.length
-            + " de 500 caracteres"
+            "feedbackMensaje"
         );
 
+
         return true;
+
     }
 
 
-    // =========================================
-    // CHECKBOX
-    // =========================================
+
+    // =================================================
+    // 9. VALIDAR CONFIRMACIÓN
+    // =================================================
 
     function validarTerminos() {
 
-        if (terminos.checked == false) {
+
+        if (terminos.checked === false) {
+
 
             mostrarError(
                 terminos,
@@ -286,102 +485,217 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Debe confirmar que los datos ingresados son correctos"
             );
 
+
             return false;
+
         }
 
 
         mostrarCorrecto(
             terminos,
-            "feedbackTerminos",
-            "Datos confirmados"
+            "feedbackTerminos"
         );
 
+
         return true;
+
     }
 
 
-    // =========================================
-    // MOSTRAR ERROR
-    // =========================================
 
-    function mostrarError(campo, idFeedback, texto) {
+    // =================================================
+    // 10. MOSTRAR ERROR
+    // =================================================
 
-        const feedback = document.getElementById(idFeedback);
+    function mostrarError(
+        campo,
+        idFeedback,
+        texto
+    ) {
 
-        campo.classList.remove("is-valid");
-        campo.classList.add("is-invalid");
 
-        feedback.className = "small text-danger mt-1";
-        feedback.textContent = texto;
+        const feedback =
+            document.getElementById(
+                idFeedback
+            );
+
+
+        campo.classList.remove(
+            "is-valid"
+        );
+
+
+        campo.classList.add(
+            "is-invalid"
+        );
+
+
+        feedback.className =
+            "small text-danger mt-1";
+
+
+        feedback.textContent =
+            texto;
+
     }
 
 
-    // =========================================
-    // MOSTRAR CORRECTO
-    // =========================================
 
-    function mostrarCorrecto(campo, idFeedback, texto) {
+    // =================================================
+    // 11. MOSTRAR CAMPO CORRECTO
+    // Solo borde/check verde.
+    // Sin texto redundante.
+    // =================================================
 
-        const feedback = document.getElementById(idFeedback);
+    function mostrarCorrecto(
+        campo,
+        idFeedback
+    ) {
 
-        campo.classList.remove("is-invalid");
-        campo.classList.add("is-valid");
 
-        feedback.className = "small text-success mt-1";
-        feedback.textContent = texto;
+        const feedback =
+            document.getElementById(
+                idFeedback
+            );
+
+
+        campo.classList.remove(
+            "is-invalid"
+        );
+
+
+        campo.classList.add(
+            "is-valid"
+        );
+
+
+        feedback.className =
+            "";
+
+
+        feedback.textContent =
+            "";
+
     }
 
 
-    // =========================================
-    // ENVIAR FORMULARIO
-    // =========================================
 
-    formulario.addEventListener("submit", function (evento) {
+    // =================================================
+    // 12. LIMPIAR MENSAJE GENERAL
+    // =================================================
 
-        evento.preventDefault();
-
-
-        let nombreValido = validarNombre();
-
-        let correoValido = validarCorreo();
-
-        let telefonoValido = validarTelefono();
-
-        let motivoValido = validarMotivo();
-
-        let mensajeValido = validarMensaje();
-
-        let terminosValidos = validarTerminos();
+    function limpiarResultadoGeneral() {
 
 
-        const resultado =
-            document.getElementById("mensajeResultado");
+        resultado.className =
+            "";
 
 
-        if (
-            nombreValido == true &&
-            correoValido == true &&
-            telefonoValido == true &&
-            motivoValido == true &&
-            mensajeValido == true &&
-            terminosValidos == true
-        ) {
+        resultado.innerHTML =
+            "";
 
-            resultado.className =
-                "alert alert-success mt-4";
+    }
 
-            resultado.textContent =
-                "Consulta enviada correctamente. Gracias por contactar a ALBEDO Outdoor.";
 
-        } else {
+
+    // =================================================
+    // 13. ENVIAR FORMULARIO
+    // =================================================
+
+    formulario.addEventListener(
+        "submit",
+        function (evento) {
+
+
+            evento.preventDefault();
+
+
+            const nombreValido =
+                validarNombre();
+
+
+            const correoValido =
+                validarCorreo();
+
+
+            const telefonoValido =
+                validarTelefono();
+
+
+            const motivoValido =
+                validarMotivo();
+
+
+            const mensajeValido =
+                validarMensaje();
+
+
+            const terminosValidos =
+                validarTerminos();
+
+
+
+            // =========================================
+            // FORMULARIO CORRECTO
+            // =========================================
+
+            if (
+                nombreValido === true &&
+                correoValido === true &&
+                telefonoValido === true &&
+                motivoValido === true &&
+                mensajeValido === true &&
+                terminosValidos === true
+            ) {
+
+
+                resultado.className =
+                    "alert alert-success mt-4";
+
+
+                resultado.innerHTML = `
+
+                    <strong>
+                        Consulta enviada correctamente
+                    </strong>
+
+                    <div class="mt-1">
+                        Gracias por contactar a ALBEDO Outdoor.
+                    </div>
+
+                `;
+
+
+                return;
+
+            }
+
+
+
+            // =========================================
+            // FORMULARIO CON ERRORES
+            // =========================================
 
             resultado.className =
                 "alert alert-danger mt-4";
 
-            resultado.textContent =
-                "No se pudo enviar la consulta. Revise los campos marcados en rojo.";
-        }
 
-    });
+            resultado.innerHTML = `
+
+                <strong>
+                    Revisa los datos ingresados
+                </strong>
+
+                <div class="mt-1">
+                    Corrige los campos marcados en rojo
+                    antes de enviar tu consulta.
+                </div>
+
+            `;
+
+
+        }
+    );
+
 
 });
