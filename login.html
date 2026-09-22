@@ -161,7 +161,6 @@
 
                     <!-- =================================
                          7. FORMULARIO DE LOGIN
-                         login.js controlará las validaciones.
                          ================================= -->
 
                     <form
@@ -186,7 +185,7 @@
 
 
                             <input
-                                type="email"
+                                type="text"
                                 class="form-control"
                                 id="correoLogin"
                                 name="correoLogin"
@@ -197,8 +196,6 @@
                             >
 
 
-                            <!-- JavaScript mostrará aquí
-                                 error o confirmación -->
                             <div id="feedbackCorreoLogin"></div>
 
 
@@ -218,14 +215,6 @@
 
                         <!-- =================================
                              9. CONTRASEÑA
-
-                             Reglas de ALBEDO:
-
-                             - Exactamente 10 caracteres.
-                             - Al menos una letra.
-                             - Al menos un número.
-                             - Al menos un símbolo permitido.
-                             - Sin espacios.
                              ================================= -->
 
                         <div class="mb-4">
@@ -252,7 +241,6 @@
                             >
 
 
-                            <!-- Mensaje generado por login.js -->
                             <div id="feedbackContrasenaLogin"></div>
 
 
@@ -283,7 +271,7 @@
 
 
                         <!-- =================================
-                             11. REGISTRO PARA USUARIOS NUEVOS
+                             11. REGISTRO
                              ================================= -->
 
                         <p class="mt-4 mb-0 small">
@@ -345,17 +333,18 @@
 
 
 
-    <!-- 14. JavaScript Bootstrap -->
+    <!-- =========================================
+         14. JAVASCRIPT
+         ========================================= -->
+
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     ></script>
 
 
-    <!-- 15. Contador del carrito -->
     <script src="carrito.js"></script>
 
 
-    <!-- 16. Validaciones del login -->
     <script src="login.js"></script>
 
 

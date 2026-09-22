@@ -146,29 +146,78 @@
                         <div class="row">
 
 
-                            <!-- RUN -->
+                            <!-- RUT Y DÍGITO VERIFICADOR -->
 
                             <div class="col-12 col-md-6 mb-4">
 
-                                <label
-                                    for="runRegistro"
-                                    class="form-label fw-semibold"
-                                >
-                                    RUN
-                                </label>
+                                <div class="row g-2 align-items-end">
 
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="runRegistro"
-                                    maxlength="9"
-                                    placeholder="19011022K"
-                                >
+
+                                    <!-- RUT -->
+
+                                    <div class="col">
+
+                                        <label
+                                            for="runRegistro"
+                                            class="form-label fw-semibold"
+                                        >
+                                            RUT
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            inputmode="numeric"
+                                            class="form-control"
+                                            id="runRegistro"
+                                            name="runRegistro"
+                                            minlength="6"
+                                            maxlength="8"
+                                            pattern="[0-9]{6,8}"
+                                            placeholder="19011022"
+                                            autocomplete="off"
+                                        >
+
+                                    </div>
+
+
+                                    <!-- GUION -->
+
+                                    <div class="col-auto pb-2 fw-bold">
+                                        -
+                                    </div>
+
+
+                                    <!-- DÍGITO VERIFICADOR -->
+
+                                    <div class="col-3">
+
+                                        <label
+                                            for="dvRegistro"
+                                            class="form-label fw-semibold"
+                                        >
+                                            DV
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            class="form-control text-center"
+                                            id="dvRegistro"
+                                            name="dvRegistro"
+                                            minlength="1"
+                                            maxlength="1"
+                                            pattern="[0-9Kk]"
+                                            placeholder="K"
+                                            autocomplete="off"
+                                        >
+
+                                    </div>
+
+                                </div>
 
                                 <div id="feedbackRunRegistro"></div>
 
                                 <div class="form-text">
-                                    Sin puntos ni guion.
+                                    RUT de 6 a 8 números y dígito verificador de 0 a 9 o K.
                                 </div>
 
                             </div>
@@ -491,7 +540,7 @@
 
 
 
-                            <!-- MENSAJE VALIDACIÓN MAPS -->
+                            <!-- MENSAJE DIRECCIÓN -->
 
                             <div class="col-12 mb-3">
 

@@ -70,24 +70,40 @@
                     Inicio
                 </a>
 
+
                 <a href="productos.html">
                     Productos
                 </a>
 
+
                 <a href="contacto.html">
                     Contacto
                 </a>
+
 
                 <a
                     href="carrito.html"
                     aria-current="page"
                 >
                     Carrito
-                    <span class="carrito-contador" id="contadorCarrito">0</span>
+
+                    <span
+                        class="carrito-contador"
+                        id="contadorCarrito"
+                    >
+                        0
+                    </span>
+
                 </a>
+
 
                 <a href="login.html">
                     Iniciar sesión
+                </a>
+
+
+                <a href="registro.html">
+                    Registrarse
                 </a>
 
             </nav>
@@ -114,53 +130,95 @@
                 ALBEDO OUTDOOR
             </p>
 
+
             <h1 class="fs-1 mb-4">
                 Carrito de compras
             </h1>
 
 
-            <!-- CARRITO VACÍO -->
+
+            <!-- =====================================
+                 CARRITO VACÍO
+                 ===================================== -->
 
             <div
                 id="carritoVacio"
                 class="alert alert-secondary"
                 style="display: none;"
             >
+
                 Tu carrito está vacío.
-                <a href="productos.html">Ver productos</a>
+
+                <a href="productos.html">
+                    Ver productos
+                </a>
+
             </div>
 
 
-            <!-- CONTENIDO DEL CARRITO -->
+
+            <!-- =====================================
+                 CONTENIDO DEL CARRITO
+                 ===================================== -->
 
             <div id="carritoContenido">
 
 
                 <div class="table-responsive">
 
+
                     <table class="table align-middle carrito-tabla">
+
 
                         <thead>
 
+
                             <tr>
-                                <th>Producto</th>
-                                <th>Color</th>
-                                <th>Precio</th>
-                                <th>Cantidad</th>
-                                <th>Subtotal</th>
+
+                                <th>
+                                    Producto
+                                </th>
+
+                                <th>
+                                    Color
+                                </th>
+
+                                <th>
+                                    Precio
+                                </th>
+
+                                <th>
+                                    Cantidad
+                                </th>
+
+                                <th>
+                                    Subtotal
+                                </th>
+
                                 <th></th>
+
                             </tr>
+
 
                         </thead>
 
+
                         <tbody id="carritoLista"></tbody>
 
+
                     </table>
+
 
                 </div>
 
 
+
+                <!-- =====================================
+                     RESUMEN
+                     ===================================== -->
+
                 <div class="carrito-resumen">
+
 
                     <button
                         id="botonVaciarCarrito"
@@ -170,10 +228,17 @@
                         Vaciar carrito
                     </button>
 
+
                     <p class="carrito-total">
+
                         Total:
-                        <span id="carritoTotal">$0</span>
+
+                        <span id="carritoTotal">
+                            $0
+                        </span>
+
                     </p>
+
 
                     <button
                         id="botonFinalizarCompra"
@@ -183,16 +248,22 @@
                         Finalizar compra
                     </button>
 
+
                 </div>
 
 
-                <div
-                    id="mensajeCompra"
-                    role="alert"
-                ></div>
-
-
             </div>
+
+
+
+            <!-- =====================================
+                 RESULTADO DE LA COMPRA
+                 ===================================== -->
+
+            <div
+                id="mensajeCompra"
+                role="alert"
+            ></div>
 
 
         </section>
@@ -223,16 +294,18 @@
 
 
 
-    <!-- BOOTSTRAP -->
+    <!-- =========================================
+         JAVASCRIPT
+         ========================================= -->
 
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     ></script>
 
 
-    <!-- JAVASCRIPT ALBEDO -->
-
     <script src="carrito.js"></script>
+
+    <script src="sesion.js"></script>
 
 
 </body>

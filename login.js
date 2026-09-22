@@ -6,29 +6,47 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =================================================
-    // 2. OBTENER CAMPOS DEL LOGIN
+    // 2. LIMPIAR PARÁMETROS ANTIGUOS DE LA URL
+    // =================================================
+
+    if (window.location.search !== "") {
+
+        window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname
+        );
+
+    }
+
+
+
+    // =================================================
+    // 3. CAMPOS DEL LOGIN
     // =================================================
 
     const formulario =
         document.getElementById("formularioLogin");
 
-
     const correo =
         document.getElementById("correoLogin");
-
 
     const contrasena =
         document.getElementById("contrasenaLogin");
 
+    const resultado =
+        document.getElementById(
+            "mensajeResultadoLogin"
+        );
+
 
 
     // =================================================
-    // 3. REGLAS DEL CORREO
+    // 4. REGLAS DEL CORREO
     // =================================================
 
     const regExCorreo =
         /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 
     const dominiosPermitidos = [
         "gmail.com",
@@ -39,35 +57,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =================================================
-    // 4. VALIDACIÓN EN TIEMPO REAL
+    // 5. VALIDACIÓN EN TIEMPO REAL
     // =================================================
 
     correo.addEventListener(
         "input",
-        validarCorreo
+        function () {
+
+            limpiarResultadoGeneral();
+
+            validarCorreo();
+
+        }
     );
 
 
     contrasena.addEventListener(
         "input",
-        validarContrasena
+        function () {
+
+            limpiarResultadoGeneral();
+
+            validarContrasena();
+
+        }
     );
 
 
 
     // =================================================
-    // 5. VALIDAR CORREO
+    // 6. VALIDAR CORREO
     // =================================================
 
     function validarCorreo() {
 
+        const valorOriginal =
+            correo.value;
 
         const valor =
-            correo.value.trim().toLowerCase();
+            valorOriginal.toLowerCase();
 
 
         if (valor === "") {
-
 
             mostrarError(
                 correo,
@@ -75,6 +106,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Debe ingresar su correo electrónico"
             );
 
+            return false;
+        }
+
+
+        if (/\s/.test(valorOriginal)) {
+
+            mostrarError(
+                correo,
+                "feedbackCorreoLogin",
+                "El correo no puede contener espacios"
+            );
 
             return false;
         }
@@ -82,13 +124,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (valor.length > 100) {
 
-
             mostrarError(
                 correo,
                 "feedbackCorreoLogin",
                 "El correo no puede superar los 100 caracteres"
             );
-
 
             return false;
         }
@@ -98,13 +138,11 @@ document.addEventListener("DOMContentLoaded", function () {
             regExCorreo.test(valor) === false
         ) {
 
-
             mostrarError(
                 correo,
                 "feedbackCorreoLogin",
                 "El formato del correo no es válido"
             );
-
 
             return false;
         }
@@ -118,13 +156,11 @@ document.addEventListener("DOMContentLoaded", function () {
             dominiosPermitidos.includes(dominio) === false
         ) {
 
-
             mostrarError(
                 correo,
                 "feedbackCorreoLogin",
                 "Solo se acepta @gmail.com, @duoc.cl o @profesor.duoc.cl"
             );
-
 
             return false;
         }
@@ -133,30 +169,21 @@ document.addEventListener("DOMContentLoaded", function () {
         mostrarCorrecto(
             correo,
             "feedbackCorreoLogin",
-            "Correo válido"
+            "Formato de correo válido"
         );
 
 
         return true;
-
 
     }
 
 
 
     // =================================================
-    // 6. VALIDAR CONTRASEÑA
-    //
-    // Reglas ALBEDO:
-    // - Exactamente 10 caracteres.
-    // - Al menos una letra.
-    // - Al menos un número.
-    // - Al menos un símbolo permitido.
-    // - Sin espacios.
+    // 7. VALIDAR CONTRASEÑA
     // =================================================
 
     function validarContrasena() {
-
 
         const valor =
             contrasena.value;
@@ -164,13 +191,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (valor === "") {
 
-
             mostrarError(
                 contrasena,
                 "feedbackContrasenaLogin",
                 "Debe ingresar su contraseña"
             );
-
 
             return false;
         }
@@ -178,13 +203,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (valor.length !== 10) {
 
-
             mostrarError(
                 contrasena,
                 "feedbackContrasenaLogin",
                 "La contraseña debe tener exactamente 10 caracteres"
             );
-
 
             return false;
         }
@@ -192,13 +215,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (/\s/.test(valor)) {
 
-
             mostrarError(
                 contrasena,
                 "feedbackContrasenaLogin",
                 "La contraseña no puede contener espacios"
             );
-
 
             return false;
         }
@@ -208,13 +229,11 @@ document.addEventListener("DOMContentLoaded", function () {
             /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/u.test(valor) === false
         ) {
 
-
             mostrarError(
                 contrasena,
                 "feedbackContrasenaLogin",
                 "La contraseña debe contener al menos una letra"
             );
-
 
             return false;
         }
@@ -224,13 +243,11 @@ document.addEventListener("DOMContentLoaded", function () {
             /[0-9]/.test(valor) === false
         ) {
 
-
             mostrarError(
                 contrasena,
                 "feedbackContrasenaLogin",
                 "La contraseña debe contener al menos un número"
             );
-
 
             return false;
         }
@@ -240,13 +257,11 @@ document.addEventListener("DOMContentLoaded", function () {
             /[%&$#\/()="!]/.test(valor) === false
         ) {
 
-
             mostrarError(
                 contrasena,
                 "feedbackContrasenaLogin",
                 'Debe contener un símbolo: % & $ # / ( ) = " !'
             );
-
 
             return false;
         }
@@ -260,13 +275,11 @@ document.addEventListener("DOMContentLoaded", function () {
             caracteresPermitidos.test(valor) === false
         ) {
 
-
             mostrarError(
                 contrasena,
                 "feedbackContrasenaLogin",
                 "La contraseña contiene caracteres no permitidos"
             );
-
 
             return false;
         }
@@ -275,49 +288,42 @@ document.addEventListener("DOMContentLoaded", function () {
         mostrarCorrecto(
             contrasena,
             "feedbackContrasenaLogin",
-            "Contraseña válida"
+            "Formato de contraseña válido"
         );
 
 
         return true;
 
-
     }
 
 
 
     // =================================================
-    // 7. OBTENER USUARIOS REGISTRADOS
-    //
-    // Lee usuariosAlbedo desde localStorage.
+    // 8. OBTENER USUARIOS REGISTRADOS
     // =================================================
 
     function obtenerUsuarios() {
 
-
         try {
 
-
             return JSON.parse(
-                localStorage.getItem("usuariosAlbedo")
+                localStorage.getItem(
+                    "usuariosAlbedo"
+                )
             ) || [];
-
 
         } catch (error) {
 
-
             return [];
 
-
         }
-
 
     }
 
 
 
     // =================================================
-    // 8. MOSTRAR ERROR
+    // 9. MENSAJES DE CAMPOS
     // =================================================
 
     function mostrarError(
@@ -326,7 +332,6 @@ document.addEventListener("DOMContentLoaded", function () {
         texto
     ) {
 
-
         const feedback =
             document.getElementById(idFeedback);
 
@@ -334,7 +339,6 @@ document.addEventListener("DOMContentLoaded", function () {
         campo.classList.remove(
             "is-valid"
         );
-
 
         campo.classList.add(
             "is-invalid"
@@ -344,25 +348,18 @@ document.addEventListener("DOMContentLoaded", function () {
         feedback.className =
             "small text-danger mt-1";
 
-
         feedback.textContent =
             texto;
-
 
     }
 
 
-
-    // =================================================
-    // 9. MOSTRAR CORRECTO
-    // =================================================
 
     function mostrarCorrecto(
         campo,
         idFeedback,
         texto
     ) {
-
 
         const feedback =
             document.getElementById(idFeedback);
@@ -372,7 +369,6 @@ document.addEventListener("DOMContentLoaded", function () {
             "is-invalid"
         );
 
-
         campo.classList.add(
             "is-valid"
         );
@@ -381,23 +377,82 @@ document.addEventListener("DOMContentLoaded", function () {
         feedback.className =
             "small text-success mt-1";
 
-
         feedback.textContent =
             texto;
-
 
     }
 
 
 
     // =================================================
-    // 10. INICIAR SESIÓN
+    // 10. CREDENCIALES INCORRECTAS
+    // =================================================
+
+    function mostrarCredencialesIncorrectas() {
+
+        // Quitamos estados verdes o rojos previos
+        correo.classList.remove(
+            "is-valid",
+            "is-invalid"
+        );
+
+        contrasena.classList.remove(
+            "is-valid",
+            "is-invalid"
+        );
+
+
+        // Limpiamos mensajes individuales
+        const feedbackCorreo =
+            document.getElementById(
+                "feedbackCorreoLogin"
+            );
+
+        const feedbackContrasena =
+            document.getElementById(
+                "feedbackContrasenaLogin"
+            );
+
+
+        feedbackCorreo.className = "";
+        feedbackCorreo.textContent = "";
+
+        feedbackContrasena.className = "";
+        feedbackContrasena.textContent = "";
+
+
+        // Un solo mensaje general
+        resultado.className =
+            "alert alert-danger mt-4";
+
+        resultado.textContent =
+            "Correo o contraseña incorrectos.";
+
+    }
+
+
+
+    // =================================================
+    // 11. LIMPIAR MENSAJE GENERAL
+    // =================================================
+
+    function limpiarResultadoGeneral() {
+
+        resultado.className = "";
+
+        resultado.textContent = "";
+
+    }
+
+
+
+    // =================================================
+    // 12. INICIAR SESIÓN
     // =================================================
 
     formulario.addEventListener(
         "submit",
         function (evento) {
-
 
             evento.preventDefault();
 
@@ -405,43 +460,29 @@ document.addEventListener("DOMContentLoaded", function () {
             const correoValido =
                 validarCorreo();
 
-
             const contrasenaValida =
                 validarContrasena();
 
 
-            const resultado =
-                document.getElementById(
-                    "mensajeResultadoLogin"
-                );
-
-
-
-            // Si el formato no es correcto,
-            // no buscamos al usuario.
             if (
                 correoValido === false ||
                 contrasenaValida === false
             ) {
 
-
                 resultado.className =
                     "alert alert-danger mt-4";
-
 
                 resultado.textContent =
                     "Revisa los datos ingresados.";
 
-
                 return;
-
 
             }
 
 
 
             // =================================================
-            // 11. BUSCAR USUARIO REGISTRADO
+            // 13. BUSCAR USUARIO
             // =================================================
 
             const usuarios =
@@ -449,79 +490,63 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             const correoIngresado =
-                correo.value.trim().toLowerCase();
-
+                correo.value.toLowerCase();
 
             const contrasenaIngresada =
                 contrasena.value;
 
 
-
             const usuarioEncontrado =
-                usuarios.find(function (usuario) {
+                usuarios.find(
+                    function (usuario) {
 
+                        return (
+                            usuario.correo ===
+                                correoIngresado &&
 
-                    return (
-                        usuario.correo === correoIngresado &&
-                        usuario.contrasena === contrasenaIngresada
-                    );
+                            usuario.contrasena ===
+                                contrasenaIngresada
+                        );
 
-
-                });
+                    }
+                );
 
 
 
             // =================================================
-            // 12. CREDENCIALES INCORRECTAS
+            // 14. CREDENCIALES INCORRECTAS
             // =================================================
 
             if (!usuarioEncontrado) {
 
-
-                resultado.className =
-                    "alert alert-danger mt-4";
-
-
-                resultado.textContent =
-                    "Correo o contraseña incorrectos.";
-
+                mostrarCredencialesIncorrectas();
 
                 return;
-
 
             }
 
 
 
             // =================================================
-            // 13. CREAR SESIÓN
-            //
-            // Guardamos solamente los datos necesarios.
-            // No copiamos la contraseña a la sesión.
+            // 15. CREAR SESIÓN
             // =================================================
 
             const usuarioSesion = {
 
-
                 run:
                     usuarioEncontrado.run,
-
 
                 nombre:
                     usuarioEncontrado.nombre,
 
-
                 apellidos:
                     usuarioEncontrado.apellidos,
-
 
                 correo:
                     usuarioEncontrado.correo,
 
-
                 tipoUsuario:
                     usuarioEncontrado.tipoUsuario
-
 
             };
 
@@ -534,18 +559,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             // =================================================
-            // 14. LOGIN EXITOSO
+            // 16. LOGIN EXITOSO
             // =================================================
 
             resultado.className =
                 "alert alert-success mt-4";
-
 
             resultado.textContent =
                 "Inicio de sesión exitoso. Bienvenido " +
                 usuarioEncontrado.nombre +
                 " a ALBEDO Outdoor.";
 
+
+
+            // =================================================
+            // 17. REDIRECCIONAR AL INICIO
+            // =================================================
+
+            setTimeout(
+                function () {
+
+                    window.location.href =
+                        "index.html";
+
+                },
+                700
+            );
 
         }
     );

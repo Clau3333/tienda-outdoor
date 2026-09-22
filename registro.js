@@ -15,6 +15,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const run =
         document.getElementById("runRegistro");
 
+    const dv =
+        document.getElementById("dvRegistro");
+
     const nombre =
         document.getElementById("nombreRegistro");
 
@@ -234,21 +237,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     Object.keys(regiones).forEach(function (nombreRegion) {
 
-
         const opcion =
             document.createElement("option");
-
 
         opcion.value =
             nombreRegion;
 
-
         opcion.textContent =
             nombreRegion;
 
-
         region.appendChild(opcion);
-
 
     });
 
@@ -260,52 +258,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
     region.addEventListener("change", function () {
 
-
         comuna.innerHTML =
             '<option value="">Selecciona una comuna</option>';
 
-
         comuna.disabled =
             region.value === "";
-
 
         limpiarEstado(
             comuna,
             "feedbackComunaRegistro"
         );
 
-
         if (region.value !== "") {
-
 
             regiones[region.value].forEach(
                 function (nombreComuna) {
 
-
                     const opcion =
                         document.createElement("option");
-
 
                     opcion.value =
                         nombreComuna;
 
-
                     opcion.textContent =
                         nombreComuna;
 
-
                     comuna.appendChild(opcion);
-
 
                 }
             );
 
-
         }
 
-
         validarRegion();
-
 
     });
 
@@ -319,46 +304,35 @@ document.addEventListener("DOMContentLoaded", function () {
         "change",
         function () {
 
-
             validarTipoDomicilio();
-
 
             if (
                 tipoDomicilio.value === "Departamento"
             ) {
 
-
                 numeroUnidad.disabled =
                     false;
-
 
                 numeroUnidad.placeholder =
                     "Ej: 504";
 
-
             } else {
-
 
                 numeroUnidad.value =
                     "";
 
-
                 numeroUnidad.disabled =
                     true;
 
-
                 numeroUnidad.placeholder =
                     "No corresponde";
-
 
                 limpiarEstado(
                     numeroUnidad,
                     "feedbackNumeroUnidadRegistro"
                 );
 
-
             }
-
 
         }
     );
@@ -372,10 +346,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const regExCorreo =
         /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-
     const regExNombre =
         /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ' -]+$/u;
-
 
     const dominiosPermitidos = [
         "gmail.com",
@@ -391,7 +363,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
     run.addEventListener(
         "input",
-        validarRun
+        function () {
+
+            run.value =
+                run.value
+                    .replace(/[^0-9]/g, "")
+                    .slice(0, 8);
+
+            validarRun();
+
+        }
+    );
+
+
+    dv.addEventListener(
+        "input",
+        function () {
+
+            dv.value =
+                dv.value
+                    .toUpperCase()
+                    .replace(/[^0-9K]/g, "")
+                    .slice(0, 1);
+
+            validarRun();
+
+        }
     );
 
 
@@ -453,9 +450,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "input",
         function () {
 
-
             validarContrasena();
-
 
             if (
                 confirmarContrasena.value !== ""
@@ -463,7 +458,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 validarConfirmarContrasena();
             }
-
 
         }
     );
@@ -477,115 +471,99 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =================================================
-    // 10. VALIDAR RUN
+    // 10. VALIDAR RUT
     // =================================================
 
     function validarRun() {
 
+        const cuerpo =
+            run.value.trim();
 
-        const valor =
-            run.value.trim().toUpperCase();
+        const digitoIngresado =
+            dv.value.trim().toUpperCase();
 
-
-        run.value =
-            valor;
-
-
-        if (
-            valor === "" ||
-            valor.length < 7 ||
-            valor.length > 9
-        ) {
+        dv.value =
+            digitoIngresado;
 
 
-            mostrarError(
-                run,
-                "feedbackRunRegistro",
-                "Ingrese un RUN válido de 7 a 9 caracteres"
+        if (cuerpo === "") {
+
+            mostrarErrorRun(
+                "Debe ingresar el RUT"
             );
-
 
             return false;
         }
 
 
         if (
-            valor.includes(".") ||
-            valor.includes("-")
+            /^[0-9]{6,8}$/.test(cuerpo) === false
         ) {
 
-
-            mostrarError(
-                run,
-                "feedbackRunRegistro",
-                "Ingrese el RUN sin puntos ni guion"
+            mostrarErrorRun(
+                "El RUT debe contener entre 6 y 8 números"
             );
 
+            return false;
+        }
+
+
+        if (digitoIngresado === "") {
+
+            mostrarErrorRun(
+                "Debe ingresar el dígito verificador"
+            );
 
             return false;
         }
 
 
         if (
-            /^[0-9]+[0-9K]$/.test(valor) === false
+            /^[0-9K]$/.test(digitoIngresado) === false
         ) {
 
-
-            mostrarError(
-                run,
-                "feedbackRunRegistro",
-                "El formato del RUN no es válido"
+            mostrarErrorRun(
+                "El dígito verificador debe ser un número de 0 a 9 o K"
             );
-
 
             return false;
         }
 
 
         if (
-            comprobarRun(valor) === false
+            comprobarRun(
+                cuerpo,
+                digitoIngresado
+            ) === false
         ) {
 
-
-            mostrarError(
-                run,
-                "feedbackRunRegistro",
-                "El RUN ingresado no es válido"
+            mostrarErrorRun(
+                "El RUT ingresado no es válido"
             );
-
 
             return false;
         }
 
 
-        mostrarCorrecto(
-            run,
-            "feedbackRunRegistro",
-            "RUN válido"
+        mostrarCorrectoRun(
+            "RUT válido"
         );
 
 
         return true;
-
 
     }
 
 
 
     // =================================================
-    // 11. DÍGITO VERIFICADOR DEL RUN
+    // 11. COMPROBAR DÍGITO VERIFICADOR DEL RUT
     // =================================================
 
-    function comprobarRun(valorRun) {
-
-
-        const cuerpo =
-            valorRun.slice(0, -1);
-
-
-        const digitoIngresado =
-            valorRun.slice(-1);
-
+    function comprobarRun(
+        cuerpo,
+        digitoIngresado
+    ) {
 
         let suma = 0;
 
@@ -598,19 +576,15 @@ document.addEventListener("DOMContentLoaded", function () {
             i--
         ) {
 
-
             suma +=
                 Number(cuerpo[i]) * multiplicador;
 
-
             multiplicador++;
-
 
             if (multiplicador > 7) {
 
                 multiplicador = 2;
             }
-
 
         }
 
@@ -639,9 +613,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         return (
-            digitoCalculado === digitoIngresado
+            digitoCalculado ===
+            digitoIngresado
         );
-
 
     }
 
@@ -653,7 +627,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function validarNombre() {
 
-
         const valor =
             nombre.value.trim();
 
@@ -664,13 +637,11 @@ document.addEventListener("DOMContentLoaded", function () {
             regExNombre.test(valor) === false
         ) {
 
-
             mostrarError(
                 nombre,
                 "feedbackNombreRegistro",
                 "Ingrese un nombre válido"
             );
-
 
             return false;
         }
@@ -685,7 +656,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return true;
 
-
     }
 
 
@@ -695,7 +665,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // =================================================
 
     function validarApellidos() {
-
 
         const valor =
             apellidos.value.trim();
@@ -707,13 +676,11 @@ document.addEventListener("DOMContentLoaded", function () {
             regExNombre.test(valor) === false
         ) {
 
-
             mostrarError(
                 apellidos,
                 "feedbackApellidosRegistro",
                 "Ingrese apellidos válidos"
             );
-
 
             return false;
         }
@@ -728,7 +695,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return true;
 
-
     }
 
 
@@ -738,7 +704,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // =================================================
 
     function validarCorreo() {
-
 
         const valor =
             correo.value.trim().toLowerCase();
@@ -750,13 +715,11 @@ document.addEventListener("DOMContentLoaded", function () {
             regExCorreo.test(valor) === false
         ) {
 
-
             mostrarError(
                 correo,
                 "feedbackCorreoRegistro",
                 "El formato del correo no es válido"
             );
-
 
             return false;
         }
@@ -770,13 +733,11 @@ document.addEventListener("DOMContentLoaded", function () {
             dominiosPermitidos.includes(dominio) === false
         ) {
 
-
             mostrarError(
                 correo,
                 "feedbackCorreoRegistro",
                 "Solo se acepta @gmail.com, @duoc.cl o @profesor.duoc.cl"
             );
-
 
             return false;
         }
@@ -791,17 +752,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return true;
 
-
     }
 
 
 
     // =================================================
-    // 15. FECHA
+    // 15. FECHA DE NACIMIENTO
     // =================================================
 
     function validarFechaNacimiento() {
-
 
         const valor =
             fechaNacimiento.value;
@@ -809,12 +768,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (valor === "") {
 
-
             limpiarEstado(
                 fechaNacimiento,
                 "feedbackFechaNacimientoRegistro"
             );
-
 
             return true;
         }
@@ -829,13 +786,11 @@ document.addEventListener("DOMContentLoaded", function () {
             fecha.getFullYear() < 1900
         ) {
 
-
             mostrarError(
                 fechaNacimiento,
                 "feedbackFechaNacimientoRegistro",
                 "La fecha de nacimiento no es válida"
             );
-
 
             return false;
         }
@@ -843,13 +798,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (fecha > hoy) {
 
-
             mostrarError(
                 fechaNacimiento,
                 "feedbackFechaNacimientoRegistro",
                 "La fecha de nacimiento no puede ser futura"
             );
-
 
             return false;
         }
@@ -864,7 +817,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return true;
 
-
     }
 
 
@@ -875,16 +827,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function validarRegion() {
 
-
         if (region.value === "") {
-
 
             mostrarError(
                 region,
                 "feedbackRegionRegistro",
                 "Debe seleccionar una región"
             );
-
 
             return false;
         }
@@ -899,7 +848,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return true;
 
-
     }
 
 
@@ -910,19 +858,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function validarComuna() {
 
-
         if (
             comuna.disabled ||
             comuna.value === ""
         ) {
-
 
             mostrarError(
                 comuna,
                 "feedbackComunaRegistro",
                 "Debe seleccionar una comuna"
             );
-
 
             return false;
         }
@@ -937,7 +882,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return true;
 
-
     }
 
 
@@ -948,7 +892,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function validarCalle() {
 
-
         const valor =
             calle.value.trim();
 
@@ -958,13 +901,11 @@ document.addEventListener("DOMContentLoaded", function () {
             valor.length > 150
         ) {
 
-
             mostrarError(
                 calle,
                 "feedbackCalleRegistro",
                 "Ingrese una calle o avenida válida"
             );
-
 
             return false;
         }
@@ -979,7 +920,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return true;
 
-
     }
 
 
@@ -990,7 +930,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function validarNumeroDomicilio() {
 
-
         const valor =
             numeroDomicilio.value.trim();
 
@@ -999,13 +938,11 @@ document.addEventListener("DOMContentLoaded", function () {
             /^[0-9]{1,7}$/.test(valor) === false
         ) {
 
-
             mostrarError(
                 numeroDomicilio,
                 "feedbackNumeroDomicilioRegistro",
                 "Ingrese solamente números"
             );
-
 
             return false;
         }
@@ -1020,7 +957,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return true;
 
-
     }
 
 
@@ -1031,18 +967,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function validarTipoDomicilio() {
 
-
         if (
             tipoDomicilio.value === ""
         ) {
-
 
             mostrarError(
                 tipoDomicilio,
                 "feedbackTipoDomicilioRegistro",
                 "Debe seleccionar Casa o Departamento"
             );
-
 
             return false;
         }
@@ -1057,7 +990,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return true;
 
-
     }
 
 
@@ -1068,17 +1000,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function validarNumeroUnidad() {
 
-
         if (
             tipoDomicilio.value === "Casa"
         ) {
-
 
             limpiarEstado(
                 numeroUnidad,
                 "feedbackNumeroUnidadRegistro"
             );
-
 
             return true;
         }
@@ -1100,13 +1029,11 @@ document.addEventListener("DOMContentLoaded", function () {
             /^[0-9]{1,6}$/.test(valor) === false
         ) {
 
-
             mostrarError(
                 numeroUnidad,
                 "feedbackNumeroUnidadRegistro",
                 "Ingrese el número del departamento"
             );
-
 
             return false;
         }
@@ -1121,7 +1048,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return true;
 
-
     }
 
 
@@ -1132,7 +1058,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function validarCodigoPostal() {
 
-
         const valor =
             codigoPostal.value.trim();
 
@@ -1141,13 +1066,11 @@ document.addEventListener("DOMContentLoaded", function () {
             /^[0-9]{7}$/.test(valor) === false
         ) {
 
-
             mostrarError(
                 codigoPostal,
                 "feedbackCodigoPostalRegistro",
                 "El código postal debe contener exactamente 7 números"
             );
-
 
             return false;
         }
@@ -1162,7 +1085,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return true;
 
-
     }
 
 
@@ -1173,13 +1095,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function validarContrasena() {
 
-
         const valor =
             contrasena.value;
 
 
         if (valor.length !== 10) {
-
 
             mostrarError(
                 contrasena,
@@ -1187,20 +1107,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Debe tener exactamente 10 caracteres"
             );
 
-
             return false;
         }
 
 
         if (/\s/.test(valor)) {
 
-
             mostrarError(
                 contrasena,
                 "feedbackContrasenaRegistro",
                 "No puede contener espacios"
             );
-
 
             return false;
         }
@@ -1210,13 +1127,11 @@ document.addEventListener("DOMContentLoaded", function () {
             /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/u.test(valor) === false
         ) {
 
-
             mostrarError(
                 contrasena,
                 "feedbackContrasenaRegistro",
                 "Debe contener al menos una letra"
             );
-
 
             return false;
         }
@@ -1226,13 +1141,11 @@ document.addEventListener("DOMContentLoaded", function () {
             /[0-9]/.test(valor) === false
         ) {
 
-
             mostrarError(
                 contrasena,
                 "feedbackContrasenaRegistro",
                 "Debe contener al menos un número"
             );
-
 
             return false;
         }
@@ -1242,13 +1155,11 @@ document.addEventListener("DOMContentLoaded", function () {
             /[%&$#\/()="!]/.test(valor) === false
         ) {
 
-
             mostrarError(
                 contrasena,
                 "feedbackContrasenaRegistro",
                 'Debe contener un símbolo: % & $ # / ( ) = " !'
             );
-
 
             return false;
         }
@@ -1259,13 +1170,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 .test(valor) === false
         ) {
 
-
             mostrarError(
                 contrasena,
                 "feedbackContrasenaRegistro",
                 "Contiene caracteres no permitidos"
             );
-
 
             return false;
         }
@@ -1280,7 +1189,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return true;
 
-
     }
 
 
@@ -1291,18 +1199,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function validarConfirmarContrasena() {
 
-
         if (
             validarContrasena() === false
         ) {
-
 
             mostrarError(
                 confirmarContrasena,
                 "feedbackConfirmarContrasenaRegistro",
                 "Primero ingrese una contraseña válida"
             );
-
 
             return false;
         }
@@ -1313,13 +1218,11 @@ document.addEventListener("DOMContentLoaded", function () {
             contrasena.value
         ) {
 
-
             mostrarError(
                 confirmarContrasena,
                 "feedbackConfirmarContrasenaRegistro",
                 "Las contraseñas no coinciden"
             );
-
 
             return false;
         }
@@ -1334,13 +1237,65 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return true;
 
+    }
+
+
+
+    // =================================================
+    // 25. MENSAJES DEL RUT
+    // =================================================
+
+    function mostrarErrorRun(texto) {
+
+        const feedback =
+            document.getElementById(
+                "feedbackRunRegistro"
+            );
+
+
+        run.classList.remove("is-valid");
+        run.classList.add("is-invalid");
+
+        dv.classList.remove("is-valid");
+        dv.classList.add("is-invalid");
+
+
+        feedback.className =
+            "small text-danger mt-1";
+
+        feedback.textContent =
+            texto;
+
+    }
+
+
+    function mostrarCorrectoRun(texto) {
+
+        const feedback =
+            document.getElementById(
+                "feedbackRunRegistro"
+            );
+
+
+        run.classList.remove("is-invalid");
+        run.classList.add("is-valid");
+
+        dv.classList.remove("is-invalid");
+        dv.classList.add("is-valid");
+
+
+        feedback.className =
+            "small text-success mt-1";
+
+        feedback.textContent =
+            texto;
 
     }
 
 
 
     // =================================================
-    // 25. MENSAJES DE VALIDACIÓN
+    // 26. MENSAJES DE VALIDACIÓN GENERALES
     // =================================================
 
     function mostrarError(
@@ -1348,7 +1303,6 @@ document.addEventListener("DOMContentLoaded", function () {
         idFeedback,
         texto
     ) {
-
 
         const feedback =
             document.getElementById(idFeedback);
@@ -1366,7 +1320,6 @@ document.addEventListener("DOMContentLoaded", function () {
         feedback.textContent =
             texto;
 
-
     }
 
 
@@ -1376,7 +1329,6 @@ document.addEventListener("DOMContentLoaded", function () {
         idFeedback,
         texto
     ) {
-
 
         const feedback =
             document.getElementById(idFeedback);
@@ -1394,7 +1346,6 @@ document.addEventListener("DOMContentLoaded", function () {
         feedback.textContent =
             texto;
 
-
     }
 
 
@@ -1403,7 +1354,6 @@ document.addEventListener("DOMContentLoaded", function () {
         campo,
         idFeedback
     ) {
-
 
         campo.classList.remove(
             "is-valid",
@@ -1419,73 +1369,58 @@ document.addEventListener("DOMContentLoaded", function () {
 
         feedback.textContent = "";
 
-
     }
 
 
 
     // =================================================
-    // 26. OBTENER USUARIOS GUARDADOS
-    //
-    // localStorage conserva los usuarios aunque
-    // recarguemos o cerremos el navegador.
+    // 27. OBTENER USUARIOS GUARDADOS
     // =================================================
 
     function obtenerUsuarios() {
 
-
         try {
-
 
             return JSON.parse(
                 localStorage.getItem("usuariosAlbedo")
             ) || [];
 
-
         } catch (error) {
-
 
             return [];
 
-
         }
-
 
     }
 
 
 
     // =================================================
-    // 27. GUARDAR USUARIOS
+    // 28. GUARDAR USUARIOS
     // =================================================
 
     function guardarUsuarios(usuarios) {
-
 
         localStorage.setItem(
             "usuariosAlbedo",
             JSON.stringify(usuarios)
         );
 
-
     }
 
 
 
     // =================================================
-    // 28. CREAR CUENTA
+    // 29. CREAR CUENTA
     // =================================================
 
     formulario.addEventListener(
         "submit",
         function (evento) {
 
-
             evento.preventDefault();
 
 
-
-            // Ejecutamos todas las validaciones.
             const todoValido = [
 
                 validarRun(),
@@ -1532,24 +1467,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (todoValido === false) {
 
-
                 resultado.className =
                     "alert alert-danger mt-4";
-
 
                 resultado.textContent =
                     "No se pudo crear la cuenta. Revisa los campos marcados en rojo.";
 
-
                 return;
-
 
             }
 
 
 
             // =================================================
-            // 29. REVISAR USUARIOS DUPLICADOS
+            // 30. REVISAR USUARIOS DUPLICADOS
             // =================================================
 
             const usuarios =
@@ -1557,7 +1488,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             const runIngresado =
-                run.value.trim().toUpperCase();
+                run.value.trim() +
+                dv.value.trim().toUpperCase();
 
 
             const correoIngresado =
@@ -1565,7 +1497,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-            // Buscamos si ya existe el mismo RUN.
             const runExistente =
                 usuarios.some(function (usuario) {
 
@@ -1578,11 +1509,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (runExistente) {
 
-
-                mostrarError(
-                    run,
-                    "feedbackRunRegistro",
-                    "Este RUN ya se encuentra registrado"
+                mostrarErrorRun(
+                    "Este RUT ya se encuentra registrado"
                 );
 
 
@@ -1591,17 +1519,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 resultado.textContent =
-                    "No se pudo crear la cuenta porque el RUN ya está registrado.";
+                    "No se pudo crear la cuenta porque el RUT ya está registrado.";
 
 
                 return;
-
 
             }
 
 
 
-            // Buscamos si ya existe el mismo correo.
             const correoExistente =
                 usuarios.some(function (usuario) {
 
@@ -1613,7 +1539,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             if (correoExistente) {
-
 
                 mostrarError(
                     correo,
@@ -1632,82 +1557,70 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 return;
 
-
             }
 
 
 
             // =================================================
-            // 30. CONSTRUIR EL NUEVO USUARIO
+            // 31. CONSTRUIR EL NUEVO USUARIO
             // =================================================
 
             const nuevoUsuario = {
 
-
                 run:
                     runIngresado,
 
+                rutNumero:
+                    run.value.trim(),
+
+                digitoVerificador:
+                    dv.value.trim().toUpperCase(),
 
                 nombre:
                     nombre.value.trim(),
 
-
                 apellidos:
                     apellidos.value.trim(),
-
 
                 correo:
                     correoIngresado,
 
-
                 fechaNacimiento:
                     fechaNacimiento.value,
-
 
                 region:
                     region.value,
 
-
                 comuna:
                     comuna.value,
-
 
                 calle:
                     calle.value.trim(),
 
-
                 numeroDomicilio:
                     numeroDomicilio.value.trim(),
-
 
                 tipoDomicilio:
                     tipoDomicilio.value,
 
-
                 numeroUnidad:
                     numeroUnidad.value.trim(),
-
 
                 codigoPostal:
                     codigoPostal.value.trim(),
 
-
                 contrasena:
                     contrasena.value,
 
-
-                // Todo usuario creado desde la tienda
-                // comienza como Cliente.
                 tipoUsuario:
                     "Cliente"
-
 
             };
 
 
 
             // =================================================
-            // 31. GUARDAR USUARIO
+            // 32. GUARDAR USUARIO
             // =================================================
 
             usuarios.push(
@@ -1722,7 +1635,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             // =================================================
-            // 32. REGISTRO EXITOSO
+            // 33. REGISTRO EXITOSO
             // =================================================
 
             resultado.className =
@@ -1733,11 +1646,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Cuenta creada correctamente. Ahora puedes iniciar sesión con tu correo y contraseña.";
 
 
-            // Ya no necesitamos el aviso de Google Maps.
             document.getElementById(
                 "feedbackDireccionGoogle"
             ).textContent = "";
-
 
         }
     );

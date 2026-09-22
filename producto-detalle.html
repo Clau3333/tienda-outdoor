@@ -70,6 +70,7 @@
                     Inicio
                 </a>
 
+
                 <a
                     href="productos.html"
                     aria-current="page"
@@ -77,17 +78,33 @@
                     Productos
                 </a>
 
+
                 <a href="contacto.html">
                     Contacto
                 </a>
 
+
                 <a href="carrito.html">
+
                     Carrito
-                    <span class="carrito-contador" id="contadorCarrito">0</span>
+
+                    <span
+                        class="carrito-contador"
+                        id="contadorCarrito"
+                    >
+                        0
+                    </span>
+
                 </a>
+
 
                 <a href="login.html">
                     Iniciar sesión
+                </a>
+
+
+                <a href="registro.html">
+                    Registrarse
                 </a>
 
             </nav>
@@ -110,9 +127,13 @@
         <section class="contenedor-detalle">
 
 
-            <a class="detalle-volver" href="productos.html">
+            <a
+                class="detalle-volver"
+                href="productos.html"
+            >
                 ← Volver a productos
             </a>
+
 
 
             <!-- PRODUCTO NO ENCONTRADO -->
@@ -126,6 +147,7 @@
             </div>
 
 
+
             <!-- DETALLE DEL PRODUCTO -->
 
             <div
@@ -133,6 +155,8 @@
                 class="detalle-grid"
             >
 
+
+                <!-- IMAGEN -->
 
                 <div class="detalle-imagen">
 
@@ -145,14 +169,20 @@
                 </div>
 
 
+
+                <!-- INFORMACIÓN -->
+
                 <div class="detalle-info">
+
 
                     <p
                         class="etiqueta"
                         id="detalleCategoria"
                     ></p>
 
+
                     <h1 id="detalleNombre"></h1>
+
 
                     <p
                         class="detalle-precio"
@@ -160,17 +190,24 @@
                     ></p>
 
 
+
+                    <!-- COLORES -->
+
                     <div
                         class="detalle-colores"
                         id="detalleColores"
                     ></div>
 
 
+
+                    <!-- CANTIDAD -->
+
                     <div class="detalle-cantidad">
 
                         <label for="cantidad">
                             Cantidad
                         </label>
+
 
                         <input
                             type="number"
@@ -183,6 +220,9 @@
                     </div>
 
 
+
+                    <!-- AÑADIR AL CARRITO -->
+
                     <button
                         id="botonAgregarCarrito"
                         class="boton-albedo"
@@ -192,6 +232,9 @@
                     </button>
 
 
+
+                    <!-- MENSAJE DEL CARRITO -->
+
                     <div
                         id="mensajeCarrito"
                         role="alert"
@@ -199,7 +242,9 @@
 
 
 
-                    <!-- ACORDEÓN DE INFORMACIÓN -->
+                    <!-- =================================
+                         ACORDEÓN DE INFORMACIÓN
+                         ================================= -->
 
                     <div
                         class="accordion detalle-acordeon"
@@ -207,9 +252,12 @@
                     >
 
 
+                        <!-- DESCRIPCIÓN -->
+
                         <div class="accordion-item">
 
                             <h2 class="accordion-header">
+
                                 <button
                                     class="accordion-button collapsed"
                                     type="button"
@@ -218,25 +266,33 @@
                                 >
                                     Descripción
                                 </button>
+
                             </h2>
+
 
                             <div
                                 id="colapsoDescripcion"
                                 class="accordion-collapse collapse"
                                 data-bs-parent="#acordeonProducto"
                             >
+
                                 <div
                                     class="accordion-body"
                                     id="detalleDescripcion"
                                 ></div>
+
                             </div>
 
                         </div>
 
 
+
+                        <!-- CARACTERÍSTICAS -->
+
                         <div class="accordion-item">
 
                             <h2 class="accordion-header">
+
                                 <button
                                     class="accordion-button collapsed"
                                     type="button"
@@ -245,28 +301,48 @@
                                 >
                                     Características
                                 </button>
+
                             </h2>
+
 
                             <div
                                 id="colapsoCaracteristicas"
                                 class="accordion-collapse collapse"
                                 data-bs-parent="#acordeonProducto"
                             >
+
                                 <div class="accordion-body">
+
                                     <ul>
-                                        <li>Tejido resistente pensado para uso outdoor.</li>
-                                        <li>Diseño cómodo para largas jornadas.</li>
-                                        <li>Disponible en distintos colores según modelo.</li>
+
+                                        <li>
+                                            Tejido resistente pensado para uso outdoor.
+                                        </li>
+
+                                        <li>
+                                            Diseño cómodo para largas jornadas.
+                                        </li>
+
+                                        <li>
+                                            Disponible en distintos colores según modelo.
+                                        </li>
+
                                     </ul>
+
                                 </div>
+
                             </div>
 
                         </div>
 
 
+
+                        <!-- DETALLES -->
+
                         <div class="accordion-item">
 
                             <h2 class="accordion-header">
+
                                 <button
                                     class="accordion-button collapsed"
                                     type="button"
@@ -275,26 +351,44 @@
                                 >
                                     Detalles
                                 </button>
+
                             </h2>
+
 
                             <div
                                 id="colapsoDetalles"
                                 class="accordion-collapse collapse"
                                 data-bs-parent="#acordeonProducto"
                             >
+
                                 <div class="accordion-body">
+
                                     <ul>
-                                        <li>Categoría: <span id="detalleCategoriaAcordeon"></span></li>
-                                        <li>Cuidado: lavar según indicaciones de la etiqueta interior.</li>
-                                        <li>Envío disponible a todo Chile.</li>
+
+                                        <li>
+                                            Categoría:
+                                            <span id="detalleCategoriaAcordeon"></span>
+                                        </li>
+
+                                        <li>
+                                            Cuidado: lavar según indicaciones de la etiqueta interior.
+                                        </li>
+
+                                        <li>
+                                            Envío disponible a todo Chile.
+                                        </li>
+
                                     </ul>
+
                                 </div>
+
                             </div>
 
                         </div>
 
 
                     </div>
+
 
                 </div>
 
@@ -330,14 +424,14 @@
 
 
 
-    <!-- BOOTSTRAP -->
+    <!-- =========================================
+         JAVASCRIPT
+         ========================================= -->
 
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     ></script>
 
-
-    <!-- JAVASCRIPT ALBEDO -->
 
     <script src="productos.js"></script>
 
@@ -346,6 +440,8 @@
     <script src="carrito.js"></script>
 
     <script src="producto-detalle.js"></script>
+
+    <script src="sesion.js"></script>
 
 
 </body>
