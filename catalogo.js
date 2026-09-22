@@ -1,95 +1,188 @@
-document.addEventListener("DOMContentLoaded", () => {
+// =====================================================
+// CATÁLOGO DE PRODUCTOS - ALBEDO OUTDOOR
+// =====================================================
 
-    const contenedores = document.querySelectorAll(
-        ".catalogo-grid[data-categoria]"
-    );
-
-
-    contenedores.forEach((contenedor) => {
-
-        const categoria =
-            contenedor.dataset.categoria;
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
 
-        const productosFiltrados =
-            productos.filter(
-                (producto) =>
-                    producto.categoria === categoria
+        // =================================================
+        // 1. BUSCAR CONTENEDORES POR CATEGORÍA
+        // =================================================
+
+        const contenedores =
+            document.querySelectorAll(
+                ".catalogo-grid[data-categoria]"
             );
 
 
-        contenedor.innerHTML =
-            productosFiltrados
-                .map(
-                    (producto) =>
-                        crearTarjeta(producto)
-                )
-                .join("");
-
-    });
+        contenedores.forEach(
+            function (contenedor) {
 
 
-    activarColores();
-
-    activarBotonesCarrito();
-
-});
+                const categoria =
+                    contenedor.dataset.categoria;
 
 
+                const productosFiltrados =
+                    productos.filter(
+                        function (producto) {
+
+                            return (
+                                producto.categoria ===
+                                categoria
+                            );
+
+                        }
+                    );
+
+
+                contenedor.innerHTML =
+                    productosFiltrados
+                        .map(
+                            function (producto) {
+
+                                return crearTarjeta(
+                                    producto
+                                );
+
+                            }
+                        )
+                        .join("");
+
+            }
+        );
+
+
+        activarColores();
+
+        activarBotonesCarrito();
+
+
+    }
+);
 
 
 
 // =====================================================
-// CREAR TARJETA DE PRODUCTO
+// 2. CREAR TARJETA
 // =====================================================
 
 function crearTarjeta(producto) {
 
+
     let coloresHTML = "";
 
 
-    if (producto.colores) {
+    if (
+        producto.colores &&
+        producto.colores.length > 0
+    ) {
+
 
         coloresHTML = `
+
             <div class="colores-producto">
 
-                ${producto.colores.map((color) => {
-
-                    const activo =
-                        color.imagen === producto.imagen
-                            ? "activo"
-                            : "";
+                ${producto.colores
+                    .map(
+                        function (color) {
 
 
-                    return `
+                            const activo =
+                                color.imagen ===
+                                producto.imagen
+                                    ? "activo"
+                                    : "";
 
-                        <button
-                            class="color-swatch ${activo}"
-                            type="button"
-                            data-imagen="${color.imagen}"
-                            data-nombre="${color.nombre}"
-                            aria-label="${producto.nombre} color ${color.nombre}"
-                            title="${color.nombre}"
-                            style="--color-producto: ${color.color};"
-                        ></button>
 
-                    `;
+                            return `
 
-                }).join("")}
+                                <button
+                                    class="color-swatch ${activo}"
+                                    type="button"
+                                    data-imagen="${color.imagen}"
+                                    data-nombre="${color.nombre}"
+                                    aria-label="${producto.nombre} color ${color.nombre}"
+                                    title="${color.nombre}"
+                                    style="--color-producto: ${color.color};"
+                                ></button>
+
+                            `;
+
+                        }
+                    )
+                    .join("")}
 
             </div>
+
         `;
 
     }
 
 
 
-    return `
+    // =================================================
+    // 3. DETERMINAR SI HAY UNA IMAGEN REAL
+    // =================================================
 
-        <article class="producto-catalogo">
+    const esProductoNuevoSinImagen =
+        producto.id &&
+        producto.id.startsWith(
+            "admin-"
+        ) &&
+        (
+            !producto.imagen ||
+            producto.imagen ===
+                "img/logo-albedo.png"
+        );
 
 
-            <!-- IMAGEN -->
+
+    let imagenHTML = "";
+
+
+    if (
+        esProductoNuevoSinImagen
+    ) {
+
+
+        imagenHTML = `
+
+            <a
+                class="catalogo-imagen"
+                href="producto-detalle.html?id=${producto.id}"
+                aria-label="Ver detalle de ${producto.nombre}"
+                style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    padding: 20px;
+                "
+            >
+
+                <span
+                    style="
+                        color: #686b6d;
+                        font-size: 12px;
+                        font-weight: 600;
+                        letter-spacing: 0.4px;
+                    "
+                >
+                    Sin imagen disponible
+                </span>
+
+            </a>
+
+        `;
+
+
+    } else {
+
+
+        imagenHTML = `
 
             <a
                 class="catalogo-imagen"
@@ -102,6 +195,28 @@ function crearTarjeta(producto) {
                 >
 
             </a>
+
+        `;
+
+    }
+
+
+
+    // =================================================
+    // 4. TARJETA COMPLETA
+    // =================================================
+
+    return `
+
+        <article
+            class="producto-catalogo"
+            data-producto-id="${producto.id}"
+        >
+
+
+            <!-- IMAGEN -->
+
+            ${imagenHTML}
 
 
 
@@ -123,7 +238,7 @@ function crearTarjeta(producto) {
             <!-- DESCRIPCIÓN -->
 
             <p class="catalogo-descripcion-producto">
-                ${producto.descripcion}
+                ${producto.descripcion || ""}
             </p>
 
 
@@ -131,7 +246,9 @@ function crearTarjeta(producto) {
             <!-- PRECIO -->
 
             <p class="catalogo-precio">
-                ${formatearPrecio(producto.precio)}
+                ${formatearPrecio(
+                    producto.precio
+                )}
             </p>
 
 
@@ -154,7 +271,7 @@ function crearTarjeta(producto) {
 
 
 
-            <!-- VER DETALLE -->
+            <!-- DETALLE -->
 
             <a
                 class="catalogo-ver-detalle"
@@ -172,13 +289,12 @@ function crearTarjeta(producto) {
 
 
 
-
-
 // =====================================================
-// SELECTORES DE COLOR
+// 5. COLORES
 // =====================================================
 
 function activarColores() {
+
 
     const tarjetas =
         document.querySelectorAll(
@@ -186,117 +302,143 @@ function activarColores() {
         );
 
 
-    tarjetas.forEach((tarjeta) => {
-
-        const imagen =
-            tarjeta.querySelector(
-                ".catalogo-imagen img"
-            );
+    tarjetas.forEach(
+        function (tarjeta) {
 
 
-        const colores =
-            tarjeta.querySelectorAll(
-                ".color-swatch"
-            );
+            const imagen =
+                tarjeta.querySelector(
+                    ".catalogo-imagen img"
+                );
 
 
-        const contenedorColores =
-            tarjeta.querySelector(
-                ".colores-producto"
-            );
+            const colores =
+                tarjeta.querySelectorAll(
+                    ".color-swatch"
+                );
 
 
-        if (
-            !imagen ||
-            colores.length === 0
-        ) {
-
-            return;
-
-        }
+            const contenedorColores =
+                tarjeta.querySelector(
+                    ".colores-producto"
+                );
 
 
+            if (
+                !imagen ||
+                colores.length === 0 ||
+                !contenedorColores
+            ) {
 
-        let colorSeleccionado =
-            tarjeta.querySelector(
-                ".color-swatch.activo"
-            );
+                return;
 
-
-        let imagenSeleccionada =
-            colorSeleccionado
-                ? colorSeleccionado.dataset.imagen
-                : imagen.getAttribute("src");
+            }
 
 
 
-        colores.forEach((color) => {
+            let colorSeleccionado =
+                tarjeta.querySelector(
+                    ".color-swatch.activo"
+                );
 
 
-            // =========================================
-            // PASAR EL MOUSE
-            // =========================================
-
-            color.addEventListener(
-                "mouseenter",
-                () => {
-
-                    imagen.src =
-                        color.dataset.imagen;
-
-                }
-            );
+            let imagenSeleccionada =
+                colorSeleccionado
+                    ? colorSeleccionado.dataset.imagen
+                    : imagen.getAttribute(
+                        "src"
+                    );
 
 
 
-            // =========================================
-            // ACCESIBILIDAD CON TECLADO
-            // =========================================
-
-            color.addEventListener(
-                "focus",
-                () => {
-
-                    imagen.src =
-                        color.dataset.imagen;
-
-                }
-            );
+            colores.forEach(
+                function (color) {
 
 
+                    // =====================================
+                    // PASAR EL MOUSE
+                    // =====================================
 
-            // =========================================
-            // CLICK = DEJAR COLOR SELECCIONADO
-            // =========================================
+                    color.addEventListener(
+                        "mouseenter",
+                        function () {
 
-            color.addEventListener(
-                "click",
-                () => {
-
-
-                    colores.forEach(
-                        (boton) => {
-
-                            boton.classList.remove(
-                                "activo"
-                            );
+                            imagen.src =
+                                color.dataset.imagen;
 
                         }
                     );
 
 
-                    color.classList.add(
-                        "activo"
+
+                    // =====================================
+                    // TECLADO
+                    // =====================================
+
+                    color.addEventListener(
+                        "focus",
+                        function () {
+
+                            imagen.src =
+                                color.dataset.imagen;
+
+                        }
                     );
 
 
-                    colorSeleccionado =
-                        color;
+
+                    // =====================================
+                    // SELECCIONAR COLOR
+                    // =====================================
+
+                    color.addEventListener(
+                        "click",
+                        function () {
 
 
-                    imagenSeleccionada =
-                        color.dataset.imagen;
+                            colores.forEach(
+                                function (boton) {
 
+                                    boton.classList.remove(
+                                        "activo"
+                                    );
+
+                                }
+                            );
+
+
+                            color.classList.add(
+                                "activo"
+                            );
+
+
+                            colorSeleccionado =
+                                color;
+
+
+                            imagenSeleccionada =
+                                color.dataset.imagen;
+
+
+                            imagen.src =
+                                imagenSeleccionada;
+
+                        }
+                    );
+
+
+                }
+            );
+
+
+
+            // =========================================
+            // VOLVER AL COLOR ELEGIDO
+            // =========================================
+
+            contenedorColores.addEventListener(
+                "mouseleave",
+                function () {
 
                     imagen.src =
                         imagenSeleccionada;
@@ -304,37 +446,20 @@ function activarColores() {
                 }
             );
 
-        });
 
-
-
-        // =============================================
-        // AL SACAR EL MOUSE VUELVE AL COLOR ELEGIDO
-        // =============================================
-
-        contenedorColores.addEventListener(
-            "mouseleave",
-            () => {
-
-                imagen.src =
-                    imagenSeleccionada;
-
-            }
-        );
-
-    });
+        }
+    );
 
 }
 
 
 
-
-
 // =====================================================
-// BOTONES AÑADIR AL CARRITO
+// 6. BOTONES AÑADIR AL CARRITO
 // =====================================================
 
 function activarBotonesCarrito() {
+
 
     const botones =
         document.querySelectorAll(
@@ -342,149 +467,175 @@ function activarBotonesCarrito() {
         );
 
 
-    botones.forEach((boton) => {
-
-        boton.addEventListener(
-            "click",
-            function () {
+    botones.forEach(
+        function (boton) {
 
 
-                const idProducto =
-                    boton.dataset.productoId;
+            boton.addEventListener(
+                "click",
+                function () {
 
 
-                const producto =
-                    productos.find(
-                        function (item) {
-
-                            return (
-                                item.id ===
-                                idProducto
-                            );
-
-                        }
-                    );
+                    const idProducto =
+                        boton.dataset.productoId;
 
 
-                if (!producto) {
+                    const producto =
+                        productos.find(
+                            function (item) {
 
-                    return;
+                                return (
+                                    item.id ===
+                                    idProducto
+                                );
 
-                }
-
-
-
-                const tarjeta =
-                    boton.closest(
-                        ".producto-catalogo"
-                    );
+                            }
+                        );
 
 
-                const colorActivo =
-                    tarjeta.querySelector(
-                        ".color-swatch.activo"
-                    );
+                    if (!producto) {
+
+                        return;
+
+                    }
 
 
 
-                let colorSeleccionado =
-                    "";
+                    const tarjeta =
+                        boton.closest(
+                            ".producto-catalogo"
+                        );
 
 
-                let imagenSeleccionada =
-                    producto.imagen;
+                    const colorActivo =
+                        tarjeta.querySelector(
+                            ".color-swatch.activo"
+                        );
 
 
 
-                if (colorActivo) {
-
-                    colorSeleccionado =
-                        colorActivo.dataset.nombre || "";
+                    let colorSeleccionado =
+                        "";
 
 
-                    imagenSeleccionada =
-                        colorActivo.dataset.imagen ||
+                    let imagenSeleccionada =
                         producto.imagen;
 
+
+
+                    if (colorActivo) {
+
+
+                        colorSeleccionado =
+                            colorActivo.dataset.nombre ||
+                            "";
+
+
+                        imagenSeleccionada =
+                            colorActivo.dataset.imagen ||
+                            producto.imagen;
+
+                    }
+
+
+
+                    // Si el producto nuevo no tiene
+                    // una imagen real, utilizamos el logo
+                    // solamente como referencia interna
+                    // para el carrito.
+
+                    if (
+                        !imagenSeleccionada
+                    ) {
+
+                        imagenSeleccionada =
+                            "img/logo-albedo.png";
+
+                    }
+
+
+
+                    agregarAlCarrito({
+
+                        id:
+                            producto.id,
+
+                        nombre:
+                            producto.nombre,
+
+                        precio:
+                            producto.precio,
+
+                        imagen:
+                            imagenSeleccionada,
+
+                        color:
+                            colorSeleccionado,
+
+                        cantidad:
+                            1
+
+                    });
+
+
+
+                    // =====================================
+                    // FEEDBACK
+                    // =====================================
+
+                    boton.textContent =
+                        "Añadido ✓";
+
+
+                    boton.disabled =
+                        true;
+
+
+
+                    setTimeout(
+                        function () {
+
+                            boton.textContent =
+                                "Añadir al carrito";
+
+                            boton.disabled =
+                                false;
+
+                        },
+                        1200
+                    );
+
+
                 }
+            );
 
 
-
-                agregarAlCarrito({
-
-                    id:
-                        producto.id,
-
-                    nombre:
-                        producto.nombre,
-
-                    precio:
-                        producto.precio,
-
-                    imagen:
-                        imagenSeleccionada,
-
-                    color:
-                        colorSeleccionado,
-
-                    cantidad:
-                        1
-
-                });
-
-
-
-                // =====================================
-                // FEEDBACK BREVE EN EL MISMO BOTÓN
-                // =====================================
-
-                const textoOriginal =
-                    "Añadir al carrito";
-
-
-                boton.textContent =
-                    "Añadido ✓";
-
-
-                boton.disabled =
-                    true;
-
-
-
-                setTimeout(
-                    function () {
-
-                        boton.textContent =
-                            textoOriginal;
-
-                        boton.disabled =
-                            false;
-
-                    },
-                    1200
-                );
-
-            }
-        );
-
-    });
+        }
+    );
 
 }
 
 
 
-
-
 // =====================================================
-// FORMATEAR PRECIO
+// 7. FORMATEAR PRECIO
 // =====================================================
 
-function formatearPrecio(precio) {
+function formatearPrecio(
+    precio
+) {
+
 
     return (
         "$" +
-        precio.toLocaleString(
-            "es-CL"
+        Number(
+            precio
+        ).toLocaleString(
+            "es-CL",
+            {
+                maximumFractionDigits:
+                    2
+            }
         )
     );
 
