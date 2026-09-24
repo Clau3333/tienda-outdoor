@@ -163,7 +163,58 @@ document.addEventListener(
 
 
         // =================================================
-        // 8. CERRAR SESIÓN
+        // 8. CREAR ENLACE DE PANEL SEGÚN ROL
+        // =================================================
+
+        let enlacePanel =
+            null;
+
+
+        if (
+            usuarioSesion.tipoUsuario ===
+            "Administrador"
+        ) {
+
+            enlacePanel =
+                document.createElement(
+                    "a"
+                );
+
+
+            enlacePanel.href =
+                "admin.html";
+
+
+            enlacePanel.textContent =
+                "Panel administrador";
+
+        }
+
+
+        if (
+            usuarioSesion.tipoUsuario ===
+            "Vendedor"
+        ) {
+
+            enlacePanel =
+                document.createElement(
+                    "a"
+                );
+
+
+            enlacePanel.href =
+                "vendedor.html";
+
+
+            enlacePanel.textContent =
+                "Panel vendedor";
+
+        }
+
+
+
+        // =================================================
+        // 9. CERRAR SESIÓN
         // =================================================
 
         const cerrarSesion =
@@ -186,12 +237,21 @@ document.addEventListener(
 
 
         // =================================================
-        // 9. AGREGAR AL MENÚ
+        // 10. AGREGAR AL MENÚ
         // =================================================
 
         menu.appendChild(
             saludo
         );
+
+
+        if (enlacePanel) {
+
+            menu.appendChild(
+                enlacePanel
+            );
+
+        }
 
 
         menu.appendChild(
@@ -201,7 +261,7 @@ document.addEventListener(
 
 
         // =================================================
-        // 10. EVENTO CERRAR SESIÓN
+        // 11. EVENTO CERRAR SESIÓN
         // =================================================
 
         cerrarSesion.addEventListener(
@@ -222,7 +282,7 @@ document.addEventListener(
 
                 // -----------------------------------------
                 // VACIAR CARRITO
-                // Evita que el carrito del usuario anterior
+                // Evita que el carrito de otro usuario
                 // quede visible después de cerrar sesión.
                 // -----------------------------------------
 

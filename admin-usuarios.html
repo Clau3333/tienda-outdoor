@@ -221,6 +221,11 @@
                         >
 
 
+                            <!--
+                                Guarda internamente el RUN completo
+                                cuando estamos editando.
+                            -->
+
                             <input
                                 type="hidden"
                                 id="runOriginalUsuario"
@@ -232,31 +237,73 @@
                             <div class="row g-4">
 
 
-                                <!-- RUN -->
+                                <!-- =================================
+                                     RUT + DV
+                                     ================================= -->
 
                                 <div class="col-12 col-md-6">
 
-                                    <label
-                                        for="runUsuario"
-                                        class="form-label fw-semibold"
-                                    >
-                                        RUN
-                                    </label>
 
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="runUsuario"
-                                        maxlength="9"
-                                        autocomplete="off"
-                                        placeholder="Ej: 19011022K"
-                                    >
+                                    <div class="row g-2">
+
+
+                                        <!-- RUT -->
+
+                                        <div class="col-9">
+
+                                            <label
+                                                for="runUsuario"
+                                                class="form-label fw-semibold"
+                                            >
+                                                RUT
+                                            </label>
+
+                                            <input
+                                                type="text"
+                                                inputmode="numeric"
+                                                class="form-control"
+                                                id="runUsuario"
+                                                maxlength="8"
+                                                autocomplete="off"
+                                                placeholder="Ej: 11111111"
+                                            >
+
+                                        </div>
+
+
+                                        <!-- DV -->
+
+                                        <div class="col-3">
+
+                                            <label
+                                                for="dvUsuario"
+                                                class="form-label fw-semibold"
+                                            >
+                                                DV
+                                            </label>
+
+                                            <input
+                                                type="text"
+                                                class="form-control text-uppercase"
+                                                id="dvUsuario"
+                                                maxlength="1"
+                                                autocomplete="off"
+                                                placeholder="1"
+                                            >
+
+                                        </div>
+
+
+                                    </div>
+
 
                                     <div id="feedbackRunUsuario"></div>
 
                                     <div class="form-text">
-                                        Sin puntos ni guion. Entre 7 y 9 caracteres.
+                                        RUT sin puntos ni guion.
+                                        El DV debe ser 0–9 o K.
                                     </div>
+
 
                                 </div>
 
@@ -772,7 +819,7 @@
                                     <tr>
 
                                         <th>
-                                            RUN
+                                            RUT
                                         </th>
 
                                         <th>

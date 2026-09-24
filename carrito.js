@@ -24,11 +24,19 @@ function obtenerCarrito() {
 
     try {
 
-        return JSON.parse(
-            localStorage.getItem(
-                "carritoAlbedo"
-            )
-        ) || [];
+        const carrito =
+            JSON.parse(
+                localStorage.getItem(
+                    "carritoAlbedo"
+                )
+            );
+
+
+        return Array.isArray(
+            carrito
+        )
+            ? carrito
+            : [];
 
     } catch (error) {
 
@@ -44,11 +52,15 @@ function obtenerCarrito() {
 // 3. GUARDAR CARRITO
 // =====================================================
 
-function guardarCarrito(carrito) {
+function guardarCarrito(
+    carrito
+) {
 
     localStorage.setItem(
         "carritoAlbedo",
-        JSON.stringify(carrito)
+        JSON.stringify(
+            carrito
+        )
     );
 
 }
@@ -56,10 +68,307 @@ function guardarCarrito(carrito) {
 
 
 // =====================================================
-// 4. AGREGAR PRODUCTO
+// 4. OBTENER ÓRDENES
 // =====================================================
 
-function agregarAlCarrito(item) {
+function obtenerOrdenes() {
+
+    try {
+
+        const ordenes =
+            JSON.parse(
+                localStorage.getItem(
+                    "ordenesAlbedo"
+                )
+            );
+
+
+        return Array.isArray(
+            ordenes
+        )
+            ? ordenes
+            : [];
+
+    } catch (error) {
+
+        return [];
+
+    }
+
+}
+
+
+
+// =====================================================
+// 5. GUARDAR ÓRDENES
+// =====================================================
+
+function guardarOrdenes(
+    ordenes
+) {
+
+    localStorage.setItem(
+        "ordenesAlbedo",
+        JSON.stringify(
+            ordenes
+        )
+    );
+
+}
+
+
+
+// =====================================================
+// 6. OBTENER SESIÓN
+// =====================================================
+
+function obtenerUsuarioSesion() {
+
+    try {
+
+        const usuario =
+            JSON.parse(
+                localStorage.getItem(
+                    "usuarioSesionAlbedo"
+                )
+            );
+
+
+        return usuario || null;
+
+    } catch (error) {
+
+        return null;
+
+    }
+
+}
+
+
+
+// =====================================================
+// 7. GENERAR NÚMERO DE ORDEN
+// =====================================================
+
+function generarNumeroOrden(
+    ordenes
+) {
+
+    let numeroMayor =
+        0;
+
+
+    ordenes.forEach(
+        function (orden) {
+
+            const coincidencia =
+                String(
+                    orden.numeroOrden || ""
+                ).match(
+                    /ORD-(\d+)/
+                );
+
+
+            if (
+                coincidencia
+            ) {
+
+                const numero =
+                    parseInt(
+                        coincidencia[1],
+                        10
+                    );
+
+
+                if (
+                    numero > numeroMayor
+                ) {
+
+                    numeroMayor =
+                        numero;
+
+                }
+
+            }
+
+        }
+    );
+
+
+    return (
+        "ORD-" +
+        String(
+            numeroMayor + 1
+        ).padStart(
+            4,
+            "0"
+        )
+    );
+
+}
+
+
+
+// =====================================================
+// 8. CREAR ORDEN
+// =====================================================
+
+function crearOrdenDesdeCarrito(
+    carrito
+) {
+
+    const ordenes =
+        obtenerOrdenes();
+
+
+    const usuario =
+        obtenerUsuarioSesion();
+
+
+    const total =
+        carrito.reduce(
+            function (
+                suma,
+                item
+            ) {
+
+                return (
+                    suma +
+                    (
+                        Number(
+                            item.precio
+                        ) *
+                        Number(
+                            item.cantidad
+                        )
+                    )
+                );
+
+            },
+            0
+        );
+
+
+    const ahora =
+        new Date();
+
+
+    const orden = {
+
+        id:
+            "orden-" +
+            Date.now(),
+
+        numeroOrden:
+            generarNumeroOrden(
+                ordenes
+            ),
+
+        fecha:
+            ahora.toISOString(),
+
+        fechaTexto:
+            ahora.toLocaleString(
+                "es-CL"
+            ),
+
+        estado:
+            "Pendiente",
+
+        cliente: {
+
+            nombre:
+                usuario
+                    ? usuario.nombre || ""
+                    : "Cliente",
+
+            apellidos:
+                usuario
+                    ? usuario.apellidos || ""
+                    : "",
+
+            correo:
+                usuario
+                    ? usuario.correo || ""
+                    : "Sin sesión",
+
+            run:
+                usuario
+                    ? usuario.run || ""
+                    : ""
+
+        },
+
+        productos:
+            carrito.map(
+                function (item) {
+
+                    return {
+
+                        id:
+                            item.id,
+
+                        nombre:
+                            item.nombre,
+
+                        precio:
+                            Number(
+                                item.precio
+                            ),
+
+                        cantidad:
+                            Number(
+                                item.cantidad
+                            ),
+
+                        color:
+                            item.color || "",
+
+                        imagen:
+                            item.imagen || "",
+
+                        subtotal:
+                            Number(
+                                item.precio
+                            ) *
+                            Number(
+                                item.cantidad
+                            )
+
+                    };
+
+                }
+            ),
+
+        total:
+            total
+
+    };
+
+
+    ordenes.push(
+        orden
+    );
+
+
+    guardarOrdenes(
+        ordenes
+    );
+
+
+    return orden;
+
+}
+
+
+
+// =====================================================
+// 9. AGREGAR PRODUCTO
+// =====================================================
+
+function agregarAlCarrito(
+    item
+) {
 
     const carrito =
         obtenerCarrito();
@@ -78,19 +387,26 @@ function agregarAlCarrito(item) {
         );
 
 
-    if (existente) {
+    if (
+        existente
+    ) {
 
         existente.cantidad +=
             item.cantidad;
 
     } else {
 
-        carrito.push(item);
+        carrito.push(
+            item
+        );
 
     }
 
 
-    guardarCarrito(carrito);
+    guardarCarrito(
+        carrito
+    );
+
 
     actualizarContadorCarrito();
 
@@ -99,14 +415,20 @@ function agregarAlCarrito(item) {
 
 
 // =====================================================
-// 5. FORMATEAR PRECIO
+// 10. FORMATEAR PRECIO
 // =====================================================
 
-function formatearPrecio(precio) {
+function formatearPrecio(
+    precio
+) {
 
     return (
         "$" +
-        precio.toLocaleString("es-CL")
+        Number(
+            precio
+        ).toLocaleString(
+            "es-CL"
+        )
     );
 
 }
@@ -114,7 +436,7 @@ function formatearPrecio(precio) {
 
 
 // =====================================================
-// 6. CONTADOR DEL CARRITO
+// 11. CONTADOR DEL CARRITO
 // =====================================================
 
 function actualizarContadorCarrito() {
@@ -125,7 +447,9 @@ function actualizarContadorCarrito() {
         );
 
 
-    if (!contador) {
+    if (
+        !contador
+    ) {
 
         return;
 
@@ -138,11 +462,16 @@ function actualizarContadorCarrito() {
 
     const totalItems =
         carrito.reduce(
-            function (total, item) {
+            function (
+                total,
+                item
+            ) {
 
                 return (
                     total +
-                    item.cantidad
+                    Number(
+                        item.cantidad
+                    )
                 );
 
             },
@@ -158,7 +487,7 @@ function actualizarContadorCarrito() {
 
 
 // =====================================================
-// 7. PÁGINA DEL CARRITO
+// 12. PÁGINA DEL CARRITO
 // =====================================================
 
 function inicializarPaginaCarrito() {
@@ -169,7 +498,9 @@ function inicializarPaginaCarrito() {
         );
 
 
-    if (!lista) {
+    if (
+        !lista
+    ) {
 
         return;
 
@@ -215,14 +546,16 @@ function inicializarPaginaCarrito() {
 
 
     // =================================================
-    // 8. VACIAR CARRITO
+    // 13. VACIAR CARRITO
     // =================================================
 
     botonVaciar.addEventListener(
         "click",
         function () {
 
-            guardarCarrito([]);
+            guardarCarrito(
+                []
+            );
 
 
             limpiarMensajeCompra();
@@ -236,7 +569,7 @@ function inicializarPaginaCarrito() {
 
 
     // =================================================
-    // 9. FINALIZAR COMPRA
+    // 14. FINALIZAR COMPRA
     // =================================================
 
     botonFinalizar.addEventListener(
@@ -247,7 +580,9 @@ function inicializarPaginaCarrito() {
                 obtenerCarrito();
 
 
-            if (carrito.length === 0) {
+            if (
+                carrito.length === 0
+            ) {
 
                 mensaje.className =
                     "alert alert-danger mt-3";
@@ -263,24 +598,44 @@ function inicializarPaginaCarrito() {
 
 
 
-            // Guardamos el carrito vacío
-            guardarCarrito([]);
+            // =========================================
+            // CREAR ORDEN ANTES DE VACIAR CARRITO
+            // =========================================
+
+            const orden =
+                crearOrdenDesdeCarrito(
+                    carrito
+                );
 
 
 
-            // Actualizamos la pantalla
+            // =========================================
+            // VACIAR CARRITO
+            // =========================================
+
+            guardarCarrito(
+                []
+            );
+
+
+
+            // =========================================
+            // ACTUALIZAR PANTALLA
+            // =========================================
+
             renderizarCarrito();
 
 
 
-            // Después de una compra exitosa,
-            // ocultamos el mensaje gris de carrito vacío.
             vacio.style.display =
                 "none";
 
 
 
-            // Mostramos solamente el estado exitoso.
+            // =========================================
+            // MENSAJE DE COMPRA EXITOSA
+            // =========================================
+
             mensaje.className =
                 "alert alert-success mt-3 p-4";
 
@@ -291,8 +646,15 @@ function inicializarPaginaCarrito() {
                     Compra realizada con éxito
                 </h2>
 
+                <p class="mb-1">
+                    Tu orden fue registrada correctamente.
+                </p>
+
                 <p class="mb-3">
-                    ¡Gracias por tu compra en ALBEDO Outdoor!
+                    Número de orden:
+                    <strong>
+                        ${orden.numeroOrden}
+                    </strong>
                 </p>
 
                 <a
@@ -310,13 +672,14 @@ function inicializarPaginaCarrito() {
 
 
     // =================================================
-    // 10. LIMPIAR MENSAJE DE COMPRA
+    // 15. LIMPIAR MENSAJE
     // =================================================
 
     function limpiarMensajeCompra() {
 
         mensaje.className =
             "";
+
 
         mensaje.innerHTML =
             "";
@@ -326,7 +689,7 @@ function inicializarPaginaCarrito() {
 
 
     // =================================================
-    // 11. RENDERIZAR CARRITO
+    // 16. RENDERIZAR CARRITO
     // =================================================
 
     function renderizarCarrito() {
@@ -343,10 +706,13 @@ function inicializarPaginaCarrito() {
         // CARRITO VACÍO
         // =============================================
 
-        if (carrito.length === 0) {
+        if (
+            carrito.length === 0
+        ) {
 
             vacio.style.display =
                 "block";
+
 
             contenido.style.display =
                 "none";
@@ -364,6 +730,7 @@ function inicializarPaginaCarrito() {
 
         vacio.style.display =
             "none";
+
 
         contenido.style.display =
             "block";
@@ -383,8 +750,12 @@ function inicializarPaginaCarrito() {
                     ) {
 
                         const subtotal =
-                            item.precio *
-                            item.cantidad;
+                            Number(
+                                item.precio
+                            ) *
+                            Number(
+                                item.cantidad
+                            );
 
 
                         return `
@@ -433,11 +804,9 @@ function inicializarPaginaCarrito() {
 
 
                                 <td>
-
                                     ${formatearPrecio(
                                         subtotal
                                     )}
-
                                 </td>
 
 
@@ -479,8 +848,12 @@ function inicializarPaginaCarrito() {
                     return (
                         suma +
                         (
-                            item.precio *
-                            item.cantidad
+                            Number(
+                                item.precio
+                            ) *
+                            Number(
+                                item.cantidad
+                            )
                         )
                     );
 
@@ -505,7 +878,9 @@ function inicializarPaginaCarrito() {
                 ".carrito-input-cantidad"
             )
             .forEach(
-                function (input) {
+                function (
+                    input
+                ) {
 
                     input.addEventListener(
                         "change",
@@ -573,7 +948,9 @@ function inicializarPaginaCarrito() {
                 ".carrito-eliminar"
             )
             .forEach(
-                function (boton) {
+                function (
+                    boton
+                ) {
 
                     boton.addEventListener(
                         "click",
@@ -617,7 +994,7 @@ function inicializarPaginaCarrito() {
 
 
     // =================================================
-    // 12. CARGAR CARRITO AL ABRIR LA PÁGINA
+    // 17. CARGAR CARRITO
     // =================================================
 
     renderizarCarrito();

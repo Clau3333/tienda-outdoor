@@ -1,6 +1,7 @@
 // =====================================================
 // ALBEDO OUTDOOR
 // MANTENEDOR DE USUARIOS
+// RUT + DV SEPARADOS
 // =====================================================
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -15,8 +16,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const runOriginal =
         document.getElementById("runOriginalUsuario");
 
-    const run =
+    const rut =
         document.getElementById("runUsuario");
+
+    const dv =
+        document.getElementById("dvUsuario");
 
     const tipoUsuario =
         document.getElementById("tipoUsuario");
@@ -81,42 +85,59 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =================================================
+    // SEGURIDAD BÁSICA
+    // =================================================
+
+    if (
+        !formulario ||
+        !rut ||
+        !dv ||
+        !tipoUsuario ||
+        !nombre ||
+        !apellidos ||
+        !correo ||
+        !region ||
+        !comuna ||
+        !calle ||
+        !numeroDomicilio ||
+        !tipoDomicilio ||
+        !numeroUnidad ||
+        !codigoPostal ||
+        !contrasena ||
+        !confirmarContrasena ||
+        !lista
+    ) {
+
+        return;
+
+    }
+
+
+    // =================================================
     // EXPRESIONES Y REGLAS
     // =================================================
 
     const regExCorreo =
         /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-
     const regExNombre =
         /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ' -]+$/u;
 
-
     const dominiosPermitidos = [
-
         "gmail.com",
-
         "duoc.cl",
-
         "profesor.duoc.cl"
-
     ];
 
-
     const perfilesPermitidos = [
-
         "Administrador",
-
         "Cliente",
-
         "Vendedor"
-
     ];
 
 
     // =================================================
     // REGIONES Y COMUNAS
-    // MISMO CRITERIO QUE REGISTRO
     // =================================================
 
     const regiones = {
@@ -272,25 +293,20 @@ document.addEventListener("DOMContentLoaded", function () {
     // CARGAR REGIONES
     // =================================================
 
-    Object.keys(regiones).forEach(
-        function (nombreRegion) {
+    Object.keys(regiones).forEach(function (nombreRegion) {
 
-            const opcion =
-                document.createElement("option");
+        const opcion =
+            document.createElement("option");
 
+        opcion.value =
+            nombreRegion;
 
-            opcion.value =
-                nombreRegion;
+        opcion.textContent =
+            nombreRegion;
 
+        region.appendChild(opcion);
 
-            opcion.textContent =
-                nombreRegion;
-
-
-            region.appendChild(opcion);
-
-        }
-    );
+    });
 
 
     // =================================================
@@ -299,7 +315,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const hoy =
         new Date();
-
 
     fechaNacimiento.max =
         hoy.getFullYear() +
@@ -314,18 +329,54 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =================================================
-    // RUN COMPATIBLE CON USUARIOS ANTIGUOS
+    // USUARIOS / LOCALSTORAGE
+    // =================================================
+
+    function obtenerUsuarios() {
+
+        try {
+
+            const usuarios =
+                JSON.parse(
+                    localStorage.getItem(
+                        CLAVE_USUARIOS
+                    )
+                );
+
+            return Array.isArray(usuarios)
+                ? usuarios
+                : [];
+
+        } catch (error) {
+
+            return [];
+
+        }
+
+    }
+
+
+    function guardarUsuarios(usuarios) {
+
+        localStorage.setItem(
+            CLAVE_USUARIOS,
+            JSON.stringify(usuarios)
+        );
+
+    }
+
+
+    // =================================================
+    // COMPATIBILIDAD CON USUARIOS ANTIGUOS
     // =================================================
 
     function obtenerRunUsuario(usuario) {
 
-        if (
-            usuario.run
-        ) {
+        if (usuario.run) {
 
-            return String(
-                usuario.run
-            ).toUpperCase();
+            return String(usuario.run)
+                .trim()
+                .toUpperCase();
 
         }
 
@@ -336,12 +387,12 @@ document.addEventListener("DOMContentLoaded", function () {
         ) {
 
             return (
-                String(
-                    usuario.rutNumero
-                ) +
+                String(usuario.rutNumero).trim() +
                 String(
                     usuario.digitoVerificador
-                ).toUpperCase()
+                )
+                    .trim()
+                    .toUpperCase()
             );
 
         }
@@ -352,54 +403,58 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // =================================================
-    // LOCALSTORAGE
-    // =================================================
+    function obtenerRutNumero(usuario) {
 
-    function obtenerUsuarios() {
+        if (usuario.rutNumero) {
 
-        try {
-
-            const guardados =
-                JSON.parse(
-                    localStorage.getItem(
-                        CLAVE_USUARIOS
-                    )
-                );
-
-
-            if (
-                Array.isArray(
-                    guardados
-                )
-            ) {
-
-                return guardados;
-
-            }
-
-        } catch (error) {
-
-            // Devuelve arreglo vacío.
+            return String(
+                usuario.rutNumero
+            );
 
         }
 
 
-        return [];
+        const runCompleto =
+            obtenerRunUsuario(usuario);
+
+
+        if (runCompleto.length < 2) {
+
+            return "";
+
+        }
+
+
+        return runCompleto.slice(0, -1);
 
     }
 
 
-    function guardarUsuarios(
-        usuarios
-    ) {
+    function obtenerDvUsuario(usuario) {
 
-        localStorage.setItem(
-            CLAVE_USUARIOS,
-            JSON.stringify(
-                usuarios
-            )
-        );
+        if (usuario.digitoVerificador) {
+
+            return String(
+                usuario.digitoVerificador
+            ).toUpperCase();
+
+        }
+
+
+        const runCompleto =
+            obtenerRunUsuario(usuario);
+
+
+        if (runCompleto.length < 2) {
+
+            return "";
+
+        }
+
+
+        return runCompleto
+            .slice(-1)
+            .toUpperCase();
 
     }
 
@@ -422,56 +477,53 @@ document.addEventListener("DOMContentLoaded", function () {
             !regiones[nombreRegion]
         ) {
 
-            comuna.disabled =
-                true;
+            comuna.disabled = true;
 
             return;
 
         }
 
 
-        comuna.disabled =
-            false;
+        comuna.disabled = false;
 
 
-        regiones[nombreRegion]
-            .forEach(
-                function (nombreComuna) {
+        regiones[nombreRegion].forEach(
+            function (nombreComuna) {
 
-                    const opcion =
-                        document.createElement(
-                            "option"
-                        );
-
-
-                    opcion.value =
-                        nombreComuna;
-
-
-                    opcion.textContent =
-                        nombreComuna;
-
-
-                    if (
-                        nombreComuna ===
-                        comunaSeleccionada
-                    ) {
-
-                        opcion.selected =
-                            true;
-
-                    }
-
-
-                    comuna.appendChild(
-                        opcion
+                const opcion =
+                    document.createElement(
+                        "option"
                     );
 
+
+                opcion.value =
+                    nombreComuna;
+
+                opcion.textContent =
+                    nombreComuna;
+
+
+                if (
+                    nombreComuna ===
+                    comunaSeleccionada
+                ) {
+
+                    opcion.selected = true;
+
                 }
-            );
+
+
+                comuna.appendChild(opcion);
+
+            }
+        );
 
     }
 
+
+    // =================================================
+    // EVENTOS REGIÓN / COMUNA
+    // =================================================
 
     region.addEventListener(
         "change",
@@ -499,7 +551,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =================================================
-    // CASA / DEPARTAMENTO
+    // TIPO DE DOMICILIO
     // =================================================
 
     tipoDomicilio.addEventListener(
@@ -531,7 +583,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 numeroUnidad.placeholder =
                     "Selecciona Departamento";
 
-
                 limpiarEstado(
                     numeroUnidad,
                     "feedbackNumeroUnidadUsuario"
@@ -544,24 +595,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =================================================
-    // FILTRO RUN
+    // FILTRO RUT
     // =================================================
 
-    run.addEventListener(
+    rut.addEventListener(
         "input",
         function () {
 
-            run.value =
-                run.value
+            rut.value =
+                rut.value
+                    .replace(/\D/g, "")
+                    .slice(0, 8);
+
+
+            limpiarMensajeGeneral();
+
+            validarRun();
+
+        }
+    );
+
+
+    // =================================================
+    // FILTRO DV
+    // =================================================
+
+    dv.addEventListener(
+        "input",
+        function () {
+
+            dv.value =
+                dv.value
                     .toUpperCase()
-                    .replace(
-                        /[^0-9K]/g,
-                        ""
-                    )
-                    .slice(
-                        0,
-                        9
-                    );
+                    .replace(/[^0-9K]/g, "")
+                    .slice(0, 1);
 
 
             limpiarMensajeGeneral();
@@ -582,15 +649,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             numeroDomicilio.value =
                 numeroDomicilio.value
-                    .replace(
-                        /\D/g,
-                        ""
-                    )
-                    .slice(
-                        0,
-                        7
-                    );
-
+                    .replace(/\D/g, "")
+                    .slice(0, 7);
 
             validarNumeroDomicilio();
 
@@ -604,15 +664,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             numeroUnidad.value =
                 numeroUnidad.value
-                    .replace(
-                        /\D/g,
-                        ""
-                    )
-                    .slice(
-                        0,
-                        6
-                    );
-
+                    .replace(/\D/g, "")
+                    .slice(0, 6);
 
             validarNumeroUnidad();
 
@@ -626,15 +679,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             codigoPostal.value =
                 codigoPostal.value
-                    .replace(
-                        /\D/g,
-                        ""
-                    )
-                    .slice(
-                        0,
-                        7
-                    );
-
+                    .replace(/\D/g, "")
+                    .slice(0, 7);
 
             validarCodigoPostal();
 
@@ -651,30 +697,25 @@ document.addEventListener("DOMContentLoaded", function () {
         validarTipoUsuario
     );
 
-
     nombre.addEventListener(
         "input",
         validarNombre
     );
-
 
     apellidos.addEventListener(
         "input",
         validarApellidos
     );
 
-
     correo.addEventListener(
         "input",
         validarCorreo
     );
 
-
     fechaNacimiento.addEventListener(
         "change",
         validarFechaNacimiento
     );
-
 
     calle.addEventListener(
         "input",
@@ -709,65 +750,67 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =================================================
-    // RUN
+    // RUT + DV
     // =================================================
 
     function validarRun() {
 
-        const valor =
-            run.value
+        const rutIngresado =
+            rut.value.trim();
+
+        const dvIngresado =
+            dv.value
                 .trim()
                 .toUpperCase();
 
 
         if (
-            !/^[0-9]{6,8}[0-9K]$/
-                .test(valor)
+            !/^[0-9]{6,8}$/.test(
+                rutIngresado
+            )
         ) {
 
-            return mostrarError(
-                run,
-                "feedbackRunUsuario",
-                "RUN inválido. Ingrésalo sin puntos ni guion"
+            mostrarErrorRun(
+                "El RUT debe contener entre 6 y 8 números"
             );
+
+            return false;
 
         }
 
 
-        const cuerpo =
-            valor.slice(
-                0,
-                -1
+        if (
+            !/^[0-9K]$/.test(
+                dvIngresado
+            )
+        ) {
+
+            mostrarErrorRun(
+                "El DV debe ser un número del 0 al 9 o K"
             );
 
+            return false;
 
-        const dv =
-            valor.slice(
-                -1
-            );
+        }
 
 
         if (
             !comprobarRun(
-                cuerpo,
-                dv
+                rutIngresado,
+                dvIngresado
             )
         ) {
 
-            return mostrarError(
-                run,
-                "feedbackRunUsuario",
-                "El RUN ingresado no es válido"
+            mostrarErrorRun(
+                "El RUT y el DV no corresponden"
             );
+
+            return false;
 
         }
 
 
-        mostrarCorrecto(
-            run,
-            "feedbackRunUsuario"
-        );
-
+        mostrarCorrectoRun();
 
         return true;
 
@@ -779,37 +822,28 @@ document.addEventListener("DOMContentLoaded", function () {
         digitoIngresado
     ) {
 
-        let suma =
-            0;
+        let suma = 0;
 
-
-        let multiplicador =
-            2;
+        let multiplicador = 2;
 
 
         for (
-            let i =
-                cuerpo.length - 1;
+            let i = cuerpo.length - 1;
             i >= 0;
             i--
         ) {
 
             suma +=
-                Number(
-                    cuerpo[i]
-                ) *
+                Number(cuerpo[i]) *
                 multiplicador;
 
 
             multiplicador++;
 
 
-            if (
-                multiplicador > 7
-            ) {
+            if (multiplicador > 7) {
 
-                multiplicador =
-                    2;
+                multiplicador = 2;
 
             }
 
@@ -817,36 +851,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         const resultado =
-            11 -
-            (
-                suma %
-                11
-            );
+            11 - (suma % 11);
 
 
         let digitoCalculado;
 
 
-        if (
-            resultado === 11
-        ) {
+        if (resultado === 11) {
 
-            digitoCalculado =
-                "0";
+            digitoCalculado = "0";
 
-        } else if (
-            resultado === 10
-        ) {
+        } else if (resultado === 10) {
 
-            digitoCalculado =
-                "K";
+            digitoCalculado = "K";
 
         } else {
 
             digitoCalculado =
-                String(
-                    resultado
-                );
+                String(resultado);
 
         }
 
@@ -885,7 +907,6 @@ document.addEventListener("DOMContentLoaded", function () {
             "feedbackTipoUsuario"
         );
 
-
         return true;
 
     }
@@ -904,9 +925,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (
             valor === "" ||
             valor.length > 50 ||
-            !regExNombre.test(
-                valor
-            )
+            !regExNombre.test(valor)
         ) {
 
             return mostrarError(
@@ -922,7 +941,6 @@ document.addEventListener("DOMContentLoaded", function () {
             nombre,
             "feedbackNombreUsuario"
         );
-
 
         return true;
 
@@ -942,9 +960,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (
             valor === "" ||
             valor.length > 100 ||
-            !regExNombre.test(
-                valor
-            )
+            !regExNombre.test(valor)
         ) {
 
             return mostrarError(
@@ -961,7 +977,6 @@ document.addEventListener("DOMContentLoaded", function () {
             "feedbackApellidosUsuario"
         );
 
-
         return true;
 
     }
@@ -976,7 +991,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const original =
             correo.value;
 
-
         const valor =
             original
                 .trim()
@@ -984,9 +998,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         if (
-            /\s/.test(
-                original
-            )
+            /\s/.test(original)
         ) {
 
             return mostrarError(
@@ -1001,9 +1013,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (
             valor === "" ||
             valor.length > 100 ||
-            !regExCorreo.test(
-                valor
-            )
+            !regExCorreo.test(valor)
         ) {
 
             return mostrarError(
@@ -1016,9 +1026,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         const dominio =
-            valor.split(
-                "@"
-            )[1];
+            valor.split("@")[1];
 
 
         if (
@@ -1041,14 +1049,13 @@ document.addEventListener("DOMContentLoaded", function () {
             "feedbackCorreoUsuario"
         );
 
-
         return true;
 
     }
 
 
     // =================================================
-    // FECHA
+    // FECHA DE NACIMIENTO
     // =================================================
 
     function validarFechaNacimiento() {
@@ -1063,7 +1070,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 "feedbackFechaNacimientoUsuario"
             );
 
-
             return true;
 
         }
@@ -1077,11 +1083,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         if (
-            Number.isNaN(
-                fecha.getTime()
-            ) ||
-            fecha.getFullYear() <
-                1900 ||
+            Number.isNaN(fecha.getTime()) ||
+            fecha.getFullYear() < 1900 ||
             fecha > hoy
         ) {
 
@@ -1099,22 +1102,19 @@ document.addEventListener("DOMContentLoaded", function () {
             "feedbackFechaNacimientoUsuario"
         );
 
-
         return true;
 
     }
 
 
     // =================================================
-    // DIRECCIÓN
+    // REGIÓN
     // =================================================
 
     function validarRegion() {
 
         if (
-            !regiones[
-                region.value
-            ]
+            !regiones[region.value]
         ) {
 
             return mostrarError(
@@ -1131,18 +1131,20 @@ document.addEventListener("DOMContentLoaded", function () {
             "feedbackRegionUsuario"
         );
 
-
         return true;
 
     }
 
 
+    // =================================================
+    // COMUNA
+    // =================================================
+
     function validarComuna() {
 
         if (
             comuna.disabled ||
-            comuna.value ===
-            ""
+            comuna.value === ""
         ) {
 
             return mostrarError(
@@ -1159,11 +1161,14 @@ document.addEventListener("DOMContentLoaded", function () {
             "feedbackComunaUsuario"
         );
 
-
         return true;
 
     }
 
+
+    // =================================================
+    // CALLE
+    // =================================================
 
     function validarCalle() {
 
@@ -1190,19 +1195,21 @@ document.addEventListener("DOMContentLoaded", function () {
             "feedbackCalleUsuario"
         );
 
-
         return true;
 
     }
 
 
+    // =================================================
+    // NÚMERO DOMICILIO
+    // =================================================
+
     function validarNumeroDomicilio() {
 
         if (
-            !/^[0-9]{1,7}$/
-                .test(
-                    numeroDomicilio.value
-                )
+            !/^[0-9]{1,7}$/.test(
+                numeroDomicilio.value
+            )
         ) {
 
             return mostrarError(
@@ -1219,11 +1226,14 @@ document.addEventListener("DOMContentLoaded", function () {
             "feedbackNumeroDomicilioUsuario"
         );
 
-
         return true;
 
     }
 
+
+    // =================================================
+    // TIPO DOMICILIO
+    // =================================================
 
     function validarTipoDomicilio() {
 
@@ -1250,11 +1260,14 @@ document.addEventListener("DOMContentLoaded", function () {
             "feedbackTipoDomicilioUsuario"
         );
 
-
         return true;
 
     }
 
+
+    // =================================================
+    // NÚMERO DEPARTAMENTO
+    // =================================================
 
     function validarNumeroUnidad() {
 
@@ -1268,7 +1281,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 "feedbackNumeroUnidadUsuario"
             );
 
-
             return true;
 
         }
@@ -1277,10 +1289,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (
             tipoDomicilio.value !==
             "Departamento" ||
-            !/^[0-9]{1,6}$/
-                .test(
-                    numeroUnidad.value
-                )
+            !/^[0-9]{1,6}$/.test(
+                numeroUnidad.value
+            )
         ) {
 
             return mostrarError(
@@ -1297,19 +1308,21 @@ document.addEventListener("DOMContentLoaded", function () {
             "feedbackNumeroUnidadUsuario"
         );
 
-
         return true;
 
     }
 
 
+    // =================================================
+    // CÓDIGO POSTAL
+    // =================================================
+
     function validarCodigoPostal() {
 
         if (
-            !/^[0-9]{7}$/
-                .test(
-                    codigoPostal.value
-                )
+            !/^[0-9]{7}$/.test(
+                codigoPostal.value
+            )
         ) {
 
             return mostrarError(
@@ -1325,7 +1338,6 @@ document.addEventListener("DOMContentLoaded", function () {
             codigoPostal,
             "feedbackCodigoPostalUsuario"
         );
-
 
         return true;
 
@@ -1343,8 +1355,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         if (
-            valor.length !==
-            10
+            valor.length !== 10
         ) {
 
             return mostrarError(
@@ -1357,9 +1368,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         if (
-            /\s/.test(
-                valor
-            )
+            /\s/.test(valor)
         ) {
 
             return mostrarError(
@@ -1386,8 +1395,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         if (
-            !/[0-9]/
-                .test(valor)
+            !/[0-9]/.test(valor)
         ) {
 
             return mostrarError(
@@ -1400,8 +1408,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         if (
-            !/[%&$#\/()="!]/
-                .test(valor)
+            !/[%&$#\/()="!]/.test(valor)
         ) {
 
             return mostrarError(
@@ -1432,11 +1439,14 @@ document.addEventListener("DOMContentLoaded", function () {
             "feedbackContrasenaUsuario"
         );
 
-
         return true;
 
     }
 
+
+    // =================================================
+    // CONFIRMAR CONTRASEÑA
+    // =================================================
 
     function validarConfirmarContrasena() {
 
@@ -1472,14 +1482,123 @@ document.addEventListener("DOMContentLoaded", function () {
             "feedbackConfirmarContrasenaUsuario"
         );
 
-
         return true;
 
     }
 
 
     // =================================================
-    // FEEDBACK
+    // FEEDBACK RUT + DV
+    // =================================================
+
+    function mostrarErrorRun(texto) {
+
+        const feedback =
+            document.getElementById(
+                "feedbackRunUsuario"
+            );
+
+
+        rut.classList.remove(
+            "is-valid"
+        );
+
+        dv.classList.remove(
+            "is-valid"
+        );
+
+
+        rut.classList.add(
+            "is-invalid"
+        );
+
+        dv.classList.add(
+            "is-invalid"
+        );
+
+
+        if (feedback) {
+
+            feedback.className =
+                "small text-danger mt-1";
+
+            feedback.textContent =
+                texto;
+
+        }
+
+    }
+
+
+    function mostrarCorrectoRun() {
+
+        const feedback =
+            document.getElementById(
+                "feedbackRunUsuario"
+            );
+
+
+        rut.classList.remove(
+            "is-invalid"
+        );
+
+        dv.classList.remove(
+            "is-invalid"
+        );
+
+
+        rut.classList.add(
+            "is-valid"
+        );
+
+        dv.classList.add(
+            "is-valid"
+        );
+
+
+        if (feedback) {
+
+            feedback.className = "";
+
+            feedback.textContent = "";
+
+        }
+
+    }
+
+
+    function limpiarEstadoRun() {
+
+        rut.classList.remove(
+            "is-valid",
+            "is-invalid"
+        );
+
+        dv.classList.remove(
+            "is-valid",
+            "is-invalid"
+        );
+
+
+        const feedback =
+            document.getElementById(
+                "feedbackRunUsuario"
+            );
+
+
+        if (feedback) {
+
+            feedback.className = "";
+
+            feedback.textContent = "";
+
+        }
+
+    }
+
+
+    // =================================================
+    // FEEDBACK GENERAL
     // =================================================
 
     function mostrarError(
@@ -1489,27 +1608,27 @@ document.addEventListener("DOMContentLoaded", function () {
     ) {
 
         const feedback =
-            document.getElementById(
-                id
-            );
+            document.getElementById(id);
 
 
         campo.classList.remove(
             "is-valid"
         );
 
-
         campo.classList.add(
             "is-invalid"
         );
 
 
-        feedback.className =
-            "small text-danger mt-1";
+        if (feedback) {
 
+            feedback.className =
+                "small text-danger mt-1";
 
-        feedback.textContent =
-            texto;
+            feedback.textContent =
+                texto;
+
+        }
 
 
         return false;
@@ -1523,27 +1642,28 @@ document.addEventListener("DOMContentLoaded", function () {
     ) {
 
         const feedback =
-            document.getElementById(
-                id
-            );
+            document.getElementById(id);
 
 
         campo.classList.remove(
             "is-invalid"
         );
 
-
         campo.classList.add(
             "is-valid"
         );
 
 
-        feedback.className =
-            "";
+        if (feedback) {
+
+            feedback.className = "";
+
+            feedback.textContent = "";
+
+        }
 
 
-        feedback.textContent =
-            "";
+        return true;
 
     }
 
@@ -1560,62 +1680,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         const feedback =
-            document.getElementById(
-                id
-            );
+            document.getElementById(id);
 
 
-        feedback.className =
-            "";
+        if (feedback) {
 
+            feedback.className = "";
 
-        feedback.textContent =
-            "";
+            feedback.textContent = "";
+
+        }
 
     }
 
 
     function limpiarMensajeGeneral() {
 
-        mensaje.className =
-            "";
+        mensaje.className = "";
 
-
-        mensaje.textContent =
-            "";
-
-    }
-
-
-    // =================================================
-    // NOMBRE VISUAL
-    // =================================================
-
-    function formatearNombre(
-        texto
-    ) {
-
-        return String(
-            texto ||
-            ""
-        )
-            .trim()
-            .toLowerCase()
-            .split(
-                /\s+/
-            )
-            .map(
-                function (palabra) {
-
-                    return (
-                        palabra.charAt(0)
-                            .toUpperCase() +
-                        palabra.slice(1)
-                    );
-
-                }
-            )
-            .join(" ");
+        mensaje.textContent = "";
 
     }
 
@@ -1624,40 +1707,54 @@ document.addEventListener("DOMContentLoaded", function () {
     // ESCAPAR HTML
     // =================================================
 
-    function escaparHTML(
-        valor
-    ) {
+    function escaparHTML(valor) {
 
         return String(
-            valor ??
-            ""
+            valor ?? ""
         )
-            .replaceAll(
-                "&",
-                "&amp;"
-            )
-            .replaceAll(
-                "<",
-                "&lt;"
-            )
-            .replaceAll(
-                ">",
-                "&gt;"
-            )
-            .replaceAll(
-                "\"",
-                "&quot;"
-            )
-            .replaceAll(
-                "'",
-                "&#039;"
-            );
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("'", "&#039;");
 
     }
 
 
     // =================================================
-    // TABLA
+    // MOSTRAR RUT
+    // =================================================
+
+    function formatearRutUsuario(usuario) {
+
+        const numero =
+            obtenerRutNumero(usuario);
+
+        const digito =
+            obtenerDvUsuario(usuario);
+
+
+        if (
+            numero === "" ||
+            digito === ""
+        ) {
+
+            return "-";
+
+        }
+
+
+        return (
+            numero +
+            "-" +
+            digito
+        );
+
+    }
+
+
+    // =================================================
+    // RENDERIZAR USUARIOS
     // =================================================
 
     function renderizarUsuarios() {
@@ -1667,8 +1764,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         if (
-            usuarios.length ===
-            0
+            usuarios.length === 0
         ) {
 
             lista.innerHTML = `
@@ -1685,7 +1781,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 </tr>
 
             `;
-
 
             return;
 
@@ -1712,17 +1807,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                         const nombreCompleto =
-                            formatearNombre(
-                                (
+                            (
+                                String(
                                     usuario.nombre ||
                                     ""
                                 ) +
                                 " " +
-                                (
+                                String(
                                     usuario.apellidos ||
                                     ""
                                 )
-                            );
+                            ).trim();
 
 
                         return `
@@ -1731,18 +1826,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
                                 <td>
                                     ${escaparHTML(
-                                        runUsuario
+                                        formatearRutUsuario(
+                                            usuario
+                                        )
                                     )}
                                 </td>
 
                                 <td>
-
                                     <strong>
                                         ${escaparHTML(
                                             nombreCompleto
                                         )}
                                     </strong>
-
                                 </td>
 
                                 <td>
@@ -1752,13 +1847,11 @@ document.addEventListener("DOMContentLoaded", function () {
                                 </td>
 
                                 <td>
-
                                     <strong>
                                         ${escaparHTML(
                                             perfil
                                         )}
                                     </strong>
-
                                 </td>
 
                                 <td>
@@ -1804,7 +1897,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =================================================
-    // EDITAR
+    // BOTONES EDITAR
     // =================================================
 
     function activarBotonesEditar() {
@@ -1832,6 +1925,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+
+    // =================================================
+    // EDITAR USUARIO
+    // =================================================
 
     function editarUsuario(
         runSeleccionado
@@ -1873,8 +1970,16 @@ document.addEventListener("DOMContentLoaded", function () {
             runUsuario;
 
 
-        run.value =
-            runUsuario;
+        rut.value =
+            obtenerRutNumero(
+                usuario
+            );
+
+
+        dv.value =
+            obtenerDvUsuario(
+                usuario
+            );
 
 
         tipoUsuario.value =
@@ -1940,11 +2045,9 @@ document.addEventListener("DOMContentLoaded", function () {
             numeroUnidad.disabled =
                 false;
 
-
             numeroUnidad.value =
                 usuario.numeroUnidad ||
                 "";
-
 
             numeroUnidad.placeholder =
                 "Ej: 504";
@@ -1954,9 +2057,11 @@ document.addEventListener("DOMContentLoaded", function () {
             numeroUnidad.disabled =
                 true;
 
-
             numeroUnidad.value =
                 "";
+
+            numeroUnidad.placeholder =
+                "Selecciona Departamento";
 
         }
 
@@ -1995,11 +2100,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         formulario.scrollIntoView(
             {
-                behavior:
-                    "smooth",
-
-                block:
-                    "start"
+                behavior: "smooth",
+                block: "start"
             }
         );
 
@@ -2007,7 +2109,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =================================================
-    // LIMPIAR
+    // LIMPIAR FORMULARIO
     // =================================================
 
     function limpiarFormulario() {
@@ -2022,7 +2124,6 @@ document.addEventListener("DOMContentLoaded", function () {
         comuna.innerHTML =
             '<option value="">Selecciona primero una región</option>';
 
-
         comuna.disabled =
             true;
 
@@ -2030,10 +2131,8 @@ document.addEventListener("DOMContentLoaded", function () {
         numeroUnidad.disabled =
             true;
 
-
         numeroUnidad.value =
             "";
-
 
         numeroUnidad.placeholder =
             "Selecciona Departamento";
@@ -2056,30 +2155,56 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    // =================================================
+    // LIMPIAR ESTADOS
+    // =================================================
+
     function limpiarTodosLosEstados() {
+
+        limpiarEstadoRun();
+
 
         const campos = [
 
-            [run, "feedbackRunUsuario"],
+            [
+                tipoUsuario,
+                "feedbackTipoUsuario"
+            ],
 
-            [tipoUsuario, "feedbackTipoUsuario"],
+            [
+                nombre,
+                "feedbackNombreUsuario"
+            ],
 
-            [nombre, "feedbackNombreUsuario"],
+            [
+                apellidos,
+                "feedbackApellidosUsuario"
+            ],
 
-            [apellidos, "feedbackApellidosUsuario"],
-
-            [correo, "feedbackCorreoUsuario"],
+            [
+                correo,
+                "feedbackCorreoUsuario"
+            ],
 
             [
                 fechaNacimiento,
                 "feedbackFechaNacimientoUsuario"
             ],
 
-            [region, "feedbackRegionUsuario"],
+            [
+                region,
+                "feedbackRegionUsuario"
+            ],
 
-            [comuna, "feedbackComunaUsuario"],
+            [
+                comuna,
+                "feedbackComunaUsuario"
+            ],
 
-            [calle, "feedbackCalleUsuario"],
+            [
+                calle,
+                "feedbackCalleUsuario"
+            ],
 
             [
                 numeroDomicilio,
@@ -2128,6 +2253,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    // =================================================
+    // CANCELAR EDICIÓN
+    // =================================================
+
     botonCancelar.addEventListener(
         "click",
         function () {
@@ -2150,9 +2279,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             evento.preventDefault();
 
-
-            // Guardamos el perfil AHORA,
-            // antes de limpiar cualquier campo.
 
             const perfilSeleccionado =
                 tipoUsuario.value;
@@ -2194,8 +2320,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 function (resultado) {
 
                     return (
-                        resultado ===
-                        true
+                        resultado === true
                     );
 
                 }
@@ -2207,10 +2332,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 mensaje.className =
                     "alert alert-danger mt-4";
 
-
                 mensaje.textContent =
                     "Revisa los campos marcados en rojo antes de guardar el usuario.";
-
 
                 return;
 
@@ -2221,10 +2344,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 obtenerUsuarios();
 
 
-            const runNuevo =
-                run.value
+            // =========================================
+            // CONSTRUIR RUT COMPLETO
+            // =========================================
+
+            const rutNumero =
+                rut.value.trim();
+
+
+            const digitoVerificador =
+                dv.value
                     .trim()
                     .toUpperCase();
+
+
+            const runNuevo =
+                rutNumero +
+                digitoVerificador;
 
 
             const runAnterior =
@@ -2240,7 +2376,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             // =========================================
-            // DUPLICADOS
+            // DUPLICADO RUT
             // =========================================
 
             const runDuplicado =
@@ -2254,8 +2390,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                         if (
-                            runAnterior !==
-                                "" &&
+                            runAnterior !== "" &&
                             runUsuario ===
                                 runAnterior
                         ) {
@@ -2278,17 +2413,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 runDuplicado
             ) {
 
-                mostrarError(
-                    run,
-                    "feedbackRunUsuario",
-                    "Este RUN ya está registrado"
+                mostrarErrorRun(
+                    "Este RUT ya está registrado"
                 );
-
 
                 return;
 
             }
 
+
+            // =========================================
+            // DUPLICADO CORREO
+            // =========================================
 
             const correoDuplicado =
                 usuarios.some(
@@ -2301,8 +2437,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                         if (
-                            runAnterior !==
-                                "" &&
+                            runAnterior !== "" &&
                             runUsuario ===
                                 runAnterior
                         ) {
@@ -2316,7 +2451,9 @@ document.addEventListener("DOMContentLoaded", function () {
                             String(
                                 usuario.correo ||
                                 ""
-                            ).toLowerCase() ===
+                            )
+                                .trim()
+                                .toLowerCase() ===
                             correoNuevo
                         );
 
@@ -2333,7 +2470,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     "feedbackCorreoUsuario",
                     "Este correo ya está registrado"
                 );
-
 
                 return;
 
@@ -2382,14 +2518,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     "La dirección completa no puede superar 300 caracteres"
                 );
 
-
                 return;
 
             }
 
 
             // =========================================
-            // DATOS NUEVOS
+            // DATOS DEL USUARIO
             // =========================================
 
             const datosActualizados = {
@@ -2398,15 +2533,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     runNuevo,
 
                 rutNumero:
-                    runNuevo.slice(
-                        0,
-                        -1
-                    ),
+                    rutNumero,
 
                 digitoVerificador:
-                    runNuevo.slice(
-                        -1
-                    ),
+                    digitoVerificador,
 
                 nombre:
                     nombre.value.trim(),
@@ -2457,7 +2587,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             // =========================================
-            // EDITAR EXISTENTE
+            // EDITAR
             // =========================================
 
             if (
@@ -2489,13 +2619,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                                 ...usuario,
 
-                                ...datosActualizados,
-
-                                // Se fuerza explícitamente
-                                // el perfil seleccionado.
-
-                                tipoUsuario:
-                                    perfilSeleccionado
+                                ...datosActualizados
 
                             };
 
@@ -2514,9 +2638,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
 
 
-                // Render vuelve a leer localStorage.
                 renderizarUsuarios();
-
 
                 limpiarFormulario();
 
@@ -2562,7 +2684,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             renderizarUsuarios();
 
-
             limpiarFormulario();
 
 
@@ -2590,7 +2711,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =================================================
-    // ACTUALIZAR SESIÓN ACTUAL
+    // ACTUALIZAR SESIÓN SI SE EDITA
+    // AL USUARIO ACTUAL
     // =================================================
 
     function actualizarSesionSiCorresponde(
@@ -2630,11 +2752,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 String(
                     sesion.correo ||
                     ""
-                ).toLowerCase() ===
+                )
+                    .trim()
+                    .toLowerCase() ===
                 String(
                     usuarioNuevo.correo ||
                     ""
-                ).toLowerCase();
+                )
+                    .trim()
+                    .toLowerCase();
 
 
             if (
@@ -2679,7 +2805,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         } catch (error) {
 
-            // La edición del usuario continúa.
+            // Si falla la actualización de sesión,
+            // no se interrumpe la edición del usuario.
 
         }
 

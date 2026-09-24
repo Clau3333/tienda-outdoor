@@ -235,20 +235,22 @@ document.addEventListener("DOMContentLoaded", function () {
     // 5. CARGAR REGIONES
     // =================================================
 
-    Object.keys(regiones).forEach(function (nombreRegion) {
+    Object.keys(regiones).forEach(
+        function (nombreRegion) {
 
-        const opcion =
-            document.createElement("option");
+            const opcion =
+                document.createElement("option");
 
-        opcion.value =
-            nombreRegion;
+            opcion.value =
+                nombreRegion;
 
-        opcion.textContent =
-            nombreRegion;
+            opcion.textContent =
+                nombreRegion;
 
-        region.appendChild(opcion);
+            region.appendChild(opcion);
 
-    });
+        }
+    );
 
 
 
@@ -256,43 +258,50 @@ document.addEventListener("DOMContentLoaded", function () {
     // 6. REGIÓN → COMUNA
     // =================================================
 
-    region.addEventListener("change", function () {
+    region.addEventListener(
+        "change",
+        function () {
 
-        comuna.innerHTML =
-            '<option value="">Selecciona una comuna</option>';
+            comuna.innerHTML =
+                '<option value="">Selecciona una comuna</option>';
 
-        comuna.disabled =
-            region.value === "";
+            comuna.disabled =
+                region.value === "";
 
-        limpiarEstado(
-            comuna,
-            "feedbackComunaRegistro"
-        );
-
-        if (region.value !== "") {
-
-            regiones[region.value].forEach(
-                function (nombreComuna) {
-
-                    const opcion =
-                        document.createElement("option");
-
-                    opcion.value =
-                        nombreComuna;
-
-                    opcion.textContent =
-                        nombreComuna;
-
-                    comuna.appendChild(opcion);
-
-                }
+            limpiarEstado(
+                comuna,
+                "feedbackComunaRegistro"
             );
 
+            if (
+                region.value !== ""
+            ) {
+
+                regiones[
+                    region.value
+                ].forEach(
+                    function (nombreComuna) {
+
+                        const opcion =
+                            document.createElement("option");
+
+                        opcion.value =
+                            nombreComuna;
+
+                        opcion.textContent =
+                            nombreComuna;
+
+                        comuna.appendChild(opcion);
+
+                    }
+                );
+
+            }
+
+            validarRegion();
+
         }
-
-        validarRegion();
-
-    });
+    );
 
 
 
@@ -457,6 +466,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ) {
 
                 validarConfirmarContrasena();
+
             }
 
         }
@@ -486,13 +496,16 @@ document.addEventListener("DOMContentLoaded", function () {
             digitoIngresado;
 
 
-        if (cuerpo === "") {
+        if (
+            cuerpo === ""
+        ) {
 
             mostrarErrorRun(
                 "Debe ingresar el RUT"
             );
 
             return false;
+
         }
 
 
@@ -505,16 +518,20 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
-        if (digitoIngresado === "") {
+        if (
+            digitoIngresado === ""
+        ) {
 
             mostrarErrorRun(
                 "Debe ingresar el dígito verificador"
             );
 
             return false;
+
         }
 
 
@@ -527,6 +544,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -542,6 +560,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -557,7 +576,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =================================================
-    // 11. COMPROBAR DÍGITO VERIFICADOR DEL RUT
+    // 11. COMPROBAR DÍGITO VERIFICADOR
     // =================================================
 
     function comprobarRun(
@@ -577,13 +596,18 @@ document.addEventListener("DOMContentLoaded", function () {
         ) {
 
             suma +=
-                Number(cuerpo[i]) * multiplicador;
+                Number(
+                    cuerpo[i]
+                ) * multiplicador;
 
             multiplicador++;
 
-            if (multiplicador > 7) {
+            if (
+                multiplicador > 7
+            ) {
 
                 multiplicador = 2;
+
             }
 
         }
@@ -596,13 +620,19 @@ document.addEventListener("DOMContentLoaded", function () {
         let digitoCalculado;
 
 
-        if (resultado === 11) {
+        if (
+            resultado === 11
+        ) {
 
-            digitoCalculado = "0";
+            digitoCalculado =
+                "0";
 
-        } else if (resultado === 10) {
+        } else if (
+            resultado === 10
+        ) {
 
-            digitoCalculado = "K";
+            digitoCalculado =
+                "K";
 
         } else {
 
@@ -644,6 +674,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -683,6 +714,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -722,6 +754,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -730,7 +763,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         if (
-            dominiosPermitidos.includes(dominio) === false
+            dominiosPermitidos.includes(
+                dominio
+            ) === false
         ) {
 
             mostrarError(
@@ -740,6 +775,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -766,7 +802,9 @@ document.addEventListener("DOMContentLoaded", function () {
             fechaNacimiento.value;
 
 
-        if (valor === "") {
+        if (
+            valor === ""
+        ) {
 
             limpiarEstado(
                 fechaNacimiento,
@@ -774,15 +812,20 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return true;
+
         }
 
 
         const fecha =
-            new Date(valor + "T00:00:00");
+            new Date(
+                valor + "T00:00:00"
+            );
 
 
         if (
-            Number.isNaN(fecha.getTime()) ||
+            Number.isNaN(
+                fecha.getTime()
+            ) ||
             fecha.getFullYear() < 1900
         ) {
 
@@ -793,10 +836,13 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
-        if (fecha > hoy) {
+        if (
+            fecha > hoy
+        ) {
 
             mostrarError(
                 fechaNacimiento,
@@ -805,6 +851,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -827,7 +874,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function validarRegion() {
 
-        if (region.value === "") {
+        if (
+            region.value === ""
+        ) {
 
             mostrarError(
                 region,
@@ -836,6 +885,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -870,6 +920,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -908,6 +959,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -925,7 +977,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =================================================
-    // 19. NÚMERO DE DOMICILIO
+    // 19. NÚMERO DOMICILIO
     // =================================================
 
     function validarNumeroDomicilio() {
@@ -945,6 +997,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -962,7 +1015,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =================================================
-    // 20. TIPO DE DOMICILIO
+    // 20. TIPO DOMICILIO
     // =================================================
 
     function validarTipoDomicilio() {
@@ -978,6 +1031,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -1010,6 +1064,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return true;
+
         }
 
 
@@ -1018,6 +1073,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ) {
 
             return false;
+
         }
 
 
@@ -1036,6 +1092,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -1073,6 +1130,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -1099,7 +1157,9 @@ document.addEventListener("DOMContentLoaded", function () {
             contrasena.value;
 
 
-        if (valor.length !== 10) {
+        if (
+            valor.length !== 10
+        ) {
 
             mostrarError(
                 contrasena,
@@ -1108,10 +1168,13 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
-        if (/\s/.test(valor)) {
+        if (
+            /\s/.test(valor)
+        ) {
 
             mostrarError(
                 contrasena,
@@ -1120,6 +1183,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -1134,6 +1198,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -1148,6 +1213,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -1162,6 +1228,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -1177,6 +1244,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -1210,6 +1278,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -1225,6 +1294,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -1242,10 +1312,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =================================================
-    // 25. MENSAJES DEL RUT
+    // 25. MENSAJES RUT
     // =================================================
 
-    function mostrarErrorRun(texto) {
+    function mostrarErrorRun(
+        texto
+    ) {
 
         const feedback =
             document.getElementById(
@@ -1253,23 +1325,38 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-        run.classList.remove("is-valid");
-        run.classList.add("is-invalid");
+        run.classList.remove(
+            "is-valid"
+        );
 
-        dv.classList.remove("is-valid");
-        dv.classList.add("is-invalid");
+        run.classList.add(
+            "is-invalid"
+        );
+
+
+        dv.classList.remove(
+            "is-valid"
+        );
+
+        dv.classList.add(
+            "is-invalid"
+        );
 
 
         feedback.className =
             "small text-danger mt-1";
 
+
         feedback.textContent =
             texto;
 
     }
 
 
-    function mostrarCorrectoRun(texto) {
+
+    function mostrarCorrectoRun(
+        texto
+    ) {
 
         const feedback =
             document.getElementById(
@@ -1277,15 +1364,27 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-        run.classList.remove("is-invalid");
-        run.classList.add("is-valid");
+        run.classList.remove(
+            "is-invalid"
+        );
 
-        dv.classList.remove("is-invalid");
-        dv.classList.add("is-valid");
+        run.classList.add(
+            "is-valid"
+        );
+
+
+        dv.classList.remove(
+            "is-invalid"
+        );
+
+        dv.classList.add(
+            "is-valid"
+        );
 
 
         feedback.className =
             "small text-success mt-1";
+
 
         feedback.textContent =
             texto;
@@ -1295,7 +1394,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =================================================
-    // 26. MENSAJES DE VALIDACIÓN GENERALES
+    // 26. MENSAJES GENERALES
     // =================================================
 
     function mostrarError(
@@ -1305,12 +1404,19 @@ document.addEventListener("DOMContentLoaded", function () {
     ) {
 
         const feedback =
-            document.getElementById(idFeedback);
+            document.getElementById(
+                idFeedback
+            );
 
 
-        campo.classList.remove("is-valid");
+        campo.classList.remove(
+            "is-valid"
+        );
 
-        campo.classList.add("is-invalid");
+
+        campo.classList.add(
+            "is-invalid"
+        );
 
 
         feedback.className =
@@ -1331,12 +1437,19 @@ document.addEventListener("DOMContentLoaded", function () {
     ) {
 
         const feedback =
-            document.getElementById(idFeedback);
+            document.getElementById(
+                idFeedback
+            );
 
 
-        campo.classList.remove("is-invalid");
+        campo.classList.remove(
+            "is-invalid"
+        );
 
-        campo.classList.add("is-valid");
+
+        campo.classList.add(
+            "is-valid"
+        );
 
 
         feedback.className =
@@ -1362,28 +1475,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         const feedback =
-            document.getElementById(idFeedback);
+            document.getElementById(
+                idFeedback
+            );
 
 
-        feedback.className = "";
+        feedback.className =
+            "";
 
-        feedback.textContent = "";
+
+        feedback.textContent =
+            "";
 
     }
 
 
 
     // =================================================
-    // 27. OBTENER USUARIOS GUARDADOS
+    // 27. OBTENER USUARIOS
     // =================================================
 
     function obtenerUsuarios() {
 
         try {
 
-            return JSON.parse(
-                localStorage.getItem("usuariosAlbedo")
-            ) || [];
+            const usuarios =
+                JSON.parse(
+                    localStorage.getItem(
+                        "usuariosAlbedo"
+                    )
+                );
+
+
+            return Array.isArray(
+                usuarios
+            )
+                ? usuarios
+                : [];
 
         } catch (error) {
 
@@ -1399,11 +1527,15 @@ document.addEventListener("DOMContentLoaded", function () {
     // 28. GUARDAR USUARIOS
     // =================================================
 
-    function guardarUsuarios(usuarios) {
+    function guardarUsuarios(
+        usuarios
+    ) {
 
         localStorage.setItem(
             "usuariosAlbedo",
-            JSON.stringify(usuarios)
+            JSON.stringify(
+                usuarios
+            )
         );
 
     }
@@ -1451,11 +1583,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 validarConfirmarContrasena()
 
-            ].every(function (resultado) {
+            ].every(
+                function (resultado) {
 
-                return resultado === true;
+                    return (
+                        resultado === true
+                    );
 
-            });
+                }
+            );
 
 
 
@@ -1465,13 +1601,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
 
 
-            if (todoValido === false) {
+
+            if (
+                todoValido === false
+            ) {
 
                 resultado.className =
                     "alert alert-danger mt-4";
 
+
                 resultado.textContent =
                     "No se pudo crear la cuenta. Revisa los campos marcados en rojo.";
+
 
                 return;
 
@@ -1480,7 +1621,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             // =================================================
-            // 30. REVISAR USUARIOS DUPLICADOS
+            // 30. REVISAR DUPLICADOS
             // =================================================
 
             const usuarios =
@@ -1493,21 +1634,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             const correoIngresado =
-                correo.value.trim().toLowerCase();
+                correo.value
+                    .trim()
+                    .toLowerCase();
 
 
 
             const runExistente =
-                usuarios.some(function (usuario) {
+                usuarios.some(
+                    function (usuario) {
 
-                    return (
-                        usuario.run === runIngresado
-                    );
+                        return (
+                            usuario.run ===
+                            runIngresado
+                        );
 
-                });
+                    }
+                );
 
 
-            if (runExistente) {
+            if (
+                runExistente
+            ) {
 
                 mostrarErrorRun(
                     "Este RUT ya se encuentra registrado"
@@ -1529,16 +1677,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             const correoExistente =
-                usuarios.some(function (usuario) {
+                usuarios.some(
+                    function (usuario) {
 
-                    return (
-                        usuario.correo === correoIngresado
-                    );
+                        return (
+                            usuario.correo ===
+                            correoIngresado
+                        );
 
-                });
+                    }
+                );
 
 
-            if (correoExistente) {
+            if (
+                correoExistente
+            ) {
 
                 mostrarError(
                     correo,
@@ -1562,7 +1715,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             // =================================================
-            // 31. CONSTRUIR EL NUEVO USUARIO
+            // 31. NUEVO USUARIO
             // =================================================
 
             const nuevoUsuario = {
@@ -1574,7 +1727,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     run.value.trim(),
 
                 digitoVerificador:
-                    dv.value.trim().toUpperCase(),
+                    dv.value
+                        .trim()
+                        .toUpperCase(),
 
                 nombre:
                     nombre.value.trim(),
@@ -1643,12 +1798,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             resultado.textContent =
-                "Cuenta creada correctamente. Ahora puedes iniciar sesión con tu correo y contraseña.";
+                "Cuenta creada correctamente. Serás redirigido al inicio de sesión.";
 
 
-            document.getElementById(
-                "feedbackDireccionGoogle"
-            ).textContent = "";
+
+            const feedbackDireccion =
+                document.getElementById(
+                    "feedbackDireccionGoogle"
+                );
+
+
+            if (
+                feedbackDireccion
+            ) {
+
+                feedbackDireccion.textContent =
+                    "";
+
+            }
+
+
+
+            // =================================================
+            // 34. REDIRECCIÓN A LOGIN
+            // =================================================
+
+            setTimeout(
+                function () {
+
+                    window.location.href =
+                        "login.html";
+
+                },
+                1500
+            );
 
         }
     );
