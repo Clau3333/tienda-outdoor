@@ -22,7 +22,6 @@
         href="admin.css"
     >
 
-    <!-- Seguridad común del área administrativa -->
     <script src="admin-seguridad.js"></script>
 
 </head>
@@ -33,10 +32,6 @@
 
     <div class="admin-layout">
 
-
-        <!-- =========================================
-             MENÚ LATERAL
-             ========================================= -->
 
         <aside class="admin-sidebar">
 
@@ -79,6 +74,10 @@
                     Usuarios
                 </a>
 
+                <a href="admin-ordenes.html">
+                    Órdenes
+                </a>
+
             </nav>
 
 
@@ -95,16 +94,8 @@
 
 
 
-        <!-- =========================================
-             CONTENIDO
-             ========================================= -->
-
         <div class="admin-contenido">
 
-
-            <!-- =====================================
-                 CABECERA
-                 ===================================== -->
 
             <header class="admin-cabecera">
 
@@ -153,10 +144,6 @@
             <main>
 
 
-                <!-- =====================================
-                     PRESENTACIÓN
-                     ===================================== -->
-
                 <section
                     class="admin-bienvenida"
                     aria-labelledby="titulo-usuarios-admin"
@@ -183,10 +170,6 @@
                 </section>
 
 
-
-                <!-- =====================================
-                     FORMULARIO
-                     ===================================== -->
 
                 <section
                     class="admin-seccion"
@@ -221,11 +204,6 @@
                         >
 
 
-                            <!--
-                                Guarda internamente el RUN completo
-                                cuando estamos editando.
-                            -->
-
                             <input
                                 type="hidden"
                                 id="runOriginalUsuario"
@@ -237,17 +215,11 @@
                             <div class="row g-4">
 
 
-                                <!-- =================================
-                                     RUT + DV
-                                     ================================= -->
-
                                 <div class="col-12 col-md-6">
 
 
                                     <div class="row g-2">
 
-
-                                        <!-- RUT -->
 
                                         <div class="col-9">
 
@@ -270,8 +242,6 @@
 
                                         </div>
 
-
-                                        <!-- DV -->
 
                                         <div class="col-3">
 
@@ -308,8 +278,6 @@
                                 </div>
 
 
-
-                                <!-- PERFIL -->
 
                                 <div class="col-12 col-md-6">
 
@@ -349,8 +317,6 @@
 
 
 
-                                <!-- NOMBRE -->
-
                                 <div class="col-12 col-md-6">
 
                                     <label
@@ -378,8 +344,6 @@
                                 </div>
 
 
-
-                                <!-- APELLIDOS -->
 
                                 <div class="col-12 col-md-6">
 
@@ -409,8 +373,6 @@
 
 
 
-                                <!-- CORREO -->
-
                                 <div class="col-12 col-md-6">
 
                                     <label
@@ -439,8 +401,6 @@
 
 
 
-                                <!-- FECHA -->
-
                                 <div class="col-12 col-md-6">
 
                                     <label
@@ -467,8 +427,6 @@
 
 
 
-                                <!-- REGIÓN -->
-
                                 <div class="col-12 col-md-6">
 
                                     <label
@@ -494,8 +452,6 @@
                                 </div>
 
 
-
-                                <!-- COMUNA -->
 
                                 <div class="col-12 col-md-6">
 
@@ -524,8 +480,6 @@
 
 
 
-                                <!-- CALLE -->
-
                                 <div class="col-12 col-md-6">
 
                                     <label
@@ -549,8 +503,6 @@
                                 </div>
 
 
-
-                                <!-- NÚMERO DOMICILIO -->
 
                                 <div class="col-12 col-md-6">
 
@@ -576,8 +528,6 @@
                                 </div>
 
 
-
-                                <!-- TIPO DOMICILIO -->
 
                                 <div class="col-12 col-md-6">
 
@@ -613,8 +563,6 @@
 
 
 
-                                <!-- DEPARTAMENTO -->
-
                                 <div class="col-12 col-md-6">
 
                                     <label
@@ -645,8 +593,6 @@
 
 
 
-                                <!-- CÓDIGO POSTAL -->
-
                                 <div class="col-12 col-md-6">
 
                                     <label
@@ -671,8 +617,6 @@
                                 </div>
 
 
-
-                                <!-- CONTRASEÑA -->
 
                                 <div class="col-12 col-md-6">
 
@@ -704,8 +648,6 @@
 
 
 
-                                <!-- CONFIRMAR CONTRASEÑA -->
-
                                 <div class="col-12 col-md-6">
 
                                     <label
@@ -734,16 +676,12 @@
 
 
 
-                            <!-- MENSAJE -->
-
                             <div
                                 id="mensajeUsuarioAdmin"
                                 role="alert"
                             ></div>
 
 
-
-                            <!-- BOTONES -->
 
                             <div class="d-flex flex-wrap gap-2 mt-4">
 
@@ -776,10 +714,6 @@
                 </section>
 
 
-
-                <!-- =====================================
-                     LISTADO
-                     ===================================== -->
 
                 <section
                     class="admin-seccion"
@@ -888,10 +822,6 @@
     </div>
 
 
-
-    <!-- =========================================
-         JAVASCRIPT
-         ========================================= -->
 
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
