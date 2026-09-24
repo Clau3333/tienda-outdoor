@@ -141,7 +141,7 @@ document.addEventListener(
 
 
         // =================================================
-        // 7. MOSTRAR USUARIO
+        // 7. SALUDO
         // =================================================
 
         const saludo =
@@ -163,51 +163,87 @@ document.addEventListener(
 
 
         // =================================================
-        // 8. CREAR ENLACE DE PANEL SEGÚN ROL
+        // 8. ENLACE SEGÚN ROL
         // =================================================
 
-        let enlacePanel =
+        let enlaceRol =
             null;
 
+
+
+        // -------------------------------------------------
+        // ADMINISTRADOR
+        // -------------------------------------------------
 
         if (
             usuarioSesion.tipoUsuario ===
             "Administrador"
         ) {
 
-            enlacePanel =
+            enlaceRol =
                 document.createElement(
                     "a"
                 );
 
 
-            enlacePanel.href =
+            enlaceRol.href =
                 "admin.html";
 
 
-            enlacePanel.textContent =
+            enlaceRol.textContent =
                 "Panel administrador";
 
         }
 
+
+
+        // -------------------------------------------------
+        // VENDEDOR
+        // -------------------------------------------------
 
         if (
             usuarioSesion.tipoUsuario ===
             "Vendedor"
         ) {
 
-            enlacePanel =
+            enlaceRol =
                 document.createElement(
                     "a"
                 );
 
 
-            enlacePanel.href =
+            enlaceRol.href =
                 "vendedor.html";
 
 
-            enlacePanel.textContent =
+            enlaceRol.textContent =
                 "Panel vendedor";
+
+        }
+
+
+
+        // -------------------------------------------------
+        // CLIENTE
+        // -------------------------------------------------
+
+        if (
+            usuarioSesion.tipoUsuario ===
+            "Cliente"
+        ) {
+
+            enlaceRol =
+                document.createElement(
+                    "a"
+                );
+
+
+            enlaceRol.href =
+                "mis-pedidos.html";
+
+
+            enlaceRol.textContent =
+                "Mis pedidos";
 
         }
 
@@ -245,10 +281,12 @@ document.addEventListener(
         );
 
 
-        if (enlacePanel) {
+        if (
+            enlaceRol
+        ) {
 
             menu.appendChild(
-                enlacePanel
+                enlaceRol
             );
 
         }
@@ -261,7 +299,7 @@ document.addEventListener(
 
 
         // =================================================
-        // 11. EVENTO CERRAR SESIÓN
+        // 11. CERRAR SESIÓN
         // =================================================
 
         cerrarSesion.addEventListener(
@@ -271,29 +309,15 @@ document.addEventListener(
                 evento.preventDefault();
 
 
-                // -----------------------------------------
-                // ELIMINAR SESIÓN
-                // -----------------------------------------
-
                 localStorage.removeItem(
                     "usuarioSesionAlbedo"
                 );
 
 
-                // -----------------------------------------
-                // VACIAR CARRITO
-                // Evita que el carrito de otro usuario
-                // quede visible después de cerrar sesión.
-                // -----------------------------------------
-
                 localStorage.removeItem(
                     "carritoAlbedo"
                 );
 
-
-                // -----------------------------------------
-                // VOLVER AL INICIO
-                // -----------------------------------------
 
                 window.location.href =
                     "index.html";

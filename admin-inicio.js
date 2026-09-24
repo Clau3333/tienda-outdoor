@@ -1,6 +1,5 @@
 // =====================================================
-// ALBEDO OUTDOOR
-// INICIO DEL PANEL DE ADMINISTRACIÓN
+// INICIO DEL PANEL ADMINISTRADOR - ALBEDO OUTDOOR
 // =====================================================
 
 document.addEventListener(
@@ -9,14 +8,12 @@ document.addEventListener(
 
 
         // =================================================
-        // 1. OBTENER CANTIDAD DE PRODUCTOS
+        // 1. PRODUCTOS
         // =================================================
 
         function obtenerCantidadProductos() {
 
-
             try {
-
 
                 const productos =
                     JSON.parse(
@@ -32,39 +29,29 @@ document.addEventListener(
                     )
                 ) {
 
-
                     return productos.length;
-
 
                 }
 
-
             } catch (error) {
 
-
-                // Si ocurre un error,
-                // se utiliza la cantidad base.
-
-
+                // Se utiliza la cantidad base.
             }
 
 
             return 15;
-
 
         }
 
 
 
         // =================================================
-        // 2. OBTENER CANTIDAD DE USUARIOS
+        // 2. USUARIOS
         // =================================================
 
         function obtenerCantidadUsuarios() {
 
-
             try {
-
 
                 const usuarios =
                     JSON.parse(
@@ -80,32 +67,64 @@ document.addEventListener(
                     )
                 ) {
 
-
                     return usuarios.length;
-
 
                 }
 
-
             } catch (error) {
 
-
-                // Si ocurre un error,
-                // se muestra cero.
-
+                return 0;
 
             }
 
 
             return 0;
 
+        }
+
+
+
+        // =================================================
+        // 3. ÓRDENES
+        // =================================================
+
+        function obtenerCantidadOrdenes() {
+
+            try {
+
+                const ordenes =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "ordenesAlbedo"
+                        )
+                    );
+
+
+                if (
+                    Array.isArray(
+                        ordenes
+                    )
+                ) {
+
+                    return ordenes.length;
+
+                }
+
+            } catch (error) {
+
+                return 0;
+
+            }
+
+
+            return 0;
 
         }
 
 
 
         // =================================================
-        // 3. ELEMENTOS DEL RESUMEN
+        // 4. ELEMENTOS
         // =================================================
 
         const cantidadProductos =
@@ -120,19 +139,23 @@ document.addEventListener(
             );
 
 
+        const cantidadOrdenes =
+            document.getElementById(
+                "cantidadOrdenesAdminInicio"
+            );
+
+
 
         // =================================================
-        // 4. MOSTRAR CANTIDADES REALES
+        // 5. MOSTRAR DATOS
         // =================================================
 
         if (
             cantidadProductos
         ) {
 
-
             cantidadProductos.textContent =
                 obtenerCantidadProductos();
-
 
         }
 
@@ -141,10 +164,18 @@ document.addEventListener(
             cantidadUsuarios
         ) {
 
-
             cantidadUsuarios.textContent =
                 obtenerCantidadUsuarios();
 
+        }
+
+
+        if (
+            cantidadOrdenes
+        ) {
+
+            cantidadOrdenes.textContent =
+                obtenerCantidadOrdenes();
 
         }
 

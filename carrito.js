@@ -507,7 +507,6 @@ function inicializarPaginaCarrito() {
     }
 
 
-
     const vacio =
         document.getElementById(
             "carritoVacio"
@@ -597,9 +596,13 @@ function inicializarPaginaCarrito() {
             }
 
 
+            const usuario =
+                obtenerUsuarioSesion();
+
+
 
             // =========================================
-            // CREAR ORDEN ANTES DE VACIAR CARRITO
+            // CREAR ORDEN
             // =========================================
 
             const orden =
@@ -626,9 +629,37 @@ function inicializarPaginaCarrito() {
             renderizarCarrito();
 
 
-
             vacio.style.display =
                 "none";
+
+
+
+            // =========================================
+            // BOTÓN MIS PEDIDOS SOLO PARA CLIENTE
+            // =========================================
+
+            let botonMisPedidos =
+                "";
+
+
+            if (
+                usuario &&
+                usuario.tipoUsuario ===
+                "Cliente"
+            ) {
+
+                botonMisPedidos = `
+
+                    <a
+                        href="mis-pedidos.html"
+                        class="btn btn-outline-dark"
+                    >
+                        Ver mis pedidos
+                    </a>
+
+                `;
+
+            }
 
 
 
@@ -657,12 +688,24 @@ function inicializarPaginaCarrito() {
                     </strong>
                 </p>
 
-                <a
-                    href="productos.html"
-                    class="btn btn-dark"
+                <div
+                    class="
+                        d-flex
+                        flex-wrap
+                        gap-2
+                    "
                 >
-                    Seguir comprando
-                </a>
+
+                    <a
+                        href="productos.html"
+                        class="btn btn-dark"
+                    >
+                        Seguir comprando
+                    </a>
+
+                    ${botonMisPedidos}
+
+                </div>
 
             `;
 
@@ -762,7 +805,6 @@ function inicializarPaginaCarrito() {
 
                             <tr>
 
-
                                 <td class="carrito-producto">
 
                                     <img
@@ -823,7 +865,6 @@ function inicializarPaginaCarrito() {
 
                                 </td>
 
-
                             </tr>
 
                         `;
@@ -878,9 +919,7 @@ function inicializarPaginaCarrito() {
                 ".carrito-input-cantidad"
             )
             .forEach(
-                function (
-                    input
-                ) {
+                function (input) {
 
                     input.addEventListener(
                         "change",
@@ -948,9 +987,7 @@ function inicializarPaginaCarrito() {
                 ".carrito-eliminar"
             )
             .forEach(
-                function (
-                    boton
-                ) {
+                function (boton) {
 
                     boton.addEventListener(
                         "click",
