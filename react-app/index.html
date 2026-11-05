@@ -1,10 +1,19 @@
 <!doctype html>
-<html lang="en">
+<html lang="es" data-bs-theme="light">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>react-app</title>
+    <title>ALBEDO Outdoor | Inicio</title>
+    <script>
+      // Misma clave de visitante que getThemeStorageKey; evita un destello al recargar.
+      try {
+        const theme = localStorage.getItem('albedo:theme:guest') === 'dark' ? 'dark' : 'light';
+        document.documentElement.dataset.bsTheme = theme;
+        document.documentElement.style.colorScheme = theme;
+      } catch {
+        document.documentElement.style.colorScheme = 'light';
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -1,0 +1,32 @@
+.carrito-page { max-width: 1200px; }
+.carrito-page .etiqueta { color: var(--albedo-link); font-size: 10px; font-weight: 700; letter-spacing: 2px; }
+.carrito-page .btn-outline-danger {
+  --bs-btn-color: var(--albedo-danger);
+  --bs-btn-border-color: var(--albedo-danger);
+  --bs-btn-hover-bg: var(--albedo-danger);
+  --bs-btn-hover-border-color: var(--albedo-danger);
+  --bs-btn-hover-color: var(--albedo-bg);
+  --bs-btn-active-bg: var(--albedo-danger);
+  --bs-btn-active-border-color: var(--albedo-danger);
+  --bs-btn-active-color: var(--albedo-bg);
+}
+.carrito-page .carrito-tabla { font-size: 13px; }
+.carrito-page .carrito-producto { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.carrito-page .carrito-producto span { overflow-wrap: anywhere; }
+.carrito-page .carrito-producto img { width: 60px; height: 70px; object-fit: contain; flex: 0 0 60px; background: var(--albedo-surface); }
+.carrito-page .carrito-input-cantidad { width: 80px; padding: .5rem; }
+.carrito-page .carrito-resumen { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 16px; }
+.carrito-page .carrito-pago { padding: clamp(16px, 3vw, 28px); border: 1px solid var(--albedo-divider); border-radius: var(--albedo-radius); background: var(--albedo-surface); }
+.carrito-page .carrito-pago .form-select { max-width: 360px; }
+@media (max-width: 700px) {
+  .carrito-page .table-responsive { overflow: visible; }
+  .carrito-page .carrito-tabla thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .carrito-page .carrito-tabla, .carrito-page .carrito-tabla tbody, .carrito-page .carrito-tabla tr { display: block; width: 100%; }
+  .carrito-page .carrito-tabla tr { padding: 12px; margin-bottom: 16px; border: 1px solid var(--albedo-divider); border-radius: var(--albedo-radius); background: var(--albedo-bg); }
+  .carrito-page .carrito-tabla td { display: flex; width: 100%; justify-content: space-between; align-items: center; gap: 12px; padding: 9px 0; text-align: right; overflow-wrap: anywhere; }
+  .carrito-page .carrito-tabla td::before { content: attr(data-label); flex: 0 0 65px; text-align: left; font-weight: 700; }
+  .carrito-page .carrito-producto { text-align: left; flex: 1; }
+  .carrito-page .carrito-resumen { flex-direction: column; align-items: stretch; }
+  .carrito-page .carrito-total { padding: 12px 0; text-align: right; }
+  .carrito-page .carrito-pago .btn { width: 100%; }
+}

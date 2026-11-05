@@ -1,0 +1,17 @@
+.enlaces-principales .header-session-greeting {
+  min-width: 0; max-width: 100%; color: var(--albedo-text);
+  font-size: 13px; font-weight: 600; overflow-wrap: anywhere;
+}
+.enlaces-principales .header-session-logout {
+  min-height: 44px; padding: 13px 0; border: 0; background: transparent;
+  color: var(--albedo-text); font-family: inherit; font-size: 13px; font-weight: 600;
+}
+.enlaces-principales .header-session-logout:hover { color: var(--albedo-link); text-decoration: underline; text-underline-offset: 4px; }
+.header-session-error { margin: 0; padding: 12px 5%; color: var(--albedo-danger); background: var(--albedo-bg); font-size: 13px; }
+@media (max-width: 1200px) {
+  .enlaces-principales .header-session-greeting, .enlaces-principales .header-session-logout { font-size: 12px; }
+}
+@media (max-width: 700px) {
+  .enlaces-principales .header-session-greeting { grid-column: 1 / -1; padding: 8px 4px; text-align: center; }
+  .enlaces-principales .header-session-logout { width: 100%; padding: 10px 4px; font-size: 11px; }
+}

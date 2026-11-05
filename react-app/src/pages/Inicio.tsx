@@ -1,8 +1,9 @@
+import PageHeading from '../components/ui/PageHeading'
+
 function Inicio() {
   return (
     <main>
-      <h1>ALBEDO Outdoor</h1>
-      <p>Comienza hoy tu aventura</p>
+      <PageHeading title="ALBEDO Outdoor" description="Comienza hoy tu aventura" />
     </main>
   );
 }

@@ -1,0 +1,12 @@
+.login-page .etiqueta { color: var(--albedo-link); font-size: 10px; font-weight: 700; letter-spacing: 2px; }
+.login-page .login-description { color: var(--albedo-muted); }
+.login-page .form-label { margin-bottom: 7px; font-size: 13px; }
+.login-page .form-control { min-height: 44px; border-radius: 5px; font-size: 14px; }
+.login-page .form-text { overflow-wrap: anywhere; }
+.login-page .login-submit {
+  --bs-btn-color: var(--albedo-bg); --bs-btn-bg: var(--albedo-text); --bs-btn-border-color: var(--albedo-text);
+  --bs-btn-hover-color: var(--albedo-bg); --bs-btn-hover-bg: var(--albedo-muted); --bs-btn-hover-border-color: var(--albedo-muted);
+  --bs-btn-active-color: var(--albedo-bg); --bs-btn-active-bg: var(--albedo-text); --bs-btn-active-border-color: var(--albedo-text);
+}
+.login-page #mensajeResultadoLogin { font-size: 13px; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .login-page .login-submit { width: 100%; } }

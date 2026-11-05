@@ -1,0 +1,11 @@
+.registro-page .etiqueta { color: var(--albedo-link); font-size: 10px; font-weight: 700; letter-spacing: 2px; }
+.registro-page .registro-description { color: var(--albedo-muted); }
+.registro-page .form-control, .registro-page .form-select { min-height: 44px; font-size: 14px; }
+.registro-page .form-text, .registro-page .invalid-feedback, .registro-page .alert { overflow-wrap: anywhere; }
+.registro-page .registro-rut-divider { padding-top: 38px; font-weight: 700; }
+.registro-page .col { min-width: 0; }
+.registro-page .registro-submit {
+  --bs-btn-color: var(--albedo-bg); --bs-btn-bg: var(--albedo-text); --bs-btn-border-color: var(--albedo-text);
+  --bs-btn-hover-color: var(--albedo-bg); --bs-btn-hover-bg: var(--albedo-muted); --bs-btn-hover-border-color: var(--albedo-muted);
+}
+@media (max-width: 480px) { .registro-page .registro-submit { width: 100%; } }

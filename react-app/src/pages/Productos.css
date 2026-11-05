@@ -1,0 +1,45 @@
+/* Medidas trasladadas de Sitio Old/estilos.css. No se aplica img-fluid ni otra escala. */
+.contenido-tienda--catalogo { max-width: none; padding: 0; }
+.catalogo-page .catalogo-cabecera,
+.catalogo-page .categoria-productos { width: min(1400px, 88%); margin: 0 auto; }
+.catalogo-page .catalogo-cabecera { padding: 65px 0 45px; }
+.catalogo-page .etiqueta { margin: 0 0 14px; color: var(--albedo-link); font-size: 10px; font-weight: 700; letter-spacing: 2.2px; text-transform: uppercase; }
+.catalogo-page .catalogo-cabecera h1 { margin: 0 0 10px; font-size: clamp(42px, 5vw, 58px); font-weight: 750; letter-spacing: -2px; }
+.catalogo-page .catalogo-descripcion { margin: 0; color: var(--albedo-muted); font-size: 14px; }
+.catalogo-page .categoria-productos { padding: 35px 0 70px; }
+.catalogo-page .categoria-encabezado { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; margin-bottom: 25px; padding-bottom: 18px; border-bottom: 1px solid var(--albedo-divider); }
+.catalogo-page .categoria-encabezado > div { display: flex; align-items: baseline; gap: 12px; }
+.catalogo-page .categoria-numero { margin: 0; color: var(--albedo-link); font-size: 10px; font-weight: 700; }
+.catalogo-page .categoria-encabezado h2 { margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -1px; scroll-margin-top: 170px; }
+.catalogo-page .categoria-encabezado > p { margin: 0; color: var(--albedo-muted); font-size: 12px; }
+.catalogo-page .catalogo-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; align-items: start; }
+.catalogo-page .producto-catalogo { min-width: 0; display: flex; flex-direction: column; }
+.catalogo-page .catalogo-imagen { display: block; aspect-ratio: 0.83; margin-bottom: 16px; overflow: hidden; background-color: var(--albedo-surface); }
+.catalogo-page .catalogo-imagen img { display: block; width: 100%; height: 100%; object-fit: contain; transition: transform .2s ease; }
+.catalogo-page .producto-catalogo:hover .catalogo-imagen img { transform: scale(1.018); }
+.catalogo-page .catalogo-titulo-enlace { display: block; color: var(--albedo-text); text-decoration: none; }
+.catalogo-page .producto-catalogo h3 { margin: 0 0 6px; font-size: 13px; font-weight: 700; }
+.catalogo-page .catalogo-descripcion-producto { min-height: 40px; margin: 0 0 8px; color: var(--albedo-muted); font-size: 11px; line-height: 1.5; }
+.catalogo-page .catalogo-precio { margin: 0; font-size: 13px; font-weight: 700; }
+.catalogo-page .catalogo-ver-detalle { display: inline-block; margin-top: 10px; color: var(--albedo-text); font-size: 11px; font-weight: 700; text-decoration: none; }
+.catalogo-page .catalogo-ver-detalle:hover { color: var(--albedo-link); }
+.catalogo-page .colores-producto { display: flex; align-items: center; gap: 10px; min-height: 32px; margin-top: 10px; padding: 4px; }
+.catalogo-page .color-swatch { appearance: none; flex: none; width: 19px; height: 19px; margin: 0; padding: 0; border: 2px solid var(--albedo-bg); border-radius: 50%; background-color: var(--color-producto); box-shadow: 0 0 0 1px #bfc1c2; cursor: pointer; transition: transform .15s ease, box-shadow .15s ease; }
+.catalogo-page .color-swatch:hover { transform: scale(1.12); box-shadow: 0 0 0 2px var(--albedo-bg), 0 0 0 3px var(--albedo-muted); }
+.catalogo-page .color-swatch.activo { box-shadow: 0 0 0 2px var(--albedo-bg), 0 0 0 3px var(--albedo-text); }
+.catalogo-page .catalogo-sin-imagen { display: flex; height: 100%; align-items: center; justify-content: center; padding: 20px; color: var(--albedo-muted); font-size: 12px; font-weight: 600; text-align: center; }
+@media (max-width: 1200px) { .catalogo-page .catalogo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 900px) { .catalogo-page .catalogo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) {
+  .catalogo-page .catalogo-cabecera, .catalogo-page .categoria-productos { width: 90%; }
+  .catalogo-page .categoria-encabezado { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .catalogo-page .categoria-encabezado > div { width: 100%; }
+}
+@media (max-width: 520px) {
+  .catalogo-page .catalogo-grid { grid-template-columns: 1fr; }
+  .catalogo-page .catalogo-cabecera h1 { font-size: 38px; }
+}
+@media (max-width: 380px) { .catalogo-page .catalogo-cabecera h1 { font-size: 34px; } }
+@media (prefers-reduced-motion: reduce) {
+  .catalogo-page .catalogo-imagen img, .catalogo-page .color-swatch { transition: none; }
+}

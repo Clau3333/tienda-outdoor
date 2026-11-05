@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "types": ["jasmine", "vite/client"],
+    "strict": true
+  },
+  "include": ["tests/jasmine/**/*.ts", "tests/jasmine/**/*.tsx"]
+}
