@@ -350,3 +350,22 @@ Toda modificación debe estar justificada, respetar las instrucciones del usuari
 No sacrificar requisitos obligatorios por mejoras opcionales.
 
 Priorizar una aplicación funcional, mantenible, comprensible y defendible.
+
+<!-- ALBEDO-REGLAS-2026-INICIO -->
+## ActualizaciÃ³n obligatoria: incidentes y estado real al 2026-11-05
+
+Esta secciÃ³n prevalece sobre descripciones anteriores desactualizadas del modo nocturno o del estado de migraciÃ³n.
+
+- El usuario exige **SIEMPRE archivos completos** para copiar y pegar. No enviar codigo parcial, ni bloques para aÃ±adir al final, ni remitir a un paso anterior. Si cambian dos archivos, entregar ambos archivos completos.
+- AcompaÃ±amiento paso a paso, un paso por turno, evitar repetir preguntas y optimizar los tokens de Codex.
+- El modo nocturno **ya funciona en React**, pero la compatibilidad con pÃ¡ginas HTML antiguas no estÃ¡ totalmente verificada. El problema real: desaparece el botÃ³n claro/oscuro en `/Sitio%20Old/`, algunos textos pierden contraste, y `Sitio Old/index.html` mostrÃ³ titulo oscuro sobre la fotografÃ­a de montaÃ±a. No declarar arreglado hasta una inspeccion manual.
+- El tema React usa `albedo:theme:guest` y `data-bs-theme`. Debe compartirse el almacenamiento, actualizarse entre pestaÃ±as y ofrecer un botÃ³n accesible en cada pagina antigua. No basta con cambiar el fondo.
+- Inicio React ya recuperÃ³ fotografia original, excursionista, lema, productos destacados, video y contacto. Respetar totalmente las dimensiones y proporciones de imagenes originales.
+- La migraciÃ³n actual conserva pÃ¡ginas HTML antiguas: Nosotros, Blog, Contacto, Mis pedidos y paneles de roles; otras rutas React incluyen Inicio, Productos, Carrito, Login y Registro. No confundir `/carrito.html` con `/Sitio%20Old/carrito.html`.
+- Incidente repetido: `Inicio.css` estaba en **0 bytes**; el primer `git diff --cached --stat` lo mostrÃ³ con `| 0`, aunque se habÃ­a compilado y visualizado la portada. Siempre comprobar ruta, extensiÃ³n, bytes reales y diff antes de commit.
+- `localhost:5173` y `localhost:5174` son origenes distintos para localStorage. Verificar sincronizaciÃ³n usando el mismo puerto.
+- Persistencia compatible con sitio antiguo: `usuarioSesionAlbedo`, `carritoAlbedo`, `ordenesAlbedo`. No alterar datos de usuario por corregir el tema. Diferencia conocida: el logout antiguo borra el carrito, React no; no introducir cambios accidentales de comportamiento.
+- Comandos Windows: `npm.cmd --prefix .\react-app run build`, `run lint`, `run test:unit` y `npm.cmd --prefix .\react-app test`. Baseline histÃ³rico: 82 Jasmine/Karma + 71 Node exitosas, 0 fallidas; volver a probar despuÃ©s de cambios.
+- Mantener revisiÃ³n de rÃºbrica EP2, pruebas, ERS V2, cobertura y responsive. No asumir que la tienda estÃ¡ terminada solo porque pasan 153 pruebas.
+- No modificar `main`, ni hacer commit o push sin aprobaciÃ³n explÃ­cita.
+<!-- ALBEDO-REGLAS-2026-FIN -->

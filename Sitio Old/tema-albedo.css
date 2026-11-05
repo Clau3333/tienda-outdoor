@@ -1,0 +1,244 @@
+
+/* =====================================================
+   ALBEDO OUTDOOR
+   TEMA COMPARTIDO CON REACT
+   ===================================================== */
+
+/* =====================================================
+   1. BOTÓN CLARO / OSCURO
+   ===================================================== */
+
+.enlaces-principales {
+    column-gap: clamp(8px, 1.3vw, 22px);
+}
+
+.enlaces-principales .tema-albedo-boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+
+    padding: 0;
+
+    color: var(--carbon);
+    background-color: var(--blanco);
+    border: 1px solid var(--gris-linea);
+    border-radius: 4px;
+
+    font-family: Arial, sans-serif;
+    font-size: 23px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.enlaces-principales .tema-albedo-boton:hover {
+    background-color: var(--gris-claro);
+    border-color: var(--naranja);
+}
+
+.enlaces-principales .tema-albedo-boton:focus-visible {
+    outline: 2px solid var(--naranja);
+    outline-offset: 3px;
+}
+
+/* =====================================================
+   2. VARIABLES DEL MODO OSCURO
+   ===================================================== */
+
+html[data-bs-theme="dark"] {
+    color-scheme: dark;
+
+    --carbon: #f4f4f2;
+    --blanco: #17191b;
+
+    --gris-texto: #bec3c7;
+    --gris-claro: #23272b;
+    --gris-menu: #2c3136;
+    --gris-linea: #43494f;
+}
+
+/* =====================================================
+   3. FONDO Y TEXTO GENERAL
+   ===================================================== */
+
+html[data-bs-theme="dark"] body {
+    background-color: #17191b;
+    color: #f4f4f2;
+}
+
+html[data-bs-theme="dark"] h1,
+html[data-bs-theme="dark"] h2,
+html[data-bs-theme="dark"] h3,
+html[data-bs-theme="dark"] h4,
+html[data-bs-theme="dark"] h5,
+html[data-bs-theme="dark"] h6 {
+    color: #f4f4f2;
+}
+
+html[data-bs-theme="dark"] .text-secondary,
+html[data-bs-theme="dark"] .text-muted {
+    color: #bec3c7 !important;
+}
+
+html[data-bs-theme="dark"] .text-dark {
+    color: #f4f4f2 !important;
+}
+
+/* =====================================================
+   4. CABECERA Y NAVEGACIÓN
+   ===================================================== */
+
+html[data-bs-theme="dark"] .cabecera-tienda {
+    background-color: #17191b;
+    border-top-color: #101214;
+}
+
+html[data-bs-theme="dark"] .cabecera-superior {
+    border-bottom-color: #43494f;
+}
+
+html[data-bs-theme="dark"] .enlaces-principales a,
+html[data-bs-theme="dark"] .usuario-sesion {
+    color: #f4f4f2;
+}
+
+html[data-bs-theme="dark"] .marca {
+    background-color: #ffffff;
+}
+
+/* =====================================================
+   5. PORTADA ORIGINAL
+   Mantener textos blancos sobre la montaña.
+   No modificar tamaño ni recorte de imágenes.
+   ===================================================== */
+
+html[data-bs-theme="dark"] .portada {
+    color: #ffffff;
+}
+
+html[data-bs-theme="dark"] .portada h1,
+html[data-bs-theme="dark"] .portada .etiqueta,
+html[data-bs-theme="dark"] .portada .descripcion {
+    color: #ffffff;
+}
+
+/* =====================================================
+   6. PRODUCTOS Y TARJETAS
+   ===================================================== */
+
+html[data-bs-theme="dark"] .producto-destacado,
+html[data-bs-theme="dark"] .catalogo-titulo-enlace,
+html[data-bs-theme="dark"] .catalogo-ver-detalle {
+    color: #f4f4f2;
+}
+
+html[data-bs-theme="dark"] .card {
+    --bs-card-bg: #23272b;
+    --bs-card-color: #f4f4f2;
+
+    background-color: #23272b;
+    color: #f4f4f2;
+    border-color: #43494f;
+}
+
+html[data-bs-theme="dark"] .card-body {
+    color: #f4f4f2;
+}
+
+html[data-bs-theme="dark"] .bg-white,
+html[data-bs-theme="dark"] .bg-light {
+    background-color: #23272b !important;
+    color: #f4f4f2;
+}
+
+html[data-bs-theme="dark"] .border {
+    border-color: #43494f !important;
+}
+
+/* =====================================================
+   7. CARRITO Y MIS PEDIDOS
+   ===================================================== */
+
+html[data-bs-theme="dark"] .alert-secondary {
+    background-color: #2c3136;
+    border-color: #43494f;
+    color: #f4f4f2;
+}
+
+html[data-bs-theme="dark"] .alert {
+    --bs-alert-color: #f4f4f2;
+}
+
+/* =====================================================
+   8. FORMULARIOS
+   ===================================================== */
+
+html[data-bs-theme="dark"] .form-control,
+html[data-bs-theme="dark"] .form-select,
+html[data-bs-theme="dark"] textarea {
+    background-color: #23272b;
+    border-color: #8b9298;
+    color: #f4f4f2;
+}
+
+html[data-bs-theme="dark"] .form-control::placeholder,
+html[data-bs-theme="dark"] textarea::placeholder {
+    color: #bec3c7;
+    opacity: 1;
+}
+
+html[data-bs-theme="dark"] .form-control:focus,
+html[data-bs-theme="dark"] .form-select:focus,
+html[data-bs-theme="dark"] textarea:focus {
+    background-color: #23272b;
+    border-color: #c74718;
+    color: #f4f4f2;
+}
+
+html[data-bs-theme="dark"] .form-control:disabled,
+html[data-bs-theme="dark"] .form-control[readonly] {
+    background-color: #2c3136;
+    color: #bec3c7;
+}
+
+/* =====================================================
+   9. BOTONES
+   ===================================================== */
+
+html[data-bs-theme="dark"] .boton-albedo {
+    background-color: #c74718;
+    color: #ffffff;
+}
+
+html[data-bs-theme="dark"] .boton-albedo:hover {
+    background-color: #963712;
+    color: #ffffff;
+}
+
+/* =====================================================
+   10. PIE DE PÁGINA
+   ===================================================== */
+
+html[data-bs-theme="dark"] .pie {
+    background-color: #101214;
+    color: #f4f4f2;
+    border-top-color: #43494f;
+}
+
+/* =====================================================
+   11. ADAPTACIÓN RESPONSIVE DEL BOTÓN
+   ===================================================== */
+
+@media (max-width: 700px) {
+    .enlaces-principales .tema-albedo-boton {
+        width: 44px;
+        height: 44px;
+        min-height: 44px;
+        margin: 4px auto;
+    }
+}
