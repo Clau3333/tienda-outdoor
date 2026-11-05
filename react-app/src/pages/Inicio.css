@@ -1,0 +1,234 @@
+
+.contenido-tienda:has(> .inicio-react) {
+  max-width: none;
+  padding: 0;
+}
+
+.inicio-react {
+  width: 100%;
+  min-width: 0;
+}
+
+.inicio-react .portada {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: 575px;
+  overflow: hidden;
+  padding: 70px 6%;
+  color: #ffffff;
+}
+
+.inicio-react .portada-imagen {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center 45%;
+}
+
+.inicio-react .portada::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    90deg,
+    rgba(5, 11, 17, 0.93) 0%,
+    rgba(5, 11, 17, 0.76) 37%,
+    rgba(5, 11, 17, 0.28) 70%,
+    rgba(5, 11, 17, 0.06) 100%
+  );
+}
+
+.inicio-react .portada-contenido {
+  width: 100%;
+  max-width: 620px;
+}
+
+.inicio-react .portada .etiqueta {
+  color: #ffffff;
+}
+
+.inicio-react .portada h1 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(48px, 5vw, 74px);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -3px;
+}
+
+.inicio-react .descripcion {
+  max-width: 470px;
+  margin: 28px 0 32px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.inicio-react .etiqueta {
+  margin: 0 0 14px;
+  color: var(--albedo-accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+}
+
+.inicio-react .productos-inicio {
+  width: min(1400px, 88%);
+  margin: 0 auto;
+  padding: 70px 0 80px;
+}
+
+.inicio-react .productos-introduccion {
+  margin-bottom: 30px;
+}
+
+.inicio-react .productos-introduccion h2 {
+  margin: 0 0 8px;
+  font-size: 32px;
+  letter-spacing: -1.2px;
+}
+
+.inicio-react .productos-introduccion > p:last-child {
+  margin: 0;
+  color: var(--albedo-muted);
+  font-size: 14px;
+}
+
+.inicio-react .productos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+}
+
+.inicio-react .producto-destacado {
+  display: block;
+  min-width: 0;
+  color: var(--albedo-text);
+  text-decoration: none;
+}
+
+.inicio-react .producto-destacado-imagen {
+  height: 330px;
+  overflow: hidden;
+  background: #f4f4f2;
+}
+
+.inicio-react .producto-destacado-imagen img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.inicio-react .producto-destacado-info {
+  padding: 18px 3px 0;
+}
+
+.inicio-react .producto-tipo {
+  margin: 0 0 7px;
+  color: var(--albedo-accent);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.inicio-react .producto-destacado-info h3 {
+  margin: 0 0 7px;
+  font-size: 18px;
+}
+
+.inicio-react .producto-destacado-info > p:not(.producto-tipo) {
+  margin: 0 0 11px;
+  color: var(--albedo-muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.inicio-react .producto-destacado-info .catalogo-precio {
+  color: var(--albedo-text);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.inicio-react .producto-destacado-info span {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.inicio-react .inicio-texto-secundario {
+  color: var(--albedo-muted);
+}
+
+.inicio-react .inicio-contacto {
+  width: min(1400px, 88%);
+  margin: 0 auto 75px;
+  padding: 55px;
+  background: var(--albedo-surface);
+}
+
+.inicio-react .inicio-contacto-contenido {
+  max-width: 610px;
+}
+
+.inicio-react .inicio-contacto h2 {
+  margin: 0 0 14px;
+  font-size: 34px;
+  letter-spacing: -1.1px;
+}
+
+.inicio-react .inicio-contacto p:not(.etiqueta) {
+  margin: 0 0 25px;
+  color: var(--albedo-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .inicio-react .productos-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .inicio-react .portada {
+    min-height: 500px;
+    padding: 55px 7%;
+  }
+
+  .inicio-react .portada h1 {
+    font-size: 42px;
+    letter-spacing: -2px;
+  }
+
+  .inicio-react .portada-imagen {
+    object-position: 67% center;
+  }
+
+  .inicio-react .portada::before {
+    background: rgba(5, 11, 17, 0.72);
+  }
+
+  .inicio-react .descripcion {
+    font-size: 15px;
+  }
+
+  .inicio-react .productos-inicio,
+  .inicio-react .inicio-contacto {
+    width: 90%;
+  }
+
+  .inicio-react .productos-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .inicio-react .inicio-contacto {
+    padding: 30px 22px;
+  }
+}
