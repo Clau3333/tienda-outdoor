@@ -195,20 +195,32 @@
 
             menu.appendChild(cerrarSesion);
 
+            /* =========================================
+               CIERRE DE SESIÓN COMPATIBLE CON REACT
+               ========================================= */
+
             cerrarSesion.addEventListener(
                 "click",
                 function (evento) {
                     evento.preventDefault();
 
-                    localStorage.removeItem(
-                        "usuarioSesionAlbedo"
-                    );
+                    try {
+                        // Solo eliminar la sesión actual.
+                        // No borrar carrito, pedidos,
+                        // usuarios ni preferencias de tema.
+                        localStorage.removeItem(
+                            "usuarioSesionAlbedo"
+                        );
 
-                    localStorage.removeItem(
-                        "carritoAlbedo"
-                    );
+                        // Regresar al Inicio React.
+                        window.location.href = "/index.html";
 
-                    window.location.href = "index.html";
+                    } catch {
+                        alert(
+                            "No se pudo cerrar la sesión. " +
+                            "Revisa el almacenamiento e inténtalo nuevamente."
+                        );
+                    }
                 }
             );
         }
