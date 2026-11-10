@@ -1,371 +1,100 @@
-
-# ALBEDO Outdoor — Instrucciones del proyecto
-
-## 1. Identidad del proyecto
-
-Proyecto académico de Duoc UC para la asignatura Fullstack II.
-
-Nombre: ALBEDO Outdoor.
-
-Tipo: tienda web de productos outdoor y montaña.
-
-Repositorio:
-https://github.com/Clau3333/tienda-outdoor
-
-Rama de desarrollo React: react.
-
-Tecnologías previstas:
-- React.
-- TypeScript.
-- Vite.
-- HTML y CSS.
-- Bootstrap según los requisitos y configuración del proyecto.
-- React Router DOM para navegación.
-
-No incorporar tecnologías adicionales sin justificación y autorización.
-
-## 2. Objetivo académico
-
-Migrar la tienda original desarrollada con HTML, CSS y JavaScript hacia una aplicación React con TypeScript.
-
-La migración debe conservar el diseño, la identidad visual y las funcionalidades originales, incorporando los requisitos de la Evaluación Parcial 2.
-
-Antes de desarrollar, revisar los documentos oficiales de la evaluación, rúbrica, anexos e instrucciones del profesor que estén disponibles.
-
-No inventar requisitos ni afirmar que un criterio está cumplido sin verificarlo.
-
-Si falta la rúbrica oficial, señalarlo y no reemplazarla por suposiciones.
-
-## 3. Diseño aprobado
-
-Identidad visual:
-- Blanco.
-- Carbón.
-- Naranja.
-
-Nombre de la tienda: ALBEDO.
-
-Logo aprobado: nombre ALBEDO, con detalle de nieve en la letra D.
-
-Texto de portada:
-"Comienza hoy tu aventura".
-
-Inspiración visual:
-- The North Face.
-- Marmot.
-
-Organizar los productos por categorías, manteniendo una presentación ordenada.
-
-REGLA OBLIGATORIA:
-
-No aumentar, reducir, recortar, reemplazar ni modificar tamaños o proporciones de imágenes existentes sin autorización explícita del usuario.
-
-No rediseñar elementos previamente aprobados sin autorización.
-
-## 4. Estructura del proyecto
-
-La carpeta "Sitio Old" contiene la versión anterior de la tienda.
-
-La carpeta "react-app" corresponde a la migración React.
-
-Antes de modificar archivos:
-- Inspeccionar la estructura real.
-- Revisar el código existente.
-- Identificar componentes y páginas implementados.
-- Evitar duplicar archivos y funcionalidades.
-- No reconstruir desde cero lo que ya funciona.
-- Utilizar el sitio original como referencia para preservar funcionalidades y diseño.
-
-No modificar "Sitio Old" salvo autorización expresa.
-
-## 5. Instrucciones del profesor: React
-
-El profesor indicó:
-
-- Migrar el sitio original a React.
-- Utilizar componentes reutilizables.
-- Crear páginas mediante componentes React.
-- Centralizar la información de productos.
-- Implementar navegación mediante React Router DOM.
-- Mantener Header, Navbar y Footer compartidos.
-- Actualizar el contenido central según la ruta.
-- Utilizar props y estados cuando corresponda.
-- Mantener estilos coherentes.
-- Comprender las decisiones técnicas implementadas.
-
-Aplicar estas instrucciones de acuerdo con el estado real del proyecto.
-
-## 6. Componentes reutilizables
-
-Priorizar componentes para elementos repetidos, por ejemplo:
-
-- Header.
-- Navbar.
-- Footer.
-- Botones.
-- Campos de texto.
-- Tarjetas de productos.
-
-Los componentes deben:
-- Evitar duplicación innecesaria.
-- Tener responsabilidades claras.
-- Recibir props cuando corresponda.
-- Mantener estilos consistentes.
-- Ser fáciles de comprender y reutilizar.
-
-No crear componentes excesivamente complejos cuando una solución sencilla sea suficiente.
-
-## 7. Páginas y navegación
-
-Migrar las páginas existentes a componentes React.
-
-Utilizar React Router DOM para gestionar las rutas de navegación cuando corresponda.
-
-El encabezado, la navegación principal y el pie de página deben poder compartirse entre páginas.
-
-El contenido principal debe cambiar según la ruta seleccionada.
-
-Verificar:
-- Navegación entre páginas.
-- Enlaces.
-- Botones.
-- Navegación Atrás y Adelante.
-- Rutas directas.
-- Recarga de páginas.
-- Funcionamiento responsive.
-
-No inventar rutas ni eliminar páginas existentes.
-
-## 8. Catálogo de productos
-
-Centralizar los datos de productos en un archivo TypeScript dentro de una carpeta data, respetando la estructura existente.
-
-Cada producto debe contener los atributos que requiera la evaluación, incluyendo cuando corresponda:
-
-- Identificador único.
-- Nombre.
-- Descripción.
-- Precio.
-- Categoría.
-- Ruta de imagen.
-
-Utilizar interfaces o tipos TypeScript para representar los productos.
-
-Renderizar tarjetas mediante los datos centralizados.
-
-Permitir acceder al detalle de un producto utilizando su identificador cuando corresponda.
-
-No modificar productos, imágenes o precios existentes sin autorización.
-
-Organizar las categorías de forma coherente.
-
-## 9. Login y registro
-
-El profesor solicitó implementar un login local utilizando información de usuarios desde un archivo local.
-
-Antes de implementar, verificar el formato exacto exigido por la evaluación.
-
-Distinguir entre autenticación académica simulada y autenticación real de producción.
-
-No utilizar credenciales reales ni presentar archivos accesibles desde el frontend como almacenamiento seguro.
-
-Mantener las validaciones aprobadas para ALBEDO.
-
-Reglas de contraseña previamente solicitadas:
-- Mínimo 10 caracteres.
-- Incluir letras.
-- Incluir al menos un número.
-- Incluir al menos un carácter especial.
-
-Mantener la opción "Recuperar clave" si forma parte del diseño o funcionalidad previamente aprobados.
-
-Respetar los campos de registro y dirección existentes.
-
-No incorporar Google Maps sin autorización.
-
-## 10. Modo nocturno
-
-El usuario solicitó considerar un modo nocturno para ALBEDO.
-
-Estado: mejora opcional aprobada conceptualmente, pendiente de implementación.
-
-Requisitos propuestos:
-- Alternar entre modo claro y nocturno.
-- Mantener identidad visual.
-- Conservar tamaños de imágenes.
-- Mantener contraste y legibilidad.
-- Permitir recordar la preferencia mediante localStorage si se aprueba su implementación.
-
-No priorizar esta característica por encima de los requisitos obligatorios de evaluación.
-
-No modificar el tema actual sin autorización para implementarlo.
-
-## 11. Forma de trabajo
-
-Aplicar las reglas de la skill claudio-workflow cuando esté disponible.
-
-Prioridades:
-- Trabajar paso a paso cuando el usuario solicite acompañamiento.
-- Explicar de manera sencilla.
-- Esperar confirmación entre pasos.
-- No repetir preguntas previamente respondidas.
-- Entregar archivos completos cuando se solicite código para copiar y pegar.
-- No eliminar funcionalidades existentes.
-- No modificar elementos ajenos al cambio.
-- Respetar decisiones aprobadas.
-- No afirmar verificaciones que no se hayan ejecutado.
-
-## 12. Verificación
-
-Aplicar las reglas de web-change-verification cuando esté disponible.
-
-Después de modificar código:
-- Revisar el cambio realizado.
-- Ejecutar los scripts disponibles de compilación y lint cuando corresponda.
-- Comprobar TypeScript.
-- Verificar importaciones.
-- Revisar navegación.
-- Comprobar formularios.
-- Detectar posibles regresiones.
-- Verificar responsive.
-- Revisar que no se modificaron imágenes accidentalmente.
-- Comprobar los criterios aplicables de la rúbrica.
-
-Informar las pruebas que no pudieron ejecutarse.
-
-## 13. Git y GitHub
-
-Antes de trabajar:
-- Identificar la rama activa.
-- Revisar el estado de Git.
-- Respetar los cambios existentes.
-- Evitar conflictos con trabajo de otros integrantes.
-
-No ejecutar commit, push, merge, reset destructivo ni eliminar ramas sin autorización expresa.
-
-Priorizar el desarrollo en la rama correspondiente.
-
-No modificar main sin autorización.
-
-## 14. Defensa académica
-
-El profesor puede preguntar por qué se tomó una determinada decisión técnica.
-
-Por ello, cada implementación debe poder justificarse.
-
-Comprender:
-- Por qué utilizamos React.
-- Por qué utilizamos TypeScript.
-- Para qué sirven los componentes.
-- Qué función cumplen las props.
-- Cómo funciona useState.
-- Para qué sirve React Router DOM.
-- Por qué centralizamos los productos.
-- Por qué reutilizamos Header y Footer.
-- Cómo funcionan las validaciones.
-- Qué pruebas se realizaron.
-
-Preferir código comprensible y soluciones que puedan explicarse durante la evaluación.
-
-## 15. Pruebas unitarias
-
-El profesor mencionó las pruebas unitarias durante la explicación de la Evaluación Parcial 2.
-
-También señaló que su tratamiento práctico sería limitado en esta instancia.
-
-No concluir que están descartadas solamente por esa explicación.
-
-Consultar la rúbrica oficial vigente antes de decidir su alcance.
-
-## 16. Prioridades de desarrollo
-
-Orden recomendado:
-
-1. Revisar el proyecto actual y la rúbrica.
-2. Comparar la versión antigua y React.
-3. Identificar funcionalidades implementadas y pendientes.
-4. Completar componentes y páginas.
-5. Implementar navegación.
-6. Centralizar los datos.
-7. Implementar formularios y login local.
-8. Verificar requisitos restantes.
-9. Ejecutar comprobaciones técnicas.
-10. Preparar defensa académica.
-11. Considerar mejoras opcionales.
-
-Adaptar este orden si los requisitos o el estado real del proyecto lo justifican.
-
-## 17. Requisitos oficiales de la Evaluación Parcial 2
-
-Requisitos oficiales comunicados por Claudio para incorporar a la documentación académica del proyecto. Esta sección complementa las instrucciones anteriores y no acredita que los requisitos ya estén implementados o verificados.
-
-### 17.1. Migración y componentes React
-
-- Migrar el sitio a componentes React reutilizables.
-- Utilizar props para comunicar y configurar componentes, y estados para gestionar los datos y la interacción cuando corresponda.
-- Conservar las páginas, funcionalidades e identidad visual anteriores durante la migración.
-
-### 17.2. Fuente de datos simulada, CRUD y persistencia
-
-- Implementar una fuente de datos simulada con operaciones CRUD: crear, consultar, actualizar y eliminar.
-- Incorporar persistencia e integrar los datos y sus operaciones con los componentes React.
-- Verificar que los cambios realizados mediante los componentes se reflejen en los datos y se conserven conforme al mecanismo de persistencia utilizado.
-- Confirmar en la documentación oficial el alcance de las entidades y el mecanismo exigido antes de implementarlos; no asumir que se requiere un backend o una base de datos real.
-
-### 17.3. Interfaz responsive y flujo de compra
-
-- Utilizar Bootstrap para el diseño responsive, conservando el diseño aprobado y las restricciones sobre imágenes.
-- Implementar y verificar la navegación, las categorías de productos, el carrito y el checkout o finalización de compra.
-- Conservar las funcionalidades existentes relacionadas con estos flujos.
-
-### 17.4. Pruebas unitarias con Jasmine y Karma
-
-- Implementar pruebas unitarias utilizando Jasmine y Karma.
-- Considerar diez pruebas unitarias para alcanzar el máximo desempeño indicado para la evaluación.
-- Verificar su ejecución y registrar los resultados reales; la cantidad de pruebas por sí sola no acredita su aprobación ni el cumplimiento completo.
-- Esta precisión complementa la sección 15: el tratamiento práctico limitado mencionado anteriormente no elimina el requisito de pruebas unitarias con estas herramientas.
-
-### 17.5. Documentación académica de entrega
-
-- Elaborar el documento ERS V2 para reflejar los requisitos y el estado real de la aplicación React.
-- Elaborar el documento de cobertura de pruebas, relacionando las funcionalidades o requisitos evaluados con los casos de prueba y sus resultados comprobados.
-- Distinguir requisitos implementados, pendientes y no verificados; no declarar cobertura total sin evidencia.
-- Conservar los documentos de la evaluación anterior como antecedentes, sin confundirlos con las entregas de la Evaluación Parcial 2.
-
-### 17.6. Presentación y defensa técnica
-
-- Preparar la presentación del proyecto y la defensa técnica de la Evaluación Parcial 2.
-- Explicar la migración, los componentes, las props, los estados, la fuente simulada, las operaciones CRUD, la persistencia, Bootstrap, la navegación y el flujo de compra.
-- Explicar las pruebas realizadas con Jasmine y Karma y su relación con el documento de cobertura y el ERS V2.
-- No asumir duraciones, formatos ni criterios de puntuación adicionales que no se hayan confirmado en las instrucciones oficiales.
-
-Mantener la revisión de la rúbrica y los anexos oficiales para precisar los detalles no incluidos en esta comunicación. Esta actualización documental no autoriza por sí sola cambios de código, instalación de dependencias ni operaciones de Git.
-
-## Regla final
-
-ALBEDO debe conservar su identidad visual y las funcionalidades previamente desarrolladas.
-
-Toda modificación debe estar justificada, respetar las instrucciones del usuario y considerar la rúbrica vigente.
-
-No sacrificar requisitos obligatorios por mejoras opcionales.
-
-Priorizar una aplicación funcional, mantenible, comprensible y defendible.
-
-<!-- ALBEDO-REGLAS-2026-INICIO -->
-## ActualizaciÃ³n obligatoria: incidentes y estado real al 2026-11-05
-
-Esta secciÃ³n prevalece sobre descripciones anteriores desactualizadas del modo nocturno o del estado de migraciÃ³n.
-
-- El usuario exige **SIEMPRE archivos completos** para copiar y pegar. No enviar codigo parcial, ni bloques para aÃ±adir al final, ni remitir a un paso anterior. Si cambian dos archivos, entregar ambos archivos completos.
-- AcompaÃ±amiento paso a paso, un paso por turno, evitar repetir preguntas y optimizar los tokens de Codex.
-- El modo nocturno **ya funciona en React**, pero la compatibilidad con pÃ¡ginas HTML antiguas no estÃ¡ totalmente verificada. El problema real: desaparece el botÃ³n claro/oscuro en `/Sitio%20Old/`, algunos textos pierden contraste, y `Sitio Old/index.html` mostrÃ³ titulo oscuro sobre la fotografÃ­a de montaÃ±a. No declarar arreglado hasta una inspeccion manual.
-- El tema React usa `albedo:theme:guest` y `data-bs-theme`. Debe compartirse el almacenamiento, actualizarse entre pestaÃ±as y ofrecer un botÃ³n accesible en cada pagina antigua. No basta con cambiar el fondo.
-- Inicio React ya recuperÃ³ fotografia original, excursionista, lema, productos destacados, video y contacto. Respetar totalmente las dimensiones y proporciones de imagenes originales.
-- La migraciÃ³n actual conserva pÃ¡ginas HTML antiguas: Nosotros, Blog, Contacto, Mis pedidos y paneles de roles; otras rutas React incluyen Inicio, Productos, Carrito, Login y Registro. No confundir `/carrito.html` con `/Sitio%20Old/carrito.html`.
-- Incidente repetido: `Inicio.css` estaba en **0 bytes**; el primer `git diff --cached --stat` lo mostrÃ³ con `| 0`, aunque se habÃ­a compilado y visualizado la portada. Siempre comprobar ruta, extensiÃ³n, bytes reales y diff antes de commit.
-- `localhost:5173` y `localhost:5174` son origenes distintos para localStorage. Verificar sincronizaciÃ³n usando el mismo puerto.
-- Persistencia compatible con sitio antiguo: `usuarioSesionAlbedo`, `carritoAlbedo`, `ordenesAlbedo`. No alterar datos de usuario por corregir el tema. Diferencia conocida: el logout antiguo borra el carrito, React no; no introducir cambios accidentales de comportamiento.
-- Comandos Windows: `npm.cmd --prefix .\react-app run build`, `run lint`, `run test:unit` y `npm.cmd --prefix .\react-app test`. Baseline histÃ³rico: 82 Jasmine/Karma + 71 Node exitosas, 0 fallidas; volver a probar despuÃ©s de cambios.
-- Mantener revisiÃ³n de rÃºbrica EP2, pruebas, ERS V2, cobertura y responsive. No asumir que la tienda estÃ¡ terminada solo porque pasan 153 pruebas.
-- No modificar `main`, ni hacer commit o push sin aprobaciÃ³n explÃ­cita.
-<!-- ALBEDO-REGLAS-2026-FIN -->
+# ALBEDO Outdoor — Instrucciones del proyecto (v2)
+
+## 1. Identidad, objetivo y fuentes
+
+- Repositorio: `https://github.com/Clau3333/tienda-outdoor.git`.
+- Proyecto académico Duoc UC, Fullstack II, Evaluación Parcial 2: migración progresiva de ALBEDO Outdoor desde HTML/CSS/JS hacia React, TypeScript y Vite.
+- **Rama autorizada de trabajo:** `react`. **Nunca modificar `main`** sin autorización expresa. Tampoco hacer commits, push, merges, borrados o resets destructivos por iniciativa propia.
+- Fuentes de requisitos, en orden de importancia aplicable: instrucciones actuales del usuario; rúbrica/anexo oficial e indicaciones del profesor verificadas; código y estado de Git actuales; documentación del proyecto. Una nota histórica no sustituye el estado real.
+- Leer las skills v2 `claudio-workflow` (método), `fullstack-development` (ingeniería) y `web-change-verification` (puerta de calidad) cuando estén disponibles. Las skills personales de otro computador no se consideran automáticamente instaladas aquí.
+
+## 2. Estado y arquitectura conocidos; volver a verificar
+
+- `react-app/`: React, TypeScript, Vite, Bootstrap y React Router. Rutas principales React históricas: `/`, `/index.html`, `/productos.html`, `/carrito.html`, `/login.html`, `/registro.html`.
+- Mantener **Header, Navbar y Footer compartidos entre las páginas React**, según las instrucciones previas del profesor; actualizar el contenido central mediante React Router y reutilizar componentes, props y estado sin duplicar lógica.
+- `Sitio Old/`: páginas heredadas aún utilizadas (incluidas Nosotros, Blog, Contacto, Mis pedidos, paneles y detalle de producto). No afirmar que la migración está terminada.
+- Enlace de detalle heredado: `/Sitio%20Old/producto-detalle.html?id=<ID-real>`; **no** confundir el enlace a detalle con `productos.html#categoria`. Comprobar que el JS resuelva realmente el ID.
+- `react-app/src/data/products.ts`: productos iniciales tipados; `react-app/src/services/productRepository.ts`: CRUD y persistencia local. Se han documentado 15 productos base de 3 categorías, pero verificar el arreglo actual antes de editarlo.
+- Conservar los datos de productos centralizados y los modelos TypeScript existentes; renderizar las tarjetas desde esos datos y mantener los contratos de ID, nombre, descripción, precio, categoría e imagen. No reconstruir funcionalidades ya implementadas.
+- Servicios React de carrito, login, registro, checkout y tema. LocalStorage histórico: `productosAdminAlbedo`, `usuarioSesionAlbedo`, `carritoAlbedo`, `ordenesAlbedo`, `albedo:theme:guest`. No cambiar claves/contratos sin migración justificada.
+- **Requisito previo registrado del profesor:** login local utilizando información de usuarios desde un archivo local. Mantener este requisito académico y comprobar el formato y alcance exactos en las instrucciones oficiales antes de modificar su implementación. La existencia de usuarios en localStorage no acredita por sí sola el cumplimiento del requisito de archivo local; no inventar un formato ni darlo por cumplido sin evidencia.
+- Tema claro/oscuro **ya implementado** en React y compatible en parte con páginas antiguas según verificaciones históricas; comprobar flujos afectados, no volver a tratarlo como pendiente absoluto.
+- Conservar la preferencia y la **sincronización del tema entre páginas React, páginas antiguas y pestañas del mismo origen**, respetando las claves vigentes (incluida `albedo:theme:guest`) y `data-bs-theme`. Mantener un control de tema accesible en cada página heredada pertinente y comprobar contraste y legibilidad. Distintos puertos son distintos orígenes/localStorage; no alterar sesión, carrito ni pedidos al corregir el tema.
+- El logout antiguo fue corregido históricamente para conservar el carrito; revisar el código real antes de afirmar su estado actual.
+- **No existe backend ni pasarela de pago reales confirmados**: el checkout es una simulación académica. No usar credenciales reales, no afirmar autenticación o seguridad de producción.
+- El plugin Vite histórico `react-app/tools/legacySite.ts` expone páginas de `Sitio Old` durante desarrollo y las copia en build. Comprobar configuración real si cambia.
+
+## 3. Diseño y contenido protegidos
+
+- Identidad aprobada: ALBEDO Outdoor, blanco/carbón/naranja; logo ALBEDO con nieve en la D; lema **«Comienza hoy tu aventura»**.
+- Referencias visuales previas: The North Face y Marmot; son antecedentes, no autorización para rediseñar lo aprobado.
+- **No modificar productos ni precios originales sin autorización explícita.** Conservar también IDs y datos aprobados fuera del alcance autorizado.
+- **No agrandar, disminuir, recortar, redimensionar, sustituir ni alterar las imágenes originales o sus proporciones** sin autorización explícita. No cambiar CSS que afecte indirectamente la escala o el recorte de imágenes sin permiso.
+- Preservar portada, navegación, categorías, contenido, formularios y funcionalidades aprobados. No emprender rediseños cosméticos no solicitados.
+- Formularios: contraseña de al menos 10 caracteres, con letras, número y carácter especial, según instrucciones previas; preservar dirección desglosada, registro y «Recuperar clave» según implementaciones reales.
+- **No incorporar Google Maps sin autorización explícita.**
+
+## 4. Reglas de cambio y coordinación entre React y legado
+
+1. Antes de modificar, leer `AGENTS.md`, revisar rama y `git status -sb`; inspeccionar archivos reales y el diff. No sobrescribir cambios locales existentes.
+2. React es el destino prioritario de nuevas funcionalidades. `Sitio Old` se modifica **solo cuando el cambio autorizado requiere corregir una página heredada aún utilizada**. No duplicar indefinidamente cambios en ambas implementaciones. Mientras sigan utilizándose, conservar en las páginas antiguas sus secciones, enlaces, formularios, sesión, accesibilidad y funcionalidad; verificar los consumidores afectados sin afirmar que toda la migración está terminada.
+3. Toda corrección de encabezado, categorías, CSS compartido, tema o navegación exige inspeccionar **todas las rutas y páginas consumidoras**: React y HTML heredado si ambos se ven afectados.
+4. Para menús: apertura automática por hover de mouse en escritorio; clic/touch funcional, Tab/Enter/Espacio/Escape y foco visible; cierre al salir del panel, al cambiar de categoría o al pulsar fuera. Mostrar solo los productos de la categoría seleccionada, también en móvil; conservar la apariencia coherente React/legado y la eliminación aprobada de flechas y recuadros innecesarios en React, sin eliminar el indicador de foco. Revisar geometría, `hidden`, `aria-expanded`, `aria-controls`, `z-index`, ancho/altura y contraste de ambos temas.
+5. Los enlaces de cada producto deben abrir su detalle con el **ID real**. Los finales aprobados son «Ver todas las chaquetas», «Ver todos los polares» y «Ver todos los pantalones»; deben abrir la categoría correspondiente, preferentemente en `/productos.html#chaquetas`, `#polar` o `#pantalones` cuando funcionen sus rutas y anclas React. Cualquier enlace «Ver categoría» debe seguir llevando al listado. Probar las 3 categorías, no únicamente el primer producto.
+6. No asumir que basta con corregir `index.html`: verificar `productos.html` y otras páginas con navegación equivalente mediante búsqueda real en el proyecto. No inventar rutas ni eliminar páginas existentes.
+7. Priorizar cambios pequeños y verificables; si una solución necesita más archivos, inspeccionarlos y explicar el impacto antes de reemplazarlos.
+8. Cuando se entregue código para copiar y pegar, **cada archivo completo**, con ruta precisa. No entregar fragmentos ambiguos. En edición automática autorizada, revisar diff y pruebas antes de darlo por terminado.
+
+## 5. Seguridad, calidad y vida útil
+
+- Aplicar la skill de ingeniería para seguridad proporcional al alcance: sin secretos ni contraseñas reales en frontend/almacenamiento público, entradas no confiables tratadas de forma segura, dependencia y permisos revisados.
+- Una tienda académica basada en localStorage **no es una aplicación segura de producción**. Si se plantea producción, diseñar por separado backend, autenticación/autorización, sesiones, almacenamiento servidor, controles OWASP, despliegue HTTPS y mantenimiento.
+- Mantener responsabilidad única, componentes reutilizables, modelos tipados, rutas claras, mensajes de error y accesibilidad por teclado.
+- Verificar responsive escritorio/tablet/móvil; Bootstrap presente no equivale a validación terminada.
+- No añadir dependencias, desplegar servicios, instalar herramientas o ejecutar scanners invasivos sin justificación y autorización.
+
+## 6. Comprobación técnica
+
+Desde la raíz del repositorio, usar los scripts reales solo después de verificar `react-app/package.json`:
+
+```powershell
+npm.cmd --prefix .\react-app run build
+npm.cmd --prefix .\react-app run lint
+npm.cmd --prefix .\react-app run test:unit
+npm.cmd --prefix .\react-app test
+npm.cmd --prefix .\react-app run test:navigation
+```
+
+- Como antecedente anterior a la corrección de menús se registraron **82 Jasmine/Karma y 71 Node aprobadas**. No confundir estos resultados históricos con la ejecución posterior resumida en la sección 8 ni presentar ninguna cifra anterior como una nueva ejecución.
+- Jasmine define expectativas y Karma ejecuta en Chrome. No presentar pruebas Node como Jasmine/Karma, ni atribuir cobertura porcentual no medida.
+- Build React **no sustituye** revisión visual/interactiva de páginas `Sitio Old`.
+- Registrar URL exacta y puerto (por ejemplo `5173`; `5174` utiliza otro origen/localStorage), tema, resolución, navegador, acciones y resultados observados.
+- Revisar `git diff --check`, diff, archivos nuevos no vacíos, cambios accidentales en imágenes, enlaces y cambios funcionales relacionados.
+- Estado final por criterio: **aprobado**, **falló**, **no probado**, con evidencia. No anunciar solución completa por una sola captura.
+- Las pruebas de navegación actuales requieren Chrome instalado y Node compatible; no instalar herramientas por iniciativa propia. No confundir emulación touch con dispositivos físicos, límites horizontales con contención vertical completa, ni ausencia de excepciones JavaScript con ausencia de errores HTTP o de consola. Revisar altura, zoom, recorrido de teclado y navegadores según el alcance de cada cambio.
+
+## 7. Requisitos y entrega académica
+
+- Priorizar la rúbrica oficial EP2: componentes React reutilizables, props/state, datos tipados, CRUD/persistencia, Bootstrap responsive, navegación, carrito/checkout, pruebas Jasmine/Karma (demostración de 10 casos), análisis y documentación de testing.
+- No sacrificar requisitos obligatorios por mejoras opcionales. Cada decisión técnica debe poder explicarse en la defensa: React/TypeScript, componentes, props/state, rutas, datos, validaciones, persistencia y pruebas.
+- Rúbrica documentada: 100 puntos; implementación 40 y exposición/demostración 60, sujetos a comprobación con documento oficial vigente.
+- Entregables documentados: repositorio GitHub público, frontend ZIP, README raíz real, **ERS V2**, documento de cobertura, presentación de unos 15 minutos y preguntas. Comprobar fecha, formatos y documentos antes de afirmar cumplimiento.
+- **Conservar los documentos y antecedentes de evaluaciones anteriores**, incluida ERS V1, rúbricas y evidencias; no eliminarlos ni sustituirlos sin autorización. Utilizarlos como antecedentes para ERS V2 y distinguirlos de los entregables y resultados actuales de EP2.
+- Explicar que la migración puede ser parcial y que el checkout es simulado; no inventar backend ni pagos reales.
+- Frente a fallas, clasificar impacto y severidad, reproducir, hallar causa, corregir y aportar evidencia y métricas genuinas. No inventar correcciones específicas no comunicadas por el profesor.
+
+## 8. Continuidad y estado local al recibir nuevas instrucciones
+
+- Estado Git comprobado al actualizar este documento el **9 de noviembre de 2026**: rama `react`, HEAD local **`e611fce`**, mensaje `fix: unificar menus de categorias React y Sitio Old`. El seguimiento local mostró `react...origin/react [ahead 1]`; no se consultó ni actualizó el remoto. `AGENTS.md` tenía cambios locales y `ALBEDO_CONTINUIDAD_COMPLETA_2026-11-09.md` seguía no versionado. Volver a comprobar el estado antes de trabajar; esta nota no autoriza commit ni push.
+- Vite inició históricamente en `http://localhost:5173/`. No inferir que continúa ejecutándose.
+- **Menús de categorías corregidos y registrados en el commit técnico local `e611fce`**: React e Inicio/Productos antiguos conservan las tres categorías, sus fichas por ID y los finales «Ver todos»; se corrigieron hover, clic/touch, teclado, presentación compacta y acceso móvil. No volver a presentar estas correcciones como pendientes absolutos.
+- **Resultado de la ejecución anterior**, según el informe de esta conversación del 9 de noviembre de 2026, no reejecutado durante esta actualización documental: build y lint aprobados; **86/86 Jasmine/Karma**, **74/74 Node** y **721/721 comprobaciones de navegador**. Estas últimas comprenden 432 escenarios de presentación/entrada/teclado, 240 aperturas de fichas, 48 enlaces de categoría y un caso de recarga/Atrás/Adelante; no son porcentajes de cobertura de la aplicación.
+- Evidencia anterior: `react-app/test-results/jasmine-karma.json` y `react-app/test-results/category-navigation.json`, leídos al actualizar este documento. Navegación en **Chrome 156**, origen de prueba `http://127.0.0.1:64278`, ambos temas, altura de 900 px y anchos de 360, 480, 700, 701, 768, 900, 901, 1024 y 1440 px. Se recorrieron las seis rutas React de la sección 2 y `/Sitio%20Old/index.html` y `/Sitio%20Old/productos.html`. Los archivos `test-results` son generados e ignorados por Git: no asumir que existen al clonar ni que acreditan cambios posteriores.
+- **Pendientes de verificación:** dispositivos físicos, Firefox y Safari; ampliar comprobaciones de alturas bajas/contención vertical, zoom y recorrido completo de teclado. La ejecución anterior utilizó emulación touch y no acredita ausencia total de regresiones ni la validación integral de todas las páginas antiguas.
+- Documentación README/ERS V2/cobertura y defensa aún deben verificarse o completarse; no asumir cambios de Codex no confirmados.
+- Siguen pendientes la revisión de otros requisitos de EP2 contra la rúbrica vigente y las comprobaciones funcionales que no tengan evidencia, incluidos paneles Administrador/Vendedor y CRUD de interfaz. Un menú corregido o suites aprobadas no acreditan por sí solos el cumplimiento completo de la evaluación.
+- Las anotaciones anteriores son contexto inicial; **el repositorio y las pruebas actuales prevalecen para saber qué existe y qué funciona**.
+
+## 9. Cierre y permisos
+
+Antes de proponer un commit: entregar lista de archivos, diff revisable, criterios/resultado de pruebas y pendientes. Solicitar aprobación explícita para confirmar/publicar. Preservar `main`, las imágenes y todos los cambios previos. Respetar el acompañamiento **un paso por turno** cuando el usuario lo elija.
