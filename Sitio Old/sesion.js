@@ -268,3 +268,55 @@
         actualizarBoton();
     });
 })();
+
+// Control único para los menús de las páginas heredadas todavía utilizadas.
+// Los botones nativos conservan Enter/Espacio; hidden y ARIA reflejan el mismo estado.
+document.addEventListener("DOMContentLoaded", function iniciarCategoriasAlbedo() {
+    document.querySelectorAll(".menu-categorias").forEach(function (nav) {
+        const items = Array.from(nav.querySelectorAll(".mega-item"));
+        const entries = items.map(function (item) {
+            return { item, button: item.querySelector("button[aria-controls]"), panel: item.querySelector(".mega-panel") };
+        }).filter(function (entry) { return entry.button && entry.panel; });
+        if (!entries.length) return;
+
+        function mostrar(selected) {
+            entries.forEach(function (entry) {
+                const open = entry === selected;
+                entry.panel.hidden = !open;
+                entry.button.setAttribute("aria-expanded", String(open));
+            });
+        }
+        mostrar(null);
+        entries.forEach(function (entry) {
+            entry.item.addEventListener("pointerenter", function (event) {
+                if (event.pointerType === "mouse") mostrar(entry);
+            });
+            entry.item.addEventListener("pointerleave", function (event) {
+                if (event.pointerType === "mouse") mostrar(null);
+            });
+            entry.button.addEventListener("click", function (event) {
+                mostrar(event.pointerType === "mouse" || entry.panel.hidden ? entry : null);
+            });
+            entry.item.addEventListener("focusout", function (event) {
+                if (!entry.item.contains(event.relatedTarget)) mostrar(null);
+            });
+        });
+        nav.addEventListener("keydown", function (event) {
+            const open = entries.find(function (entry) { return !entry.panel.hidden; });
+            if (event.key === "Escape" && open) {
+                event.preventDefault();
+                open.button.focus();
+                mostrar(null);
+            }
+        });
+        nav.addEventListener("click", function (event) {
+            if (event.target.closest("a[href]")) mostrar(null);
+        });
+        document.addEventListener("pointerdown", function (event) {
+            if (!nav.contains(event.target)) mostrar(null);
+        });
+        window.addEventListener("pageshow", function (event) {
+            if (event.persisted) mostrar(null);
+        });
+    });
+});

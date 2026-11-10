@@ -49,32 +49,31 @@
   gap: 70px; width: 100%; min-height: 58px; padding: 0 6%;
   background: var(--albedo-bg); border-bottom: 1px solid var(--albedo-divider);
 }
-.categoria-acciones { display: flex; align-items: center; height: 100%; width: 100%; padding: 0; border: 0; background: transparent; color: var(--albedo-text); text-align: inherit; }
+.categoria-acciones { display: flex; align-items: center; height: 100%; width: 100%; padding: 0; border: 0; border-radius: 0; background: transparent; color: var(--albedo-text); font: inherit; text-align: inherit; cursor: pointer; }
 .mega-enlace {
   display: flex; align-items: center; min-height: 58px; padding: 15px 3px;
   color: var(--albedo-text); font-size: 11px; font-weight: 700;
   letter-spacing: .8px; text-decoration: none;
 }
 .mega-enlace:hover { color: var(--albedo-link); }
-.categoria-toggle {
-  display: inline-flex; align-items: center; justify-content: center;
-  min-width: 44px; min-height: 44px; padding: 6px;
-  border: 0; color: var(--albedo-text); background: transparent;
-}
-.categoria-acciones:hover .categoria-toggle,
-.categoria-acciones[aria-expanded='true'] .categoria-toggle { background: var(--albedo-surface); }
+.mega-item { position: relative; min-width: 0; }
 .mega-panel[hidden] { display: none !important; }
 .mega-panel {
-  position: absolute; top: 100%; left: 0; width: 100%;
+  position: absolute; top: 100%; left: 50%; width: min(280px, calc(100vw - 24px));
+  transform: translateX(-50%);
   max-height: 70svh; overflow-y: auto;
   background: var(--albedo-menu); border-bottom: 1px solid var(--albedo-divider);
   box-shadow: var(--albedo-shadow);
 }
-.mega-menu-grid { width: min(1450px, 92%); margin: 0 auto; padding: 38px 0 44px; }
+.mega-item:first-child .mega-panel { left: 0; transform: none; }
+.mega-item:last-child .mega-panel { left: auto; right: 0; transform: none; }
+.mega-menu-grid { --bs-gutter-x: 0; --bs-gutter-y: 0; width: 100%; margin: 0; padding: 18px 20px 20px; }
+.mega-menu-columna { min-width: 0; overflow-wrap: break-word; }
 .mega-menu-columna { display: flex; flex-direction: column; align-items: flex-start; }
 .mega-menu-columna h2 { margin: 0 0 14px; color: var(--albedo-text); font-size: 14px; font-weight: 800; }
 .mega-menu-columna a { width: 100%; padding: 5px 0; color: var(--albedo-text); font-size: 13px; text-decoration: none; }
 .mega-menu-columna a:hover { color: var(--albedo-link); text-decoration: underline; }
+.mega-menu-columna .mega-ver-todo { margin-top: 10px; font-weight: 700; }
 .contenido-tienda { flex: 1; min-width: 0; max-width: var(--albedo-content-width); padding: clamp(2rem, 5vw, 4rem) 5%; }
 .contenido-tienda h1 { margin: 0 0 16px; }
 .pie { margin-top: auto; padding: var(--albedo-space-12) 6%; color: var(--albedo-footer-text); background: var(--albedo-footer-bg); border-top: 1px solid var(--albedo-divider); }
@@ -100,13 +99,14 @@
   .enlaces-principales a { display: flex; justify-content: center; padding: 10px 4px; font-size: 11px; white-space: normal; text-align: center; }
   .menu-categorias { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; min-height: auto; padding: 0 10px; }
   .mega-item { min-width: 0; }
-  .categoria-acciones { display: grid; grid-template-columns: minmax(0, 1fr) 44px; align-items: center; gap: 0; }
+  .categoria-acciones { justify-content: center; }
   .mega-enlace { min-width: 0; min-height: 44px; justify-content: center; padding: 8px 4px; font-size: 12px; line-height: 1.35; letter-spacing: .3px; white-space: normal; overflow-wrap: anywhere; text-align: center; }
-  .categoria-toggle { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; }
-  .mega-menu-grid { padding: 20px 0; }
+  .mega-item { position: static; }
+  .menu-categorias .mega-panel { left: 50%; right: auto; transform: translateX(-50%); }
   .mega-panel { max-height: 55svh; }
 }
 @media (max-width: 480px) {
   .menu-categorias { grid-template-columns: minmax(0, 1fr); }
   .mega-enlace { justify-content: flex-start; padding-inline: 8px; font-size: 13px; text-align: left; }
+  .categoria-acciones { justify-content: flex-start; }
 }

@@ -3,6 +3,7 @@ import type { CategoryKey } from './navigation'
 type MenuState = { category: CategoryKey | null; locationKey: string }
 type MenuAction =
   | { type: 'toggle'; category: CategoryKey; locationKey: string }
+  | { type: 'open'; category: CategoryKey; locationKey: string }
   | { type: 'navigate'; locationKey: string }
   | { type: 'close' }
 
@@ -12,6 +13,9 @@ export function initialMenuState(locationKey: string): MenuState {
 
 export function categoryMenuReducer(state: MenuState, action: MenuAction): MenuState {
   switch (action.type) {
+    case 'open':
+      return state.category === action.category && state.locationKey === action.locationKey
+        ? state : { category: action.category, locationKey: action.locationKey }
     case 'toggle':
       return {
         category: state.locationKey === action.locationKey && state.category === action.category

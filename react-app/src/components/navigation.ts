@@ -13,7 +13,7 @@ export const primaryLinks = [
 
 export const categories = [
   {
-    label: 'CHAQUETAS', anchor: 'chaquetas',
+    label: 'CHAQUETAS', anchor: 'chaquetas', allLabel: 'Ver todas las chaquetas',
     products: [
       { id: 'chaqueta-cordillera', name: 'Chaqueta Cordillera' },
       { id: 'chaqueta-andes', name: 'Chaqueta Andes' },
@@ -23,7 +23,7 @@ export const categories = [
     ],
   },
   {
-    label: 'POLERONES Y POLAR', anchor: 'polar',
+    label: 'POLERONES Y POLAR', anchor: 'polar', allLabel: 'Ver todos los polares',
     products: [
       { id: 'polar-sendero', name: 'Polar Sendero' },
       { id: 'polar-andes', name: 'Polar Andes' },
@@ -33,7 +33,7 @@ export const categories = [
     ],
   },
   {
-    label: 'PANTALONES', anchor: 'pantalones',
+    label: 'PANTALONES', anchor: 'pantalones', allLabel: 'Ver todos los pantalones',
     products: [
       { id: 'pantalon-cumbre', name: 'Pantalón Cumbre' },
       { id: 'pantalon-andes', name: 'Pantalón Andes' },

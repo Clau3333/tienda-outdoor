@@ -39,6 +39,7 @@ export default function Navbar() {
     <CategoryMenu menuId={menuId} navRef={nav}
       openCategory={state.locationKey === location.key ? state.category : null}
       onToggle={(category) => dispatch({ type: 'toggle', category, locationKey: location.key })}
+      onOpen={(category) => dispatch({ type: 'open', category, locationKey: location.key })}
       onClose={() => dispatch({ type: 'close' })}
       onEscape={() => {
         if (state.category) buttons.current[state.category]?.focus()

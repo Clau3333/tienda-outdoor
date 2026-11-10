@@ -37,6 +37,7 @@ function harness() {
     view: () => CategoryMenu({
       menuId: 'categorias-test', openCategory: state.category,
       onToggle: (category) => dispatch({ type: 'toggle', category, locationKey: state.locationKey }),
+      onOpen: (category) => dispatch({ type: 'open', category, locationKey: state.locationKey }),
       onClose: close, onEscape: close, onButtonRef: () => {},
     }),
     navigate: (locationKey) => dispatch({ type: 'navigate', locationKey }),
@@ -86,7 +87,7 @@ test('cambiar de categoria cierra la anterior y deja solo una expandida', () => 
   }
 })
 
-test('volver a pulsar el texto o flecha del mismo boton cierra el submenu', () => {
+test('volver a activar por teclado o touch el mismo boton cierra el submenu', () => {
   const menu = harness()
   toggles(menu)[0].props.onClick()
   toggles(menu)[0].props.onClick()
@@ -109,7 +110,8 @@ test('el enlace al catalogo de la categoria se conserva y tambien cierra', () =>
   const menu = harness()
   toggles(menu)[1].props.onClick()
   const link = links(opened(menu)[0]).at(-1)
-  assert.equal(link.props.href, `${legacyBase}productos.html#polar`)
+  assert.equal(link.props.href, '/productos.html#polar')
+  assert.equal(link.props.children, 'Ver todos los polares')
   link.props.onClick()
   assert.equal(opened(menu).length, 0)
 })
@@ -185,16 +187,57 @@ test('Inicio, Productos, Carrito, Login y Registro usan React; las otras opcione
   assert.deepEqual([...app.matchAll(/<Route path="([^"]+)"/g)].map((match) => match[1]), ['/', '/index.html', '/productos.html', '/carrito.html', '/login.html', '/registro.html'])
 })
 
-test('hover no abre paneles; hidden permanece protegido y se conservan reglas responsive', async () => {
+test('hover de mouse abre exclusivamente su categoria y salir cierra; touch no simula hover', () => {
   const menu = harness()
-  assert.equal(menu.view().props.onPointerEnter, undefined)
-  for (const item of elements(menu.view(), (node) => node.props.className === 'mega-item')) {
-    assert.equal(item.props.onPointerEnter, undefined)
+  const items = () => elements(menu.view(), (node) => node.props.className === 'mega-item')
+  for (let index = 0; index < 3; index++) {
+    items()[index].props.onPointerEnter({ pointerType: 'touch' })
+    assert.equal(opened(menu).length, 0)
+    items()[index].props.onPointerEnter({ pointerType: 'mouse' })
+    assert.equal(menu.state.category, categories[index].anchor)
+    items()[index].props.onPointerEnter({ pointerType: 'mouse' })
+    assert.equal(opened(menu).length, 1)
+    toggles(menu)[index].props.onClick({ nativeEvent: { pointerType: 'mouse' } })
+    assert.equal(opened(menu).length, 1, 'clic tras hover conserva apertura')
+    items()[index].props.onPointerLeave({ pointerType: 'mouse' })
+    assert.equal(opened(menu).length, 0)
   }
+})
+
+test('touch alterna y los tres finales usan etiquetas especificas y rutas React', () => {
+  const menu = harness()
+  for (const [index, category] of categories.entries()) {
+    toggles(menu)[index].props.onClick({ nativeEvent: { pointerType: 'touch' } })
+    assert.equal(opened(menu).length, 1)
+    assert.equal(links(opened(menu)[0]).at(-1).props.children, category.allLabel)
+    assert.equal(links(opened(menu)[0]).at(-1).props.href, `/productos.html#${category.anchor}`)
+    toggles(menu)[index].props.onClick({ nativeEvent: { pointerType: 'touch' } })
+    assert.equal(opened(menu).length, 0)
+  }
+  assert.equal(elements(menu.view(), (node) => node.props.className === 'categoria-toggle').length, 0)
+})
+
+test('hidden permanece protegido y se conservan reglas responsive sin flechas ni cajas', async () => {
   const css = await readFile(new URL('../src/App.css', import.meta.url), 'utf8')
   assert.match(css, /\.mega-panel\[hidden\]\s*\{\s*display:\s*none\s*!important/)
   assert.ok(!/\.mega-item:(?:hover|focus-within)[^{]*\{[^}]*(?:display|visibility|opacity)/s.test(css))
   assert.match(css, /@media \(max-width: 700px\)/)
   assert.match(css, /@media \(max-width: 480px\)/)
-  assert.match(css, /grid-template-columns: minmax\(0, 1fr\) 44px/)
+  assert.ok(!css.includes('.categoria-toggle'))
+  assert.match(css, /\.categoria-acciones[^}]*background: transparent/)
+})
+
+test('ambos HTML heredados conservan 15 IDs y tres finales React con botones accesibles', async () => {
+  for (const file of ['index.html', 'productos.html']) {
+    const html = await readFile(new URL(`../../Sitio Old/${file}`, import.meta.url), 'utf8')
+    const menu = html.match(/<nav\s+class="menu-categorias"[\s\S]*?<\/nav>/)[0]
+    assert.equal([...menu.matchAll(/<button[^>]+aria-expanded="false"[^>]+aria-controls="menu-[^"]+"/g)].length, 3)
+    assert.equal([...menu.matchAll(/class="mega-panel"[^>]+hidden/g)].length, 3)
+    assert.equal([...menu.matchAll(/href="producto-detalle\.html\?id=/g)].length, 15)
+    for (const category of categories) {
+      for (const product of category.products) assert.ok(menu.includes(`href="producto-detalle.html?id=${product.id}"`))
+      assert.ok(menu.includes(`href="/productos.html#${category.anchor}"`))
+      assert.ok(menu.includes(category.allLabel))
+    }
+  }
 })
