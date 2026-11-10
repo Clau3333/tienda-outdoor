@@ -65,7 +65,7 @@ describe('Header: sesión real, navegación y eventos de almacenamiento', () => 
     expect(header().querySelector('a[href="/login.html"]')).toBeNull()
     expect(header().querySelector('a[href="/registro.html"]')).toBeNull()
     expect(logoutButton()).not.toBeNull()
-    expect(header().querySelector('a[href="/Sitio%20Old/mis-pedidos.html"]')).not.toBeNull()
+    expect(header().querySelector('a[href="/mis-pedidos.html"]')).not.toBeNull()
   })
   it('SUI-02 Login por defecto guarda y actualiza Header inmediatamente antes de redirigir', async () => {
     await mount('/login.html'); jasmine.clock().install()
@@ -111,7 +111,7 @@ describe('Header: sesión real, navegación y eventos de almacenamiento', () => 
     await mount()
     for (const [role, destination] of [['Cliente', 'mis-pedidos.html'], ['Administrador', 'admin.html'], ['Vendedor', 'vendedor.html']]) {
       mock.values.set(LOGIN_SESSION_KEY, JSON.stringify({ ...account, tipoUsuario: role })); storageEvent(LOGIN_SESSION_KEY)
-      expect(header().querySelector(`a[href="/Sitio%20Old/${destination}"]`)).not.toBeNull()
+      expect(header().querySelector(`a[href="/${destination}"]`)).not.toBeNull()
       expect(header().querySelector('a[href="/login.html"]')).toBeNull()
     }
   })
@@ -149,7 +149,7 @@ describe('Header: sesión real, navegación y eventos de almacenamiento', () => 
     mock.values.set(LOGIN_SESSION_KEY, JSON.stringify({ ...account, tipoUsuario: 'Superadmin' })); await mount()
     expect(header().querySelector('a[href="/login.html"]')).not.toBeNull()
     expect(header().querySelector('.header-session-greeting')).toBeNull()
-    expect(header().querySelector('a[href="/Sitio%20Old/admin.html"]')).toBeNull()
+    expect(header().querySelector('a[href="/admin.html"]')).toBeNull()
     mock.values.set(LOGIN_SESSION_KEY, '{corrupto'); storageEvent(LOGIN_SESSION_KEY)
     expect(header().textContent).toContain('No se pudo leer una sesión válida.')
     expect(mock.values.get(LOGIN_SESSION_KEY)).toBe('{corrupto')

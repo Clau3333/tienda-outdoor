@@ -2,35 +2,15 @@
 import { Link } from 'react-router-dom'
 import { legacyBase } from '../components/navigation'
 import './Inicio.css'
-
-const destacados = [
-  {
-    nombre: 'Chaqueta Cordillera',
-    categoria: 'CHAQUETAS',
-    descripcion: 'Protección impermeable para condiciones cambiantes.',
-    precio: '$59.990',
-    imagen: 'chaqueta-cordillera.png',
-    enlace: '/productos.html#chaquetas',
-  },
-  {
-    nombre: 'Polar Sendero',
-    categoria: 'POLERONES Y POLAR',
-    descripcion: 'Abrigo ligero y cómodo para cada salida.',
-    precio: '$29.990',
-    imagen: 'polar-sendero.png',
-    enlace: '/productos.html#polar',
-  },
-  {
-    nombre: 'Pantalón Cumbre',
-    categoria: 'PANTALONES',
-    descripcion: 'Comodidad y libertad de movimiento en cualquier terreno.',
-    precio: '$39.990',
-    imagen: 'pantalon-cumbre.png',
-    enlace: '/productos.html#pantalones',
-  },
-]
+import { useProducts } from '../services/productStore'
+import { formatPrice, productImageUrl } from '../services/productSelection'
 
 function Inicio() {
+  const { products } = useProducts()
+  const destacados = ['chaqueta-cordillera', 'polar-sendero', 'pantalon-cumbre'].flatMap((id) => {
+    const product = products.find((row) => row.id === id)
+    return product ? [{ ...product, precio: formatPrice(product.precio), enlace: '/producto-detalle.html?id=' + encodeURIComponent(id) }] : []
+  })
   return (
     <main className="inicio-react">
       <section className="portada" aria-labelledby="bienvenida">
@@ -87,7 +67,7 @@ function Inicio() {
             >
               <div className="producto-destacado-imagen">
                 <img
-                  src={`${legacyBase}img/${producto.imagen}`}
+                  src={productImageUrl(producto.imagen)}
                   alt={producto.nombre}
                 />
               </div>
@@ -105,7 +85,7 @@ function Inicio() {
                   {producto.precio}
                 </p>
 
-                <span>Ver colección →</span>
+                <span>Ver detalle →</span>
               </div>
             </Link>
           ))}
@@ -168,7 +148,7 @@ function Inicio() {
 
           <a
             className="boton-albedo"
-            href={`${legacyBase}contacto.html`}
+            href="/contacto.html"
           >
             Contáctanos
           </a>

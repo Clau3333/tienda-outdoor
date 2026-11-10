@@ -11,6 +11,7 @@ export type Product = {
   codigo?: string
   stock?: number
   stockCritico?: number | ''
+  oferta?: boolean
 }
 
 export type StoragePort = Pick<Storage, 'getItem' | 'setItem'>

@@ -95,7 +95,7 @@ describe('Login React: formulario, navegación y tema en Chrome', () => {
       await mount(); jasmine.clock().install()
       enter('correoLogin', 'rol@duoc.cl'); enter('contrasenaLogin', 'Admin2026#'); submit()
       act(() => jasmine.clock().tick(700))
-      expect(redirect).toHaveBeenCalledOnceWith('/Sitio%20Old/' + destination)
+      expect(redirect).toHaveBeenCalledOnceWith('/' + destination)
       expect(JSON.parse(mock.values.get(LOGIN_SESSION_KEY)!).tipoUsuario).toBe(role)
     })
   }

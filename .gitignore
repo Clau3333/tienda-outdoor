@@ -1,0 +1,11 @@
+# Documento personal: conservar localmente y excluir de entregas.
+ALBEDO_CONTINUIDAD_COMPLETA_*.md
+entregas/
+.env
+.env.*
+!.env.example
+auth.json
+*.pem
+*.key
+.agents/
+.codex/

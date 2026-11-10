@@ -23,7 +23,7 @@ Claudio informó que comprobó manualmente el carrito, cantidades, contador, tem
 
 ## Cómo demostrarlo al profesor
 
-Desde `C:\Users\claud\tienda-outdoor`, en PowerShell:
+Desde la raíz del repositorio, en PowerShell:
 
 ```powershell
 # Pruebas académicas: comprueba tipos, compila TS/TSX y ejecuta Jasmine en Chrome con Karma.

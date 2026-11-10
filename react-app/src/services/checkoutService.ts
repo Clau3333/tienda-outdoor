@@ -1,5 +1,7 @@
 import type { StoragePort } from '../data/productTypes.ts'
 import { createCartRepository, type CartItem } from './cartRepository.ts'
+import { validateDelivery } from './commerceService.ts'
+import type { Delivery } from './commerceService.ts'
 
 export const ORDERS_KEY = 'ordenesAlbedo'
 export const SESSION_KEY = 'usuarioSesionAlbedo'
@@ -9,6 +11,7 @@ export type Order = {
   cliente: { nombre: string; apellidos: string; correo: string; run: string }
   productos: (CartItem & { subtotal: number })[]; total: number
   pagoSimulado: { resultado: 'aprobado'; intentoId: string; limpiezaPendiente: boolean }
+  entrega?: Delivery
 }
 type SavedOrder = Partial<Order> & Record<string, unknown>
 
@@ -60,12 +63,13 @@ export function createCheckoutService(storage: StoragePort, cart: ReturnType<typ
   }
   return {
     finish,
-    pay(result: PaymentResult, attemptId: string) {
+    pay(result: PaymentResult, attemptId: string, delivery?: Delivery) {
       if (result !== 'aprobado' && result !== 'rechazado') throw new Error('Selecciona un resultado de demostración válido.')
       if (!attemptId) throw new Error('Falta el identificador del intento.')
       const previous = orders()
       const existing = previous.find((order) => order.pagoSimulado?.intentoId === attemptId)
       if (existing) return finish(existing as Order)
+      if (delivery && validateDelivery(delivery)) throw new Error(validateDelivery(delivery))
       const items = cart.list()
       if (!items.length) throw new Error('Agrega productos antes de finalizar la compra.')
       if (result === 'rechazado') return { status: 'rechazado' as const }
@@ -88,10 +92,13 @@ export function createCheckoutService(storage: StoragePort, cart: ReturnType<typ
       const productos = items.map((item) => ({ ...item, subtotal: item.precio * item.cantidad }))
       const total = productos.reduce((sum, item) => sum + item.subtotal, 0)
       if (!Number.isFinite(total)) throw new Error('El total no es válido.')
+      const buyer = customer()
       const order: Order = {
         id: `orden-${date.getTime()}-${attemptId}`, numeroOrden: `ORD-${String(largest + 1).padStart(4, '0')}`,
         fecha: date.toISOString(), fechaTexto: date.toLocaleString('es-CL'), estado: 'Pendiente',
-        cliente: customer(), productos, total, pagoSimulado: { resultado: 'aprobado', intentoId: attemptId, limpiezaPendiente: true },
+        cliente: buyer.correo && buyer.correo !== 'Sin sesión' ? buyer : { ...buyer, ...(delivery ? { nombre: delivery.nombre.trim(), apellidos: delivery.apellidos.trim(), correo: delivery.correo.trim().toLowerCase() } : {}) },
+        ...(delivery ? { entrega: structuredClone(delivery) } : {}),
+        productos, total, pagoSimulado: { resultado: 'aprobado', intentoId: attemptId, limpiezaPendiente: true },
       }
       storage.setItem(ORDERS_KEY, JSON.stringify([...previous, order]))
       return finish(order)

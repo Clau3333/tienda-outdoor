@@ -25,6 +25,7 @@ const widths = [360, 480, 700, 701, 768, 900, 901, 1024, 1440]
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 const results = []
 const errors = []
+const ep2Only = process.argv.includes('--ep2-only')
 const report = { date: new Date().toISOString(), browser: '', origin: '', height: 900, widths, routes, results, errors }
 let server, chrome, socket
 let requestId = 0
@@ -49,14 +50,15 @@ async function evaluate(expression) {
 }
 async function until(expression) {
   for (let n = 0; n < 150; n++) {
-    if (await evaluate(expression)) return
+    try { if (await evaluate(expression)) return }
+    catch (error) { if (!/navigated|context.*destroyed|Cannot find context/i.test(error.message)) throw error }
     await sleep(40)
   }
   throw new Error('No se cumplió: ' + expression)
 }
 async function navigate(path, ready = 'document.querySelectorAll(".categoria-acciones").length === 3 && !!document.querySelector(".theme-toggle, .tema-albedo-boton")') {
   await send('Page.navigate', { url: new URL(path, report.origin).href })
-  await until(`location.pathname === ${JSON.stringify(new URL(path, report.origin).pathname)} && (${ready})`)
+  await until(`document.readyState === 'complete' && location.pathname === ${JSON.stringify(new URL(path, report.origin).pathname)} && (${ready})`)
 }
 async function key(key, code, virtualKey, text, modifiers = 0) {
   await send('Input.dispatchKeyEvent', { type: 'keyDown', key, code, windowsVirtualKeyCode: virtualKey, text, modifiers })
@@ -82,6 +84,10 @@ async function activate(selector, touch = false) {
     await send('Input.dispatchMouseEvent', { type: 'mousePressed', button: 'left', clickCount: 1, ...p })
     await send('Input.dispatchMouseEvent', { type: 'mouseReleased', button: 'left', clickCount: 1, ...p })
   }
+  await sleep(30)
+}
+async function input(selector, value) {
+  await evaluate(`(() => { const e=document.querySelector(${JSON.stringify(selector)}); if(!e) throw new Error('Campo ausente: '+${JSON.stringify(selector)}); const proto=e instanceof HTMLSelectElement?HTMLSelectElement.prototype:e instanceof HTMLTextAreaElement?HTMLTextAreaElement.prototype:HTMLInputElement.prototype; Object.getOwnPropertyDescriptor(proto,'value').set.call(e,${JSON.stringify(value)}); e.dispatchEvent(new Event('input',{bubbles:true})); e.dispatchEvent(new Event('change',{bubbles:true})); })()`)
   await sleep(30)
 }
 async function countOpen() {
@@ -129,11 +135,15 @@ try {
     const message = JSON.parse(event.data)
     if (pending.has(message.id)) { pending.get(message.id)(message); pending.delete(message.id) }
     if (message.method === 'Runtime.exceptionThrown') errors.push(message.params.exceptionDetails.exception?.description || message.params.exceptionDetails.text)
+    if (message.method === 'Runtime.consoleAPICalled' && message.params.type === 'error') errors.push('console.error: ' + message.params.args.map((arg) => arg.value ?? arg.description ?? '').join(' '))
+    if (message.method === 'Network.responseReceived' && message.params.response.status >= 400) errors.push('HTTP ' + message.params.response.status + ': ' + message.params.response.url)
   })
   await send('Runtime.enable')
   await send('Page.enable')
+  await send('Network.enable')
   console.log(report.browser, report.origin)
 
+  if (!ep2Only) {
   for (const route of routes) {
     for (const width of widths) {
       const touch = width <= 768
@@ -221,7 +231,9 @@ try {
               await until(`location.search === '?id=${product.id}' && document.getElementById('detalleNombre')?.textContent === ${JSON.stringify(product.name)}`)
               const base = original.find((p) => p.id === product.id)
               assert.equal(await evaluate('document.getElementById("detalleCategoria").textContent'), base.categoria)
-              assert.equal(await evaluate('document.getElementById("detalleImagen").getAttribute("src")'), base.imagen)
+              const detailPath = await evaluate('location.pathname')
+              assert.equal(detailPath, route.includes('Sitio') ? '/Sitio%20Old/producto-detalle.html' : '/producto-detalle.html')
+              assert.equal(await evaluate('document.getElementById("detalleImagen").getAttribute("src")'), route.includes('Sitio') ? base.imagen : '/Sitio%20Old/' + base.imagen)
             } else {
               await until(`location.pathname === '/productos.html' && location.hash === '#${category.anchor}' && !!document.getElementById('${category.anchor}')`)
               await until(`Math.abs(document.getElementById('${category.anchor}').getBoundingClientRect().top) < 400`)
@@ -242,12 +254,122 @@ try {
     await until('document.getElementById("detalleNombre")?.textContent === "Chaqueta Cordillera"')
     await send('Page.reload')
     await until('document.getElementById("detalleNombre")?.textContent === "Chaqueta Cordillera"')
-    await evaluate('history.back()')
+    const history = await send('Page.getNavigationHistory')
+    await send('Page.navigateToHistoryEntry', { entryId: history.entries[history.currentIndex - 1].id })
     await until('location.pathname === "/productos.html" && !!document.querySelector(".categoria-acciones")')
     assert.equal(await countOpen(), 0)
-    await evaluate('history.forward()')
+    await send('Page.navigateToHistoryEntry', { entryId: history.entries[history.currentIndex].id })
     await until('document.getElementById("detalleNombre")?.textContent === "Chaqueta Cordillera"')
   })
+  // Flujos EP2 en el perfil efímero de Chrome y origen aislado de este servidor.
+  }
+  await viewport(1440, false)
+  await record({ test: 'ep2-registration-login' }, async () => {
+    await navigate('/login.html') // Incluye administrador preexistente, como en el recorrido completo.
+    await navigate('/registro.html')
+    const fields = { rutNumero:'11111111',digitoVerificador:'1',nombre:'Cliente',apellidos:'Prueba',correo:'cliente.prueba@duoc.cl',region:'Biobío',comuna:'Concepción',calle:'Calle de prueba',numeroDomicilio:'123',tipoDomicilio:'Casa',codigoPostal:'4030000',contrasena:'Prueba2026#',confirmarContrasena:'Prueba2026#' }
+    for(const [name,value] of Object.entries(fields)) await input(['region','comuna','tipoDomicilio'].includes(name) ? `#${name}Registro` : `[name="${name}"]`,value)
+    await activate('form button[type="submit"]')
+    await until('location.pathname === "/login.html"')
+    await input('#correoLogin',fields.correo); await input('#contrasenaLogin',fields.contrasena)
+    await activate('form button[type="submit"]')
+    await until('location.pathname === "/index.html" && !!document.querySelector(".header-session-greeting")')
+    assert.equal(await evaluate('JSON.parse(localStorage.usuarioSesionAlbedo).tipoUsuario'), 'Cliente')
+  })
+  await record({ test:'ep2-search-filters' },async()=>{
+    await navigate('/productos.html');await input('#buscar-productos','Chaqueta Cordillera')
+    assert.equal(await evaluate('document.querySelectorAll(".producto-catalogo").length'),1)
+    await input('#buscar-productos','inexistente-qa');assert.equal(await evaluate('document.querySelectorAll(".producto-catalogo").length'),0)
+    await input('#buscar-productos','');await input('#filtrar-categoria','Pantalones')
+    assert.equal(await evaluate('document.querySelectorAll(".producto-catalogo").length'),5)
+    await input('#ordenar-productos','asc')
+    const prices=await evaluate('[...document.querySelectorAll(".catalogo-precio")].map(e=>Number(e.textContent.replace(/[^0-9]/g,"")))')
+    assert.deepEqual(prices,[...prices].sort((a,b)=>a-b))
+  })
+  await record({ test:'ep2-checkout-rejection-approval-orders' },async()=>{
+    await navigate('/producto-detalle.html?id=chaqueta-cordillera');await input('#detalle-cantidad','2')
+    await activate('.catalogo-agregar-carrito');await navigate('/carrito.html')
+    assert.equal(await evaluate('document.querySelector("#compra-nombre").value'),'Cliente')
+    assert.equal(await evaluate('document.querySelector("#compra-calle").value'),'Calle de prueba')
+    await activate('.carrito-pago button.btn-primary')
+    await until('document.querySelector("main [role=alert]")?.textContent.includes("teléfono")')
+    await input('#compra-telefono','912345678');await input('#resultado-pago','rechazado')
+    const checkoutShot = await send('Page.captureScreenshot', { format: 'png' })
+    await writeFile(join(output, 'ep2-checkout.png'), Buffer.from(checkoutShot.data, 'base64'))
+    await activate('.carrito-pago button.btn-primary');await until('document.querySelector("[role=alert]")?.textContent.includes("rechazado")')
+    assert.equal(await evaluate('JSON.parse(localStorage.carritoAlbedo)[0].cantidad'),2)
+    assert.equal(await evaluate('JSON.parse(localStorage.getItem("ordenesAlbedo")||"[]").length'),0)
+    await input('#resultado-pago','aprobado');await activate('.carrito-pago button.btn-primary')
+    await until('document.querySelector("main h2")?.textContent === "Compra simulada aprobada"')
+    assert.equal(await evaluate('JSON.parse(localStorage.ordenesAlbedo).length'),1)
+    assert.equal(await evaluate('JSON.parse(localStorage.carritoAlbedo).length'),0)
+    await navigate('/mis-pedidos.html');assert.equal(await evaluate('document.querySelectorAll("main .list-group-item").length'),1)
+    await activate('main .list-group-item a');await until('document.querySelector("main h2")?.textContent.includes("ORD-")')
+    assert.ok(await evaluate('document.querySelector("main").textContent.includes("Calle de prueba")'))
+  })
+  await record({test:'ep2-role-denial-unknown-ids',},async()=>{
+    await navigate('/admin-productos.html');assert.ok(await evaluate('document.querySelector("main").textContent.includes("Acceso no permitido")'))
+    await navigate('/producto-detalle.html?id=no-existe');assert.ok(await evaluate('document.querySelector("main").textContent.includes("Producto no encontrado")'))
+    await navigate('/pedido-detalle.html?id=no-existe');assert.ok(await evaluate('document.querySelector("main").textContent.includes("Pedido no encontrado")'))
+    await navigate('/ruta-inexistente');assert.ok(await evaluate('document.querySelector("main").textContent.includes("Página no encontrada")'))
+  })
+  await record({test:'ep2-admin-login-crud-offer',},async()=>{
+    await activate('.header-session-logout');await navigate('/login.html')
+    await input('#correoLogin','admin@duoc.cl');await input('#contrasenaLogin','Admin2026#');await activate('form button[type="submit"]')
+    await until('location.pathname === "/admin.html"');await navigate('/admin-productos.html')
+    for(const [id,value] of Object.entries({id:'prueba-qa',codigo:'QA001',nombre:'Producto QA',descripcion:'Producto temporal de pruebas',precio:'1000',stock:'5',stockCritico:'2'})) await input('#gestion-'+id,value)
+    await activate('.commerce-form input[type="checkbox"]');await activate('form button.btn-primary')
+    await until('JSON.parse(localStorage.productosAdminAlbedo).some(p=>p.id==="admin-prueba-qa")')
+    await navigate('/productos.html');await activate('.catalogo-cabecera input[type="checkbox"]')
+    assert.equal(await evaluate('document.querySelectorAll(".producto-catalogo").length'),1)
+    assert.ok(await evaluate('document.querySelector(".producto-catalogo").textContent.includes("Producto QA")'))
+    await navigate('/admin-productos.html');await input('main input:not([id^="gestion-"])','Producto QA')
+    await activate('tbody button.btn-outline-secondary');await input('#gestion-nombre','Producto QA editado');await activate('form button.btn-primary')
+    await until('JSON.parse(localStorage.productosAdminAlbedo).some(p=>p.nombre==="Producto QA editado")')
+    await send('Page.handleJavaScriptDialog', { accept: true }).catch(()=>{})
+    await evaluate('window.confirm=()=>true')
+    await activate('tbody button.btn-outline-danger')
+    assert.equal(await evaluate('JSON.parse(localStorage.productosAdminAlbedo).length'),15)
+  })
+  await record({test:'ep2-admin-order-status'},async()=>{
+    await navigate('/admin-ordenes.html');await activate('main .list-group-item a')
+    await until('!!document.querySelector("#estado-pedido")');await input('#estado-pedido','Enviado')
+    assert.equal(await evaluate('JSON.parse(localStorage.ordenesAlbedo)[0].estado'),'Enviado')
+  })
+  await record({test:'ep2-user-management-seller-permissions'},async()=>{
+    await navigate('/admin-usuarios.html')
+    await evaluate(`(() => { const row=[...document.querySelectorAll('main li')].find(e=>e.textContent.includes('cliente.prueba@duoc.cl')); if(!row) throw new Error('Cliente de prueba ausente'); row.querySelector('button').click(); })()`)
+    await input('#usuario-rol','Vendedor');await activate('form button.btn-primary')
+    await until('JSON.parse(localStorage.usuariosAlbedo).some(u=>u.correo==="cliente.prueba@duoc.cl"&&u.tipoUsuario==="Vendedor")')
+    await activate('.header-session-logout');await navigate('/login.html');await input('#correoLogin','cliente.prueba@duoc.cl');await input('#contrasenaLogin','Prueba2026#');await activate('form button[type="submit"]')
+    await until('location.pathname === "/vendedor.html"');await navigate('/vendedor-productos.html')
+    assert.equal(await evaluate('document.querySelectorAll("tbody tr").length'),15)
+    assert.equal(await evaluate('document.querySelectorAll("main form").length'),0)
+    await navigate('/vendedor-ordenes.html');assert.equal(await evaluate('document.querySelectorAll("main .list-group-item").length'),1)
+    await navigate('/admin-usuarios.html');assert.ok(await evaluate('document.querySelector("main").textContent.includes("Acceso no permitido")'))
+  })
+  await record({test:'ep2-contact-validation'},async()=>{
+    await navigate('/contacto.html');await activate('main form button')
+    await until('!!document.querySelector("main [role=alert]")')
+    await input('main input[type=tel]','912345678');await input('#contacto-motivo','Consulta de producto');await input('#contacto-mensaje','Consulta ficticia de verificación EP2.')
+    await activate('main input[type=checkbox]');await activate('main form button')
+    await until('document.querySelector("main [role=status]")?.textContent.includes("Simulación completada")')
+  })
+  // Páginas públicas nuevas y formularios, en escritorio, tablet y móvil / ambos temas.
+  for(const width of [360,768,1440]) for(const mode of ['light','dark']) for(const route of ['/nosotros.html','/blog.html','/blog-detalle-1.html','/blog-detalle-2.html','/contacto.html','/producto-detalle.html?id=polar-sendero','/carrito.html','/vendedor-productos.html']) {
+    await record({test:'ep2-pages-responsive',route,width,theme:mode},async()=>{
+      await viewport(width,width<900);await navigate(route);await theme(mode)
+      assert.ok(await evaluate('!!document.querySelector("main h1")'))
+      assert.ok(await evaluate('document.documentElement.scrollWidth<=innerWidth+1'),'sin desbordamiento horizontal de página')
+      await until('[...document.images].every(i=>i.complete&&i.naturalWidth>0)')
+      assert.equal(await evaluate('[...document.images].filter(i=>!i.complete||i.naturalWidth===0).length'),0,'imágenes cargadas')
+      if (width === 360 && mode === 'dark' && route !== '/carrito.html') {
+        const shot = await send('Page.captureScreenshot', { format:'png' })
+        await writeFile(join(output, 'ep2-' + route.split('?')[0].replaceAll('/','').replace('.html','') + '.png'), Buffer.from(shot.data,'base64'))
+      }
+    })
+  }
+  await navigate('/');await evaluate('localStorage.clear()')
   for (const [route, name, mode, width] of [
     ['/', 'menu-react-desktop', 'light', 1440], ['/Sitio%20Old/index.html', 'menu-legacy-inicio', 'light', 1440],
     ['/Sitio%20Old/productos.html', 'menu-legacy-catalogo', 'dark', 1024], ['/', 'menu-react-mobile', 'dark', 360],

@@ -1,9 +1,10 @@
 
 import type { Ref } from 'react'
-import { categories, legacyBase } from './navigation'
+import { categories } from './navigation'
 import type { CategoryKey } from './navigation'
 
 type CategoryMenuProps = {
+  items?: readonly { label: string; anchor: CategoryKey; allLabel: string; products: readonly { id: string; name: string }[] }[]
   menuId: string
   openCategory: CategoryKey | null
   onToggle: (category: CategoryKey) => void
@@ -15,6 +16,7 @@ type CategoryMenuProps = {
 }
 
 export default function CategoryMenu({
+  items = categories,
   menuId,
   openCategory,
   onToggle,
@@ -41,7 +43,7 @@ export default function CategoryMenu({
         }
       }}
     >
-      {categories.map((category) => (
+      {items.map((category) => (
         <div
           className="mega-item"
           key={category.anchor}
@@ -90,7 +92,7 @@ export default function CategoryMenu({
                 {category.products.map((product) => (
                   <a
                     key={product.id}
-                    href={`${legacyBase}producto-detalle.html?id=${encodeURIComponent(product.id)}`}
+                    href={`/producto-detalle.html?id=${encodeURIComponent(product.id)}`}
                     onClick={onClose}
                   >
                     {product.name}

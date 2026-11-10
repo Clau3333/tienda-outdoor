@@ -23,6 +23,7 @@ function normalizeProduct(value: unknown): Product {
     descripcion: typeof row.descripcion === 'string' ? row.descripcion : '',
     imagen: typeof row.imagen === 'string' && row.imagen ? row.imagen : base?.imagen ?? 'img/logo-albedo.png',
     colores: clone(colors as ProductColor[]),
+    ...(row.oferta === true ? { oferta: true } : {}),
     ...(typeof row.codigo === 'string' ? { codigo: row.codigo } : {}),
     ...(row.stock !== undefined ? { stock: Number(row.stock) } : {}),
     ...(row.stockCritico !== undefined ? { stockCritico: row.stockCritico === '' ? '' : Number(row.stockCritico) } : {}),

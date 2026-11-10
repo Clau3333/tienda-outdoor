@@ -3,9 +3,14 @@ import { useLocation } from 'react-router-dom'
 import CategoryMenu from './CategoryMenu'
 import { categoryMenuReducer, initialMenuState } from './categoryMenuState'
 import type { CategoryKey } from './navigation'
+import { categories } from './navigation'
+import { categoryDefinitions } from '../data/products'
+import { useProducts } from '../services/productStore'
 
 export default function Navbar() {
   const location = useLocation()
+  const { products } = useProducts()
+  const items = categories.map((category) => ({ ...category, products: products.filter((product) => product.categoria === categoryDefinitions.find((definition) => definition.anchor === category.anchor)?.nombre).map((product) => ({ id: product.id, name: product.nombre })) }))
   const [state, dispatch] = useReducer(categoryMenuReducer, location.key, initialMenuState)
   const menuId = useId()
   const nav = useRef<HTMLElement>(null)
@@ -36,7 +41,7 @@ export default function Navbar() {
   }, [])
 
   return (
-    <CategoryMenu menuId={menuId} navRef={nav}
+    <CategoryMenu items={items} menuId={menuId} navRef={nav}
       openCategory={state.locationKey === location.key ? state.category : null}
       onToggle={(category) => dispatch({ type: 'toggle', category, locationKey: location.key })}
       onOpen={(category) => dispatch({ type: 'open', category, locationKey: location.key })}

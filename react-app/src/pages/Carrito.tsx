@@ -5,6 +5,9 @@ import { createCheckoutService, type Order, type PaymentResult } from '../servic
 import { formatPrice, productImageUrl } from '../services/productSelection'
 import type { CartItem } from '../services/cartRepository'
 import './Carrito.css'
+import DeliveryForm from '../components/DeliveryForm'
+import { deliveryFor, emptyDelivery, validateDelivery } from '../services/commerceService'
+import { useSession } from '../services/sessionStore'
 
 const checkout = createCheckoutService({
   getItem: (key) => window.localStorage.getItem(key),
@@ -12,6 +15,14 @@ const checkout = createCheckoutService({
 }, cartRepository)
 
 export default function Carrito() {
+  const { user } = useSession()
+  return <CartContent key={user?.correo ?? 'visitante'} />
+}
+function CartContent() {
+  const { user } = useSession()
+  const [delivery, setDelivery] = useState(() => {
+    try { return deliveryFor(localStorage, user) } catch { return { ...emptyDelivery } }
+  })
   const { items, total, error: storageError } = useCart()
   const [error, setError] = useState('')
   const [message, setMessage] = useState('')
@@ -45,13 +56,15 @@ export default function Carrito() {
   }
   async function pay() {
     if (submitting.current || receipt) return
+    const deliveryError = validateDelivery(delivery)
+    if (deliveryError) { setError(deliveryError); return }
     submitting.current = true
     setBusy(true)
     setError('')
     setMessage('')
     attempt.current ??= crypto.randomUUID()
     try {
-      const run = () => checkout.pay(result, attempt.current!)
+      const run = () => checkout.pay(result, attempt.current!, delivery)
       // Chrome coordina las compras React entre pestañas del mismo origen.
       const response = navigator.locks ? await navigator.locks.request('albedo-checkout', run) : run()
       if (response.status === 'rechazado') {
@@ -84,6 +97,7 @@ export default function Carrito() {
       {receipt && <section className="alert alert-success" role="status" aria-label="Confirmación de compra">
         <h2 className="h4">Compra simulada aprobada</h2>
         <p>Orden <strong>{receipt.numeroOrden}</strong> guardada. Total: {formatPrice(receipt.total)}. No se realizó ningún cobro real.</p>
+        <p>Entrega: {receipt.entrega?.metodo === 'retiro' ? 'Retiro coordinado' : 'Domicilio'}. <Link to={`/pedido-detalle.html?id=${encodeURIComponent(receipt.id)}`}>Consultar pedido</Link></p>
         {warning && <p className="alert alert-warning">{warning}</p>}
         {warning ? <button type="button" className="btn btn-outline-secondary" onClick={retryCleanup}>Reintentar limpieza del carrito</button>
           : <Link className="btn btn-primary" to="/productos.html">Seguir comprando</Link>}
@@ -122,6 +136,7 @@ export default function Carrito() {
         {!receipt && <section className="carrito-pago mt-4" aria-labelledby="pago-titulo">
           <h2 id="pago-titulo" className="h4">Pago simulado · demostración académica</h2>
           <p>No se solicitan datos bancarios ni se realizan cobros reales. Elige el resultado para probar ambos escenarios.</p>
+          <DeliveryForm value={delivery} onChange={setDelivery} disabled={busy} />
           <label htmlFor="resultado-pago" className="form-label">Resultado de la demostración</label>
           <select id="resultado-pago" className="form-select" value={result} disabled={busy} onChange={(event) => setResult(event.target.value as PaymentResult)}>
             <option value="aprobado">Pago aprobado</option><option value="rechazado">Pago rechazado</option>

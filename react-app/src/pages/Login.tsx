@@ -3,7 +3,6 @@ import type { FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import TextField from '../components/ui/TextField'
 import Button from '../components/ui/Button'
-import { legacyBase } from '../components/navigation'
 import { createLoginService } from '../services/loginService'
 import { sessionLoginService, sessionState } from '../services/sessionStore'
 import { validateLoginEmail, validateLoginPassword } from '../services/loginValidation'
@@ -70,7 +69,7 @@ export default function Login({ service = defaultService, redirectLegacy = redir
           return
         }
         if (result.destination === 'index.html') navigate('/index.html')
-        else redirectLegacy(legacyBase + result.destination)
+        else redirectLegacy('/' + result.destination)
       }, 700)
     } catch {
       setMessage('')

@@ -1,0 +1,8 @@
+.commerce-number { max-width: 10rem; }
+.commerce-form { max-width: 56rem; }
+.commerce-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-block: 1rem; }
+.commerce-table { overflow-wrap: anywhere; }
+.commerce-form textarea { min-height: 8rem; }
+.commerce-section { padding-block: 1rem; }
+.commerce-notice { border-inline-start: 3px solid var(--albedo-accent); padding: .75rem; }
+.contenido-editorial .text-secondary { color: var(--albedo-muted) !important; }

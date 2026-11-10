@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useId, useRef, useState } from 'react'
 import Navbar from './Navbar'
 import ThemeToggle from './ThemeToggle'
-import { legacyBase, primaryLinks } from './navigation'
+import { primaryLinks } from './navigation'
 import { sessionState, useSession } from '../services/sessionStore'
 import './Header.css'
 
@@ -54,7 +54,7 @@ export default function Header({ cartCount }: HeaderProps) {
           aria-label="ALBEDO Outdoor, inicio"
         >
           <img
-            src={`${legacyBase}img/logo-albedo.png`}
+            src="/Sitio%20Old/img/logo-albedo.png"
             alt="ALBEDO Outdoor"
             width="165"
             height="56"
@@ -79,7 +79,7 @@ export default function Header({ cartCount }: HeaderProps) {
           </Link>
 
           {primaryLinks.filter(({ href }) => !user || (href !== 'login.html' && href !== 'registro.html')).map(({ label, href }) =>
-            href === 'productos.html' || href === 'carrito.html' || href === 'login.html' || href === 'registro.html' ? (
+            href.endsWith('.html') ? (
               <Link
                 key={href}
                 to={`/${href}`}
@@ -103,7 +103,7 @@ export default function Header({ cartCount }: HeaderProps) {
             ) : (
               <a
                 key={href}
-                href={`${legacyBase}${href}`}
+                href={`/${href}`}
               >
                 {label}
 
@@ -121,7 +121,7 @@ export default function Header({ cartCount }: HeaderProps) {
           )}
           {user && <>
             <span className="header-session-greeting" role="status">Hola, {user.nombre}</span>
-            <a href={`${legacyBase}${roleLink.href}`}>{roleLink.label}</a>
+            <Link to={`/${roleLink.href}`}>{roleLink.label}</Link>
             <button type="button" className="header-session-logout" onClick={logout}>Cerrar sesión</button>
           </>}
         </nav>

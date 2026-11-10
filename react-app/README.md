@@ -1,75 +1,20 @@
-# React + TypeScript + Vite
+# ALBEDO Outdoor · aplicación React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Consultar el [README raíz](../README.md) para instalación, ejecución, credenciales académicas, scripts y límites.
 
-Currently, two official plugins are available:
+## Organización
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- `src/components`: Header, Navbar, Footer, tarjetas, controles accesibles, entrega y protección de navegación.
+- `src/pages`: tienda, contenido editorial, ficha individual, registro/login, carrito, pedidos y paneles por rol.
+- `src/services`: datos, persistencia, validaciones, sesión, compra simulada y gestión.
+- `src/data`: quince productos originales tipados y contenido editorial migrado.
+- `tests/jasmine`: renderizado, props, eventos, condiciones, lógica y mocks con Jasmine/Karma.
+- `tests/*.test.mjs`: pruebas Node independientes.
+- `tools/verify-category-navigation.mjs`: navegación real con Chrome temporal.
+- `tools/legacySite.ts`: sirve y empaqueta Sitio Old sin eliminar sus páginas.
 
-## React Compiler
+`npm run build` comprueba TypeScript y genera `dist`; `npm run lint` revisa el código. `npm run test:unit`, `npm test` y `npm run test:navigation` comprueban capas distintas. No atribuir cobertura porcentual a estos comandos.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+La carpeta hermana Sitio Old es necesaria. No desplegar `src` directamente: usar `dist` y resolver las rutas React a `index.html`. No utilizar datos ni contraseñas reales; este frontend no tiene backend ni autorización de servidor.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+Documentación de entrega: [ERS V2](../docs/ERS-V2.md), [testing](../docs/TESTING-EP2.md), [Duoc](../docs/GUIA-DUOC.md) y [presentación/defensa](../docs/PRESENTACION-EP2.md).

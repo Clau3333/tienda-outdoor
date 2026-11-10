@@ -1,0 +1,1353 @@
+{
+  "nosotros": [
+    {
+      "tag": "main",
+      "attrs": {},
+      "children": [
+        {
+          "tag": "section",
+          "attrs": {
+            "class": "container py-5"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "row justify-content-center"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "col-12 col-lg-9"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "attrs": {
+                        "class": "etiqueta mb-2"
+                      },
+                      "children": [
+                        "\n                        ALBEDO OUTDOOR\n                    "
+                      ]
+                    },
+                    {
+                      "tag": "h1",
+                      "attrs": {
+                        "class": "display-5 fw-semibold"
+                      },
+                      "children": [
+                        "\n                        Nosotros\n                    "
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {
+                        "class": "lead text-secondary mt-3"
+                      },
+                      "children": [
+                        "\n\n                        Equipamiento pensado para acompañarte\n                        desde el primer sendero hasta tu próxima\n                        aventura.\n\n                    "
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "attrs": {
+            "class": "container pb-5"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "row justify-content-center"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "col-12 col-lg-9"
+                  },
+                  "children": [
+                    {
+                      "tag": "div",
+                      "attrs": {
+                        "class": "border-top pt-5"
+                      },
+                      "children": [
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "etiqueta mb-2"
+                          },
+                          "children": [
+                            "\n                            NUESTRA IDENTIDAD\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "h2",
+                          "attrs": {
+                            "class": "mb-4"
+                          },
+                          "children": [
+                            "\n                            ¿Qué es ALBEDO Outdoor?\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary"
+                          },
+                          "children": [
+                            "\n\n                            ALBEDO Outdoor es una tienda orientada\n                            a personas que disfrutan de la montaña,\n                            el trekking y las actividades al aire libre.\n\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary"
+                          },
+                          "children": [
+                            "\n\n                            Nuestro objetivo es ofrecer prendas\n                            funcionales y versátiles que acompañen\n                            a nuestros clientes en distintas condiciones\n                            y terrenos.\n\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary mb-0"
+                          },
+                          "children": [
+                            "\n\n                            La tienda reúne una selección de chaquetas,\n                            polares y pantalones outdoor, combinando\n                            protección, comodidad y una identidad visual\n                            inspirada en la montaña.\n\n                        "
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "attrs": {
+            "class": "container pb-5"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "row justify-content-center"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "col-12 col-lg-9"
+                  },
+                  "children": [
+                    {
+                      "tag": "div",
+                      "attrs": {
+                        "class": "border-top pt-5"
+                      },
+                      "children": [
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "etiqueta mb-2"
+                          },
+                          "children": [
+                            "\n                            NUESTRO PROPÓSITO\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "h2",
+                          "attrs": {
+                            "class": "mb-4"
+                          },
+                          "children": [
+                            "\n                            Comienza hoy tu aventura\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "div",
+                          "attrs": {
+                            "class": "row g-4"
+                          },
+                          "children": [
+                            {
+                              "tag": "div",
+                              "attrs": {
+                                "class": "col-12 col-md-4"
+                              },
+                              "children": [
+                                {
+                                  "tag": "h3",
+                                  "attrs": {
+                                    "class": "h5"
+                                  },
+                                  "children": [
+                                    "\n                                    Protección\n                                "
+                                  ]
+                                },
+                                {
+                                  "tag": "p",
+                                  "attrs": {
+                                    "class": "text-secondary mb-0"
+                                  },
+                                  "children": [
+                                    "\n\n                                    Prendas pensadas para acompañarte\n                                    frente a condiciones climáticas\n                                    cambiantes.\n\n                                "
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "div",
+                              "attrs": {
+                                "class": "col-12 col-md-4"
+                              },
+                              "children": [
+                                {
+                                  "tag": "h3",
+                                  "attrs": {
+                                    "class": "h5"
+                                  },
+                                  "children": [
+                                    "\n                                    Comodidad\n                                "
+                                  ]
+                                },
+                                {
+                                  "tag": "p",
+                                  "attrs": {
+                                    "class": "text-secondary mb-0"
+                                  },
+                                  "children": [
+                                    "\n\n                                    Diseños que permiten libertad de\n                                    movimiento durante tus recorridos.\n\n                                "
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "div",
+                              "attrs": {
+                                "class": "col-12 col-md-4"
+                              },
+                              "children": [
+                                {
+                                  "tag": "h3",
+                                  "attrs": {
+                                    "class": "h5"
+                                  },
+                                  "children": [
+                                    "\n                                    Aventura\n                                "
+                                  ]
+                                },
+                                {
+                                  "tag": "p",
+                                  "attrs": {
+                                    "class": "text-secondary mb-0"
+                                  },
+                                  "children": [
+                                    "\n\n                                    Equipamiento para quienes buscan\n                                    descubrir nuevos senderos y vivir\n                                    experiencias al aire libre.\n\n                                "
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "attrs": {
+            "class": "container pb-5"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "row justify-content-center"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "col-12 col-lg-9"
+                  },
+                  "children": [
+                    {
+                      "tag": "div",
+                      "attrs": {
+                        "class": "border-top pt-5"
+                      },
+                      "children": [
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "etiqueta mb-2"
+                          },
+                          "children": [
+                            "\n                            EQUIPO DE DESARROLLO\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "h2",
+                          "attrs": {
+                            "class": "mb-4"
+                          },
+                          "children": [
+                            "\n                            Desarrolladores\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "div",
+                          "attrs": {
+                            "class": "row g-4"
+                          },
+                          "children": [
+                            {
+                              "tag": "div",
+                              "attrs": {
+                                "class": "col-12 col-md-6"
+                              },
+                              "children": [
+                                {
+                                  "tag": "div",
+                                  "attrs": {
+                                    "class": "border rounded p-4 h-100"
+                                  },
+                                  "children": [
+                                    {
+                                      "tag": "p",
+                                      "attrs": {
+                                        "class": "etiqueta mb-2"
+                                      },
+                                      "children": [
+                                        "\n                                        DESARROLLADOR\n                                    "
+                                      ]
+                                    },
+                                    {
+                                      "tag": "h3",
+                                      "attrs": {
+                                        "class": "h4"
+                                      },
+                                      "children": [
+                                        "\n                                        Claudio Córdova\n                                    "
+                                      ]
+                                    },
+                                    {
+                                      "tag": "p",
+                                      "attrs": {
+                                        "class": "text-secondary mb-0"
+                                      },
+                                      "children": [
+                                        "\n\n                                        Desarrollo y construcción de\n                                        funcionalidades para la tienda\n                                        ALBEDO Outdoor.\n\n                                    "
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "div",
+                              "attrs": {
+                                "class": "col-12 col-md-6"
+                              },
+                              "children": [
+                                {
+                                  "tag": "div",
+                                  "attrs": {
+                                    "class": "border rounded p-4 h-100"
+                                  },
+                                  "children": [
+                                    {
+                                      "tag": "p",
+                                      "attrs": {
+                                        "class": "etiqueta mb-2"
+                                      },
+                                      "children": [
+                                        "\n                                        DESARROLLADOR\n                                    "
+                                      ]
+                                    },
+                                    {
+                                      "tag": "h3",
+                                      "attrs": {
+                                        "class": "h4"
+                                      },
+                                      "children": [
+                                        "\n                                        Luis Roa\n                                    "
+                                      ]
+                                    },
+                                    {
+                                      "tag": "p",
+                                      "attrs": {
+                                        "class": "text-secondary mb-0"
+                                      },
+                                      "children": [
+                                        "\n\n                                        Desarrollo y construcción de\n                                        funcionalidades para la tienda\n                                        ALBEDO Outdoor.\n\n                                    "
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "attrs": {
+            "class": "container pb-5"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "row justify-content-center"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "col-12 col-lg-9"
+                  },
+                  "children": [
+                    {
+                      "tag": "div",
+                      "attrs": {
+                        "class": "border-top pt-5"
+                      },
+                      "children": [
+                        {
+                          "tag": "h2",
+                          "attrs": {
+                            "class": "mb-3"
+                          },
+                          "children": [
+                            "\n                            Prepárate para tu próxima salida\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary"
+                          },
+                          "children": [
+                            "\n\n                            Explora nuestra selección de productos\n                            y encuentra el equipamiento para tu\n                            próxima aventura.\n\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "a",
+                          "attrs": {
+                            "href": "productos.html",
+                            "class": "boton-albedo"
+                          },
+                          "children": [
+                            "\n                            Ver productos\n                        "
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "blog": [
+    {
+      "tag": "main",
+      "attrs": {},
+      "children": [
+        {
+          "tag": "section",
+          "attrs": {
+            "class": "container py-5"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "row justify-content-center"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "col-12 col-lg-10"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "attrs": {
+                        "class": "etiqueta mb-2"
+                      },
+                      "children": [
+                        "\n                        ALBEDO OUTDOOR\n                    "
+                      ]
+                    },
+                    {
+                      "tag": "h1",
+                      "attrs": {
+                        "class": "display-5 fw-semibold"
+                      },
+                      "children": [
+                        "\n                        Blog\n                    "
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {
+                        "class": "lead text-secondary mt-3"
+                      },
+                      "children": [
+                        "\n\n                        Consejos, preparación y recomendaciones\n                        para disfrutar tus próximas aventuras\n                        al aire libre.\n\n                    "
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "attrs": {
+            "class": "container pb-5"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "row justify-content-center"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "col-12 col-lg-10"
+                  },
+                  "children": [
+                    {
+                      "tag": "div",
+                      "attrs": {
+                        "class": "border-top pt-5"
+                      },
+                      "children": [
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "etiqueta mb-2"
+                          },
+                          "children": [
+                            "\n                            EXPLORA Y PREPÁRATE\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "h2",
+                          "attrs": {
+                            "class": "mb-4"
+                          },
+                          "children": [
+                            "\n                            Últimas publicaciones\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "div",
+                          "attrs": {
+                            "class": "row g-4"
+                          },
+                          "children": [
+                            {
+                              "tag": "article",
+                              "attrs": {
+                                "class": "col-12 col-md-6"
+                              },
+                              "children": [
+                                {
+                                  "tag": "div",
+                                  "attrs": {
+                                    "class": "card h-100 border-0"
+                                  },
+                                  "children": [
+                                    {
+                                      "tag": "img",
+                                      "attrs": {
+                                        "src": "img/portada-albedo.png",
+                                        "class": "card-img-top",
+                                        "alt": "Montañas y excursionista en una aventura outdoor"
+                                      },
+                                      "children": []
+                                    },
+                                    {
+                                      "tag": "div",
+                                      "attrs": {
+                                        "class": "card-body px-0"
+                                      },
+                                      "children": [
+                                        {
+                                          "tag": "p",
+                                          "attrs": {
+                                            "class": "etiqueta mb-2"
+                                          },
+                                          "children": [
+                                            "\n                                            CONSEJOS OUTDOOR\n                                        "
+                                          ]
+                                        },
+                                        {
+                                          "tag": "h3",
+                                          "attrs": {
+                                            "class": "h4"
+                                          },
+                                          "children": [
+                                            "\n                                            Cómo prepararte para una salida a la montaña\n                                        "
+                                          ]
+                                        },
+                                        {
+                                          "tag": "p",
+                                          "attrs": {
+                                            "class": "text-secondary"
+                                          },
+                                          "children": [
+                                            "\n\n                                            Una buena aventura comienza antes\n                                            de llegar al sendero. Conoce algunos\n                                            aspectos importantes para preparar\n                                            tu próxima salida.\n\n                                        "
+                                          ]
+                                        },
+                                        {
+                                          "tag": "a",
+                                          "attrs": {
+                                            "href": "blog-detalle-1.html",
+                                            "class": "btn btn-dark"
+                                          },
+                                          "children": [
+                                            "\n                                            Leer artículo\n                                        "
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "article",
+                              "attrs": {
+                                "class": "col-12 col-md-6"
+                              },
+                              "children": [
+                                {
+                                  "tag": "div",
+                                  "attrs": {
+                                    "class": "card h-100 border-0"
+                                  },
+                                  "children": [
+                                    {
+                                      "tag": "img",
+                                      "attrs": {
+                                        "src": "img/chaqueta-cordillera.png",
+                                        "class": "card-img-top",
+                                        "alt": "Chaqueta outdoor para actividades de montaña"
+                                      },
+                                      "children": []
+                                    },
+                                    {
+                                      "tag": "div",
+                                      "attrs": {
+                                        "class": "card-body px-0"
+                                      },
+                                      "children": [
+                                        {
+                                          "tag": "p",
+                                          "attrs": {
+                                            "class": "etiqueta mb-2"
+                                          },
+                                          "children": [
+                                            "\n                                            EQUIPAMIENTO\n                                        "
+                                          ]
+                                        },
+                                        {
+                                          "tag": "h3",
+                                          "attrs": {
+                                            "class": "h4"
+                                          },
+                                          "children": [
+                                            "\n                                            Cómo elegir tu ropa para actividades outdoor\n                                        "
+                                          ]
+                                        },
+                                        {
+                                          "tag": "p",
+                                          "attrs": {
+                                            "class": "text-secondary"
+                                          },
+                                          "children": [
+                                            "\n\n                                            Protección, comodidad y movilidad\n                                            son algunos de los aspectos que\n                                            debes considerar al elegir tu\n                                            equipamiento.\n\n                                        "
+                                          ]
+                                        },
+                                        {
+                                          "tag": "a",
+                                          "attrs": {
+                                            "href": "blog-detalle-2.html",
+                                            "class": "btn btn-dark"
+                                          },
+                                          "children": [
+                                            "\n                                            Leer artículo\n                                        "
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "attrs": {
+            "class": "container pb-5"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "row justify-content-center"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "col-12 col-lg-10"
+                  },
+                  "children": [
+                    {
+                      "tag": "div",
+                      "attrs": {
+                        "class": "border-top pt-5"
+                      },
+                      "children": [
+                        {
+                          "tag": "h2",
+                          "attrs": {
+                            "class": "mb-3"
+                          },
+                          "children": [
+                            "\n                            Prepárate para tu próxima aventura\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary"
+                          },
+                          "children": [
+                            "\n\n                            Revisa nuestro catálogo y encuentra\n                            el equipamiento que necesitas para\n                            tu próxima salida.\n\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "a",
+                          "attrs": {
+                            "href": "productos.html",
+                            "class": "boton-albedo"
+                          },
+                          "children": [
+                            "\n                            Ver productos\n                        "
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "blog-detalle-1": [
+    {
+      "tag": "main",
+      "attrs": {},
+      "children": [
+        {
+          "tag": "article",
+          "attrs": {
+            "class": "container py-5"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "row justify-content-center"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "col-12 col-lg-9"
+                  },
+                  "children": [
+                    {
+                      "tag": "a",
+                      "attrs": {
+                        "href": "blog.html",
+                        "class": "text-decoration-none text-dark"
+                      },
+                      "children": [
+                        "\n                        ← Volver al blog\n                    "
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "attrs": {
+                        "class": "mt-4 mb-4"
+                      },
+                      "children": [
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "etiqueta mb-2"
+                          },
+                          "children": [
+                            "\n                            CONSEJOS OUTDOOR\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "h1",
+                          "attrs": {
+                            "class": "display-5 fw-semibold"
+                          },
+                          "children": [
+                            "\n                            Cómo prepararte para una salida a la montaña\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "lead text-secondary mt-3"
+                          },
+                          "children": [
+                            "\n\n                            Una buena aventura comienza antes de llegar\n                            al sendero. La preparación adecuada puede\n                            marcar una gran diferencia durante una salida\n                            a la montaña.\n\n                        "
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "attrs": {
+                        "class": "mb-5"
+                      },
+                      "children": [
+                        {
+                          "tag": "img",
+                          "attrs": {
+                            "src": "img/portada-albedo.png",
+                            "class": "img-fluid",
+                            "alt": "Excursionista frente a una cordillera nevada"
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "section",
+                      "attrs": {
+                        "class": "mb-5"
+                      },
+                      "children": [
+                        {
+                          "tag": "h2",
+                          "attrs": {
+                            "class": "h3 mb-3"
+                          },
+                          "children": [
+                            "\n                            Planifica antes de salir\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary"
+                          },
+                          "children": [
+                            "\n\n                            Antes de comenzar una ruta es importante\n                            conocer el recorrido, la duración aproximada,\n                            las condiciones del terreno y el clima esperado.\n                            Revisar esta información permite organizar mejor\n                            la salida y anticiparse a posibles cambios.\n\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary"
+                          },
+                          "children": [
+                            "\n\n                            También es recomendable comunicar a otra persona\n                            el lugar al que te diriges y la hora aproximada\n                            de regreso. Esta pequeña medida puede ser útil\n                            ante cualquier inconveniente durante el recorrido.\n\n                        "
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "section",
+                      "attrs": {
+                        "class": "mb-5"
+                      },
+                      "children": [
+                        {
+                          "tag": "h2",
+                          "attrs": {
+                            "class": "h3 mb-3"
+                          },
+                          "children": [
+                            "\n                            Lleva el equipamiento adecuado\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary"
+                          },
+                          "children": [
+                            "\n\n                            El equipamiento debe elegirse considerando\n                            el clima, la distancia y el tipo de actividad.\n                            Una prenda cómoda y adecuada puede ayudar a\n                            protegerte del viento, la lluvia y los cambios\n                            de temperatura.\n\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary"
+                          },
+                          "children": [
+                            "\n\n                            También es importante llevar agua, alimentación,\n                            protección solar y otros elementos necesarios\n                            para mantenerte cómodo durante el trayecto.\n\n                        "
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "section",
+                      "attrs": {
+                        "class": "mb-5"
+                      },
+                      "children": [
+                        {
+                          "tag": "h2",
+                          "attrs": {
+                            "class": "h3 mb-3"
+                          },
+                          "children": [
+                            "\n                            Respeta tu propio ritmo\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary"
+                          },
+                          "children": [
+                            "\n\n                            Cada persona tiene un nivel físico diferente.\n                            Avanzar a un ritmo adecuado permite disfrutar\n                            mejor la experiencia y evitar un desgaste\n                            innecesario.\n\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary"
+                          },
+                          "children": [
+                            "\n\n                            Durante el recorrido es recomendable realizar\n                            pausas cuando sea necesario, mantenerse hidratado\n                            y prestar atención a las condiciones del entorno.\n\n                        "
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "section",
+                      "attrs": {
+                        "class": "mb-5"
+                      },
+                      "children": [
+                        {
+                          "tag": "h2",
+                          "attrs": {
+                            "class": "h3 mb-3"
+                          },
+                          "children": [
+                            "\n                            Cuida el entorno\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary"
+                          },
+                          "children": [
+                            "\n\n                            Las actividades outdoor también implican una\n                            responsabilidad con el medioambiente. Mantener\n                            los senderos limpios, respetar la señalización\n                            y evitar alterar el entorno ayuda a conservar\n                            estos lugares.\n\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary mb-0"
+                          },
+                          "children": [
+                            "\n\n                            Prepararse correctamente permite disfrutar\n                            la montaña de manera más segura, responsable\n                            y consciente.\n\n                        "
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "attrs": {
+                        "class": "border-top pt-5"
+                      },
+                      "children": [
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "etiqueta mb-2"
+                          },
+                          "children": [
+                            "\n                            PREPARA TU PRÓXIMA SALIDA\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "h2",
+                          "attrs": {
+                            "class": "h3 mb-3"
+                          },
+                          "children": [
+                            "\n                            Encuentra tu equipamiento\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary"
+                          },
+                          "children": [
+                            "\n\n                            Explora la colección de ALBEDO Outdoor\n                            y encuentra prendas para acompañarte\n                            en tu próxima aventura.\n\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "a",
+                          "attrs": {
+                            "href": "productos.html",
+                            "class": "boton-albedo"
+                          },
+                          "children": [
+                            "\n                            Ver productos\n                        "
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "blog-detalle-2": [
+    {
+      "tag": "main",
+      "attrs": {},
+      "children": [
+        {
+          "tag": "article",
+          "attrs": {
+            "class": "container py-5"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "row justify-content-center"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "col-12 col-lg-9"
+                  },
+                  "children": [
+                    {
+                      "tag": "a",
+                      "attrs": {
+                        "href": "blog.html",
+                        "class": "text-decoration-none text-dark"
+                      },
+                      "children": [
+                        "\n                        ← Volver al blog\n                    "
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "attrs": {
+                        "class": "mt-4 mb-4"
+                      },
+                      "children": [
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "etiqueta mb-2"
+                          },
+                          "children": [
+                            "\n                            EQUIPAMIENTO\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "h1",
+                          "attrs": {
+                            "class": "display-5 fw-semibold"
+                          },
+                          "children": [
+                            "\n                            Cómo elegir tu ropa para actividades outdoor\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "lead text-secondary mt-3"
+                          },
+                          "children": [
+                            "\n\n                            Elegir correctamente las prendas para una\n                            actividad al aire libre permite enfrentar\n                            diferentes condiciones con mayor comodidad\n                            y protección.\n\n                        "
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "attrs": {
+                        "class": "mb-5"
+                      },
+                      "children": [
+                        {
+                          "tag": "img",
+                          "attrs": {
+                            "src": "img/chaqueta-cordillera.png",
+                            "class": "img-fluid",
+                            "alt": "Chaqueta Cordillera para actividades outdoor"
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "section",
+                      "attrs": {
+                        "class": "mb-5"
+                      },
+                      "children": [
+                        {
+                          "tag": "h2",
+                          "attrs": {
+                            "class": "h3 mb-3"
+                          },
+                          "children": [
+                            "\n                            Considera las condiciones del lugar\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary"
+                          },
+                          "children": [
+                            "\n\n                            Antes de elegir una prenda es importante\n                            considerar el clima y el tipo de actividad\n                            que realizarás. No es lo mismo prepararse\n                            para una caminata corta que para una salida\n                            prolongada en condiciones de frío o viento.\n\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary"
+                          },
+                          "children": [
+                            "\n\n                            La temperatura, posibilidad de lluvia,\n                            intensidad del viento y características\n                            del terreno pueden ayudarte a decidir qué\n                            tipo de protección necesitas.\n\n                        "
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "section",
+                      "attrs": {
+                        "class": "mb-5"
+                      },
+                      "children": [
+                        {
+                          "tag": "h2",
+                          "attrs": {
+                            "class": "h3 mb-3"
+                          },
+                          "children": [
+                            "\n                            Busca comodidad y libertad de movimiento\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary"
+                          },
+                          "children": [
+                            "\n\n                            Una prenda outdoor debe permitirte moverte\n                            con comodidad. Durante caminatas y recorridos\n                            es importante que la ropa no limite tus\n                            movimientos.\n\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary"
+                          },
+                          "children": [
+                            "\n\n                            También debes considerar que utilizarás\n                            las prendas durante varias horas, por lo\n                            que un ajuste cómodo puede mejorar\n                            considerablemente la experiencia.\n\n                        "
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "section",
+                      "attrs": {
+                        "class": "mb-5"
+                      },
+                      "children": [
+                        {
+                          "tag": "h2",
+                          "attrs": {
+                            "class": "h3 mb-3"
+                          },
+                          "children": [
+                            "\n                            Utiliza capas\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary"
+                          },
+                          "children": [
+                            "\n\n                            Una estrategia habitual para actividades\n                            outdoor consiste en utilizar distintas capas.\n                            Esto permite adaptar la vestimenta a los\n                            cambios de temperatura que pueden ocurrir\n                            durante el recorrido.\n\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary"
+                          },
+                          "children": [
+                            "\n\n                            Una capa de abrigo puede ayudar a conservar\n                            el calor, mientras una capa exterior puede\n                            entregar protección frente al viento o la\n                            humedad.\n\n                        "
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "section",
+                      "attrs": {
+                        "class": "mb-5"
+                      },
+                      "children": [
+                        {
+                          "tag": "h2",
+                          "attrs": {
+                            "class": "h3 mb-3"
+                          },
+                          "children": [
+                            "\n                            Elige según tu actividad\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary"
+                          },
+                          "children": [
+                            "\n\n                            Chaquetas, polares y pantalones cumplen\n                            funciones diferentes. Combinar adecuadamente\n                            estas prendas permite construir un conjunto\n                            apropiado para distintas aventuras.\n\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary mb-0"
+                          },
+                          "children": [
+                            "\n\n                            Lo importante es elegir equipamiento que\n                            responda a tus necesidades y te permita\n                            disfrutar cómodamente de cada recorrido.\n\n                        "
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "attrs": {
+                        "class": "border-top pt-5"
+                      },
+                      "children": [
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "etiqueta mb-2"
+                          },
+                          "children": [
+                            "\n                            ALBEDO OUTDOOR\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "h2",
+                          "attrs": {
+                            "class": "h3 mb-3"
+                          },
+                          "children": [
+                            "\n                            Encuentra tu próxima prenda\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {
+                            "class": "text-secondary"
+                          },
+                          "children": [
+                            "\n\n                            Revisa nuestra selección de chaquetas,\n                            polares y pantalones para preparar tu\n                            próxima salida.\n\n                        "
+                          ]
+                        },
+                        {
+                          "tag": "a",
+                          "attrs": {
+                            "href": "productos.html",
+                            "class": "boton-albedo"
+                          },
+                          "children": [
+                            "\n                            Ver productos\n                        "
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -6,7 +6,7 @@ import { Children, isValidElement, createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { MemoryRouter } from 'react-router-dom'
 import { createServer } from 'vite'
-import { categories, legacyBase, primaryLinks } from '../src/components/navigation.ts'
+import { categories, primaryLinks } from '../src/components/navigation.ts'
 import { categoryMenuReducer, initialMenuState } from '../src/components/categoryMenuState.ts'
 
 // Pruebas de callbacks, estado y HTML. No son pruebas de un navegador ni de layout.
@@ -171,7 +171,7 @@ test('los quince enlaces de producto resuelven identificadores y nombres reales 
   assert.equal(ids.size, 15)
 })
 
-test('Inicio, Productos, Carrito, Login y Registro usan React; las otras opciones conservan destinos antiguos', async () => {
+test('las opciones principales migradas usan React y los archivos heredados se conservan', async () => {
   const { default: Header } = await server.ssrLoadModule('/src/components/Header.tsx')
   const { default: Provider } = await server.ssrLoadModule('/src/theme/ThemeProvider.tsx')
   const html = renderToStaticMarkup(createElement(Provider, null,
@@ -179,12 +179,12 @@ test('Inicio, Productos, Carrito, Login y Registro usan React; las otras opcione
   const mainNav = html.match(/class="enlaces-principales"[^>]*>(.*?)<\/nav>/s)[1]
   assert.match(mainNav, /href="\/"/)
   for (const { href } of primaryLinks) {
-    const migrated = href === 'productos.html' || href === 'carrito.html' || href === 'login.html' || href === 'registro.html'
-    assert.ok(mainNav.includes(`href="${migrated ? '/' : legacyBase}${href}"`), href)
+    const migrated = href.endsWith('.html')
+    assert.ok(mainNav.includes(`href="${migrated ? '/' : '/Sitio%20Old/'}${href}"`), href)
     await access(new URL(`../../Sitio Old/${href}`, import.meta.url))
   }
   const app = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8')
-  assert.deepEqual([...app.matchAll(/<Route path="([^"]+)"/g)].map((match) => match[1]), ['/', '/index.html', '/productos.html', '/carrito.html', '/login.html', '/registro.html'])
+  assert.deepEqual([...app.matchAll(/<Route path="([^"]+)"/g)].map((match) => match[1]), ['/', '/index.html', '/productos.html', '/carrito.html', '/login.html', '/registro.html', '/producto-detalle.html', '/nosotros.html', '/blog.html', '/blog-detalle-1.html', '/blog-detalle-2.html', '/contacto.html', '/mis-pedidos.html', '/pedido-detalle.html', '/admin.html', '/admin-productos.html', '/admin-usuarios.html', '/admin-ordenes.html', '/admin-orden-detalle.html', '/vendedor.html', '/vendedor-productos.html', '/vendedor-producto-detalle.html', '/vendedor-ordenes.html', '/vendedor-orden-detalle.html', '*'])
 })
 
 test('hover de mouse abre exclusivamente su categoria y salir cierra; touch no simula hover', () => {
